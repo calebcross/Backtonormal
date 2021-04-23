@@ -8,33 +8,38 @@ const {
 	GraphQLSchema,
 	GraphQLInt,
 	GraphQLFloat,
-    GraphQLList
+	GraphQLList,
 } = graphql;
 
 const StateType = new GraphQLObjectType({
 	name: "State",
 	fields: () => ({
+		id: { type: GraphQLInt },
 		name: { type: GraphQLString },
 		stateCode: { type: GraphQLString },
 		region: { type: GraphQLString },
 		division: { type: GraphQLString },
-        entries: {type: new GraphQLList(EntryType),
-        resolve(parent, args) {
-            return knex.select().from("entries").where( "name", parent.name )
-        }
-        }
+		entries: {
+			type: new GraphQLList(EntryType),
+			resolve(parent, args) {
+				return knex.select().from("entries").where("state_id", parent.id);
+			},
+		},
 	}),
 });
 
 const EntryType = new GraphQLObjectType({
 	name: "Entry",
 	fields: () => ({
+		id: { type: GraphQLInt },
 		date: { type: GraphQLString },
+		name: { type: GraphQLString },
+		state_id: { type: GraphQLInt },
 		state: {
 			type: StateType,
 			resolve(parent, args) {
-				knex.select().from("states").where( "name", parent.name )
-			}
+				return knex.first().from("states").where("id", parent.state_id);
+			},
 		},
 		total_vaccinations: { type: GraphQLInt },
 		total_distributed: { type: GraphQLInt },
@@ -59,7 +64,7 @@ const RootQuery = new GraphQLObjectType({
 			args: { name: { type: GraphQLString } },
 			resolve(parent, args) {
 				//code to get date from db
-                return knex.first().from("states").where( "name", args.name )
+				return knex.first().from("states").where("name", args.name);
 			},
 		},
 		entry: {
@@ -67,21 +72,28 @@ const RootQuery = new GraphQLObjectType({
 			args: { date: { type: GraphQLString }, state: { type: GraphQLString } },
 			resolve(parent, args) {
 				//code to get date from db
-				return knex.first().from("entries").where( "date", args.date )
+				return knex
+					.first()
+					.from("entries")
+					.where({
+						date: `${args.date}`,
+						name: `${args.state}`,
+					});
 			},
 		},
-        states: {
-            type: GraphQLList(StateType),
-            resolve(parent, args){
-                return knex.select().from('states')
-            }
-        },
-        entries: {
-            type: GraphQLList(EntryType),
-            resolve(parent, args){
-                return knex.select().from('entries')
-            }
-        }
+		states: {
+			type: GraphQLList(StateType),
+			resolve(parent, args) {
+				return knex.select().from("states");
+			},
+		},
+		entries: {
+			type: GraphQLList(EntryType),
+			args: { state: { type: GraphQLString } },
+			resolve(parent, args) {
+				return knex.select().from("entries").where("name", args.state);
+			},
+		},
 	},
 });
 module.exports = new GraphQLSchema({
