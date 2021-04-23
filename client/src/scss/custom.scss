@@ -1,0 +1,17 @@
+@import './variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import './bootswatch';
+
+svg{
+    width: 15px;
+    height: 15px;
+    fill: $orange;
+}
+
+svg:hover {
+    fill: red;
+  }
+
+  .vcenter {
+      
+  }
