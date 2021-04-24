@@ -1,6 +1,8 @@
 import React from "react";
+import {evaluate, format } from 'mathjs'
 
-function Partially({ title }) {
+
+function Partially({ title, data }) {
 	return (
 		<div className="partially">
 			<div className='card border-dark mb-3'>
@@ -9,11 +11,11 @@ function Partially({ title }) {
                 <strong>{title}</strong></div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h3 className='card-title fw-bold'><strong>3,045,000</strong></h3>
+						<h3 className='card-title fw-bold'><strong>{data.toLocaleString()}</strong></h3>
 						<p className='card-text '><strong>persons</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h3 className='card-title fw-bold'><strong>5.27%</strong></h3>
+						<h3 className='card-title fw-bold'><strong>{format( evaluate(`100*(${data}/328200000)`), 3 )}%</strong></h3>
 						<p className='card-text text-center'><strong>of the population</strong></p>
 					</div>
 				</div>

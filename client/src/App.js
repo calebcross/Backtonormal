@@ -1,5 +1,5 @@
-import { ApolloClient, InMemoryCache, gql, useQuery } from "@apollo/client";
-import { ApolloProvider } from "@apollo/client/react";
+import React from "react";
+import { useQuery, gql } from '@apollo/client';
 //components
 import Partially from "./components/Partially";
 import Fully from "./components/Fully";
@@ -7,37 +7,27 @@ import Fully from "./components/Fully";
 import "./scss/custom.scss";
 
 
-/* const client = new ApolloClient({
-	uri: "http://localhost:8080/graphql",
-	cache: new InMemoryCache(),
-}); */
-const client = new ApolloClient({
-  uri: 'http://localhost:8080/graphql',
-  cache: new InMemoryCache()
-});
-
-
-const getStateQuery = gql`
-{
-  entry (date: "4/12/21" state: "United States") {
-    date
-    people_vaccinated
-    people_fully_vaccinated
+const getInfo = gql`
+  query GetInfo  {
+    entry (date: "4/12/21" state: "United States") {
+        date
+      people_vaccinated
+      people_fully_vaccinated
+    }
+    
   }
-  
-}`
+`;
 
 function App() {
 
-   const { loading, error, data } = useQuery(getStateQuery);
+  const { loading, error, data } = useQuery(getInfo);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
-    console.log(data) 
+    const { people_vaccinated, people_fully_vaccinated } = data.entry
 
 	return (
-		<ApolloProvider client={client}>
+
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
 				<h1 className='display-6 text-center'>
 					<strong>
@@ -48,10 +38,10 @@ function App() {
 						88
 					</strong>
 				</h1>
-				<Partially title='AT LEAST PARTIALLY VACCINATED' />
-				<Fully title='FULLY VACCINATED' />
+				<Partially title='AT LEAST PARTIALLY VACCINATED' data={people_vaccinated} />
+				<Fully title='FULLY VACCINATED' data={people_fully_vaccinated} />
 			</div>
-		</ApolloProvider>
+
 	);
 }
 
