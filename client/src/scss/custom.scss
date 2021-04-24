@@ -2,6 +2,9 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import './bootswatch';
 
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600;700&display=swap');
+
 svg{
     width: 15px;
     height: 15px;
@@ -21,4 +24,8 @@ svg{
     align-items: center;
     background-color: rgb(0, 0, 0, 0);
     border: none;
+}
+
+* {
+    font-family: 'Roboto Slab', serif;
 }
