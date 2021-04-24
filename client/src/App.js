@@ -38,8 +38,8 @@ function App() {
 						88
 					</strong>
 				</h1>
-				<Partially title='AT LEAST PARTIALLY VACCINATED' data={people_vaccinated} />
-				<Fully title='FULLY VACCINATED' data={people_fully_vaccinated} />
+				<Partially title='partially vaccinated' data={people_vaccinated} />
+				<Fully title='fully vaccinated' data={people_fully_vaccinated} />
 			</div>
 
 	);
