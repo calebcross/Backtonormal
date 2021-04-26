@@ -1,0 +1,31 @@
+@use './variables' as *;
+@import "~bootstrap/scss/bootstrap";
+@import './bootswatch';
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600;700&display=swap');
+
+svg{
+    width: 15px;
+    height: 15px;
+    margin-right: 1rem;
+}
+
+.partially {
+    color: $red;
+}
+
+.fully {
+    color: $cyan;
+}
+
+.card-header-vcenter{
+    display: flex;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+}
+
+* {
+    font-family: 'Roboto Slab', serif;
+}
