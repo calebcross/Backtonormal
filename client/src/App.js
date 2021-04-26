@@ -16,7 +16,6 @@ const getInfo = gql`
       people_vaccinated
       people_fully_vaccinated
     }
-    
   }
 `;
 
