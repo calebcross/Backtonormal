@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 function Time() {
 
     let scope = {
-        pop: 331002651,
+        pop: 338472604,
         vdd: 290692005,
         advdg: 2750656
     }
