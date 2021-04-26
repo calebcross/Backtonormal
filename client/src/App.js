@@ -12,7 +12,7 @@ import VacChart from "./components/VacChart";
 
 const getInfo = gql`
   query GetInfo  {
-    entry (date: "4/14/21" state: "United States") {
+    entry (date: "2021-04-25" state: "United States") {
         date
       people_vaccinated
       people_fully_vaccinated
