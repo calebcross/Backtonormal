@@ -1,10 +1,12 @@
 import React from "react";
 import { useQuery, gql } from '@apollo/client';
+
 //components
 import Partially from "./components/Partially";
 import Fully from "./components/Fully";
 //style
 import "./scss/custom.scss";
+import VacChart from "./components/VacChart";
 
 
 const getInfo = gql`
@@ -40,6 +42,7 @@ function App() {
 				</h1>
 				<Partially title='partially vaccinated' data={people_vaccinated} />
 				<Fully title='fully vaccinated' data={people_fully_vaccinated} />
+        <VacChart />
 			</div>
 
 	);
