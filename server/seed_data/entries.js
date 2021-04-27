@@ -1,21 +1,5 @@
 module.exports = [
 	{
-	  "date": "2021-01-12",
-	  "name": "Alabama",
-	  "total_vaccinations": 78134,
-	  "total_distributed": 377025,
-	  "people_vaccinated": 70861,
-	  "people_fully_vaccinated_per_hundred": 0.15,
-	  "total_vaccinations_per_hundred": 1.59,
-	  "people_fully_vaccinated": 7270,
-	  "people_vaccinated_per_hundred": 1.45,
-	  "distributed_per_hundred": 7.69,
-	  "daily_vaccinations_raw": "0",
-	  "daily_vaccinations": null,
-	  "daily_vaccinations_per_million": null,
-	  "share_doses_used": 0.207
-	},
-	{
 	  "date": "2021-01-13",
 	  "name": "Alabama",
 	  "total_vaccinations": 84040,
