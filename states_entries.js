@@ -1,4 +1,4 @@
-const cdcData = require("../seed_data/cdc");
+const entryData = require("../seed_data/entries");
 const stateData = require("../seed_data/states");
 
 exports.seed = function (knex) {
@@ -10,7 +10,7 @@ exports.seed = function (knex) {
 			return knex("states").insert(stateData);
 		})
 		.then(() => {
-			return knex("cdc").truncate();
+			return knex("entries").truncate();
 		})
 		.then(() => {
 			// Inserts seed entries
@@ -19,13 +19,12 @@ exports.seed = function (knex) {
 			});
 		})
 		.then((state) => {
-			const cdcDataWithStateIds = cdcData.map((entry) => {
+			const entryDataWithStateIds = entryData.map((entry) => {
 				state.forEach((oneState) => {
 					if (entry.name == oneState.name) entry.state_id = oneState.id
 				});
-                if(!entry.state_id) console.log(entry.name)
 				return entry;
 			});
-			return knex("cdc").insert(cdcDataWithStateIds);
+			return knex("entries").insert(entryDataWithStateIds);
 		});
 };
