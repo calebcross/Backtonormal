@@ -18,10 +18,17 @@ svg{
 .fully {
     color: $cyan;
 }
+.time {
+    color: $green;
+}
 
 .card-header-vcenter{
     display: flex;
     align-items: center;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+}
+.card-header-center{
     background-color: rgb(0, 0, 0, 0);
     border: none;
 }
