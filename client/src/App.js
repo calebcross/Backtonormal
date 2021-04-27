@@ -12,11 +12,11 @@ import VacChart from "./components/VacChart";
 
 const getInfo = gql`
   query GetInfo  {
-    entry (date: "2021-04-25" state: "United States") {
-        date
-      people_vaccinated
-      people_fully_vaccinated
+    entries (date:"2021-04-26" ){
+  
+      Total_Doses_Administered
     }
+    
   }
 `;
 
@@ -26,14 +26,13 @@ function App() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-    const { people_vaccinated, people_fully_vaccinated } = data.entry
 
 	return (
 
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
 				<Time />
-				<Partially title='partially vaccinated' data={people_vaccinated} />
-				<Fully title='fully vaccinated' data={people_fully_vaccinated} />
+				<Partially title='partially vaccinated' data={data} />
+				<Fully title='fully vaccinated' data={data} />
         <VacChart />
 			</div>
 
