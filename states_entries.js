@@ -23,7 +23,6 @@ exports.seed = function (knex) {
 				state.forEach((oneState) => {
 					if (entry.name == oneState.name) entry.state_id = oneState.id
 				});
-                if(!entry.state_id) console.log(entry.name)
 				return entry;
 			});
 			return knex("entries").insert(entryDataWithStateIds);

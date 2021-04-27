@@ -1,32 +1,75 @@
+exports.up = function (knex) {
+	return knex.schema.createTable("entries", (table) => {
+		table.increments("id").primary();
+		table.date("date").notNullable();
+		table
+			.integer("state_id")
+			.unsigned()
+			.notNullable()
+			.references("id")
+			.inTable("states")
+			.onUpdate("CASCADE")
+			.onDelete("CASCADE");
+		table.string("name").notNullable();
+		table.bigInteger("Total_Doses_Delivered");
+		table.bigInteger("Doses_Delivered_per_100K");
+		table.bigInteger("Adult_Doses_Delivered_per_100K");
+		table.bigInteger("Total_Doses_Administered");
+		table.bigInteger("Doses_Administered_per_100k");
+		table.bigInteger("Adult_Doses_Administered");
+		table.bigInteger("Adult_Doses_Administered_per_100K");
+		table.bigInteger("People_with_at_least_One_Dose");
+		table.decimal("Percent_of_Total_Pop_with_at_least_One_Dose");
+		table.bigInteger("People_Adult_with_at_least_One_Dose");
+		table.decimal("Percent_of_Adult_Pop_with_at_least_One_Dose");
+		table.bigInteger("People_Fully_Vaccinated");
+		table.bigInteger("Percent_of_Total_Pop_Fully_Vaccinated");
+		table.bigInteger("People_Adult_Fully_Vaccinated");
+		table.decimal("Percent_of_Adult_Pop_Fully_Vaccinated");
+		table.bigInteger("Total_Number_of_Pfizer_doses_delivered");
+		table.bigInteger("Total_Number_of_Moderna_doses_delivered");
+		table.bigInteger("Total_Number_of_Janssen_doses_delivered");
+		table.bigInteger(
+			"Total_Number_of_doses_from_unknown_manufacturer_delivered"
+		);
+		table.bigInteger("Total_Number_of_Janssen_doses_administered");
+		table.bigInteger("Total_Number_of_Moderna_doses_administered");
+		table.bigInteger("Total_Number_of_Pfizer_doses_administered");
+		table.bigInteger(
+			"Total_Number_of_doses_from_unknown_manufacturer_administered"
+		);
+		table.bigInteger("People_Fully_Vaccinated_Moderna");
+		table.bigInteger("People_Fully_Vaccinated_Pfizer");
+		table.bigInteger("People_Fully_Vaccinated_Janssen");
+		table.bigInteger("People_Fully_Vaccinated_Unknown_2-dose_manufacturer");
+		table.bigInteger("People_Adult_Fully_Vaccinated_Moderna");
+		table.bigInteger("People_Adult_Fully_Vaccinated_Pfizer");
+		table.bigInteger("People_Adult_Fully_Vaccinated_Janssen");
+		table.bigInteger(
+			"People_Adult_Fully_Vaccinated_Unknown_2-dose_manufacturer"
+		);
+		table.bigInteger("People_with_2_Doses");
+		table.decimal("Percent_of_Total_Pop_with_Partial_Doses");
+		table.bigInteger("People_Adult_with_Partial_Doses");
+		table.bigInteger("Percent_of_Adult_Pop_with_Partial_Doses");
+		table.decimal("Percent_of_Total_Pop_with_2_Doses");
+		table.bigInteger("People_Adult_with_2_Doses");
+		table.bigInteger("Percent_of_Adult_Pop_with_2_Doses");
+		table.bigInteger("People_with_Partial_Doses");
+		table.bigInteger("People_65plus_with_at_least_One_Dose");
+		table.decimal("Percent_of_65plus_Pop_with_at_least_One_Dose");
+		table.bigInteger("People_65plus_Fully_Vaccinated");
+		table.bigInteger("Percent_of_65plus_Pop_Fully_Vaccinated");
+		table.bigInteger("People_65plus_Fully_Vaccinated_Moderna");
+		table.bigInteger("People_65plus_Fully_Vaccinated_Pfizer");
+		table.bigInteger("People_65plus_Fully_Vaccinated_Janssen");
+		table.bigInteger("People_65plus_Fully_Vaccinated_Unknown_2-dose_Manuf");
+		table.bigInteger("65plus_Doses_Administered");
+		table.bigInteger("Doses_Administered_per_100k_of_65plus_pop");
+		table.bigInteger("Doses_Delivered_per_100k_of_65plus_pop");
+	});
+};
 
-exports.up = function(knex) {
-    return knex.schema.createTable("entries", table => {
-        table.increments("id").primary();
-        table.string("date").notNullable();
-        table
-        .integer("state_id")
-        .unsigned()
-        .notNullable()
-        .references("id")
-        .inTable("states")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE");
-        table.string("name").notNullable();
-        table.bigInteger("total_vaccinations");
-        table.bigInteger("total_distributed");
-        table.bigInteger("people_vaccinated");
-        table.decimal("people_fully_vaccinated_per_hundred");
-        table.decimal("total_vaccinations_per_hundred");
-        table.bigInteger("people_fully_vaccinated");
-        table.decimal("people_vaccinated_per_hundred");
-        table.decimal("distributed_per_hundred");
-        table.bigInteger("daily_vaccinations_raw");
-        table.bigInteger("daily_vaccinations");
-        table.bigInteger("daily_vaccinations_per_million");
-        table.decimal("share_doses_used");
-    })
-  };
-  
-  exports.down = function(knex) {
-    return knex.schema.dropTable("entries")
-  };
+exports.down = function (knex) {
+	return knex.schema.dropTable("entries");
+};
