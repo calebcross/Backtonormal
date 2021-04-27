@@ -3,6 +3,23 @@ import {evaluate, format } from 'mathjs'
 
 
 function Partially({ title, data }) {
+
+	
+	const calTotal = (data) => {
+		let total = 0
+
+		const { entries } = data
+
+		entries.forEach( entry => {
+			total = total + entry.People_with_at_least_One_Dose
+		})
+
+		return total
+	}
+
+	let total = calTotal(data)
+
+	
 	return (
 		<div className="partially">
 			<div className='card border-dark mb-3'>
@@ -11,11 +28,11 @@ function Partially({ title, data }) {
                 <strong>{title}</strong></div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold'><strong>{data.toLocaleString()}</strong></h4>
+						<h4 className='card-title fw-bold'><strong>{total.toLocaleString()}</strong></h4>
 						<p className='card-text '><strong>persons</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold'><strong>{format( evaluate(`100*(${}/338472604)`), 3 )}%</strong></h4>
+						<h4 className='card-title fw-bold'><strong>{format( evaluate(`100*(${total}/338472604)`), 3 )}%</strong></h4>
 						<p className='card-text text-center'><strong>of the population</strong></p>
 					</div>
 				</div>
