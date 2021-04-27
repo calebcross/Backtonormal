@@ -14,7 +14,8 @@ const getInfo = gql`
   query GetInfo  {
     entries (date:"2021-04-26" ){
   
-      Total_Doses_Administered
+      People_Fully_Vaccinated
+      People_with_at_least_One_Dose
     }
     
   }
@@ -33,6 +34,9 @@ function App() {
 				<Time />
 				<Partially title='partially vaccinated' data={data} />
 				<Fully title='fully vaccinated' data={data} />
+        <VacChart />
+        <VacChart />
+        <VacChart />
         <VacChart />
 			</div>
 
