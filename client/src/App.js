@@ -25,6 +25,8 @@ function App() {
 
   const { loading, error, data } = useQuery(getInfo);
 
+  let population = 338472604;
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
@@ -32,8 +34,8 @@ function App() {
 
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
 				<Time />
-				<Partially title='partially vaccinated' data={data} />
-				<Fully title='fully vaccinated' data={data} />
+				<Partially title='partially vaccinated' data={data} population={population} />
+				<Fully title='fully vaccinated' data={data} population={population} />
         <VacChart />
         <VacChart />
         <VacChart />
