@@ -12,17 +12,17 @@ exports.up = function(knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
         table.string("name").notNullable();
-        table.integer("total_vaccinations");
-        table.integer("total_distributed");
-        table.integer("people_vaccinated");
+        table.bigInteger("total_vaccinations");
+        table.bigInteger("total_distributed");
+        table.bigInteger("people_vaccinated");
         table.decimal("people_fully_vaccinated_per_hundred");
         table.decimal("total_vaccinations_per_hundred");
-        table.integer("people_fully_vaccinated");
+        table.bigInteger("people_fully_vaccinated");
         table.decimal("people_vaccinated_per_hundred");
         table.decimal("distributed_per_hundred");
-        table.integer("daily_vaccinations_raw");
-        table.integer("daily_vaccinations");
-        table.integer("daily_vaccinations_per_million");
+        table.bigInteger("daily_vaccinations_raw");
+        table.bigInteger("daily_vaccinations");
+        table.bigInteger("daily_vaccinations_per_million");
         table.decimal("share_doses_used");
     })
   };
