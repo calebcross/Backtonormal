@@ -20,16 +20,6 @@ const getInfo = gql`
     
   }
 `;
-const getChartInfo = gql`
-  query GetInfo  {
-    entries (date:"2021-04-26" ){
-  
-      People_Fully_Vaccinated
-      People_with_at_least_One_Dose
-    }
-    
-  }
-`;
 
 function App() {
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {evaluate, format } from 'mathjs'
+import {evaluate} from 'mathjs'
 import CountUp from 'react-countup';
 
 
@@ -33,7 +33,7 @@ function Partially({ title, data, population }) {
 						<p className='card-text '><strong>persons</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold'><strong>{<CountUp suffix={"%"} decimals={1} end={format( evaluate(`100*(${total}/${population})`), 3 )} />}</strong></h4>
+						<h4 className='card-title fw-bold'><strong>{<CountUp suffix={"%"} decimals={1} end={evaluate(`100*(${total}/${population})`)} />}</strong></h4>
 						<p className='card-text text-center'><strong>of the population</strong></p>
 					</div>
 				</div>
