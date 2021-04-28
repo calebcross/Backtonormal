@@ -9,6 +9,7 @@ import Fully from "./components/Fully";
 //style
 import "./scss/custom.scss";
 import VacChart from "./components/VacChart";
+import Donut from "./components/Donut";
 
 
 const getInfo = gql`
@@ -41,6 +42,7 @@ function App() {
 				<Partially title='partially vaccinated' data={data} population={populationUs} />
 				<Fully title='fully vaccinated' data={data} population={populationUs} />
         <VacChart population={populationUs} />
+        <Donut population={populationUs} />
 			</div>
 
 	);
