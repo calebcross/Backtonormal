@@ -57,6 +57,12 @@ function VacChart() {
 				borderColor: "rgb(231,76,60)",
 				data: [0, 10, 5, 2, 20, 30, 45],
 			},
+			{
+				label: "My Second dataset",
+				backgroundColor: "rgb(52,153,219)",
+				borderColor: "rgb(52,153,219)",
+				data: [2, 15, 4, 30, 10, 40, 55],
+			},
 		],
 	};
 
