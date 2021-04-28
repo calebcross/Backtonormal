@@ -29,11 +29,11 @@ function Fully({ title, data, population }) {
                 <strong>{title}</strong></div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold'><strong>{total.toLocaleString()}</strong></h4>
+						<h4 className='card-title fw-bold display-6'><strong>{total.toLocaleString()}</strong></h4>
 						<p className='card-text '><strong>persons</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold'><strong>{<CountUp suffix={"%"} decimals={1} end={evaluate(`100*(${total}/${population})`)}/>}</strong></h4>
+						<h4 className='card-title fw-bold display-6'><strong>{<CountUp suffix={"%"} decimals={1} end={evaluate(`100*(${total}/${population})`)}/>}</strong></h4>
 						<p className='card-text text-center'><strong>of the population</strong></p>
 					</div>
 				</div>

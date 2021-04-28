@@ -71,8 +71,8 @@ function VacChart() {
 			},
 			{
 				label: "Fully Vaccinated",
-				backgroundColor: "rgb(52,153,219)",
-				borderColor: "rgb(52,153,219)",
+				backgroundColor: "rgb(187,222,251)",
+				borderColor: "rgb(187,222,251)",
 				data: [2, 45],
 			},
 		],
