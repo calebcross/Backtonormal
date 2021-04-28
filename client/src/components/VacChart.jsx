@@ -1,5 +1,6 @@
 //import React, { useEffect, useRef, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
+import {evaluate} from 'mathjs'
 
 //import { Chart } from "chart.js";
 import "chartjs-adapter-date-fns";
@@ -33,11 +34,15 @@ const findDates = ({ entriesfrom }) => {
 				test.getDate();
 			return newLabel;
 		})
-	
 
 	return newLabels.sort();
 };
 
+
+const calTotal = (data) => {
+
+	
+}
 function VacChart() {
 	const { loading, error, data } = useQuery(getChartInfo);
 
@@ -52,35 +57,55 @@ function VacChart() {
 		labels: labels,
 		datasets: [
 			{
-				label: "My First dataset",
+				label: "Partially Vaccinated",
 				backgroundColor: "rgb(231,76,60)",
 				borderColor: "rgb(231,76,60)",
 				data: [0, 10, 5, 2, 20, 30, 45],
 			},
 			{
-				label: "My Second dataset",
+				label: "Fully Vaccinated",
 				backgroundColor: "rgb(52,153,219)",
 				borderColor: "rgb(52,153,219)",
-				data: [2, 15, 4, 30, 10, 40, 55],
+				data: [2, 45, 4, 30, 10, 40, 55],
 			},
 		],
 	};
 
 	const options = {
-		scales: {
-			yAxes: [
-				{
-					ticks: {
-						beginAtZero: true,
-					},
-				},
-			],
+	 plugins: {
+		legend: {
+			display: true,
+			labels: {
+				color: "#fff"
+			}
+		}
+	},
+	scales: {
+		y: {
+		  ticks: {
+			callback: function(val, index) {
+			  return val +'%';
+			},
+			color: 'white',
+		  },
+		  grid: {
+			  color: '#444'
+		  }
 		},
-	};
+		x: {
+		  ticks: {
+			color: 'white',
+		  },
+		  grid: {
+			  color: '#444'
+		  }
+		}
+	  }
+};
 
 	return (
 		<div className='card border-dark mb-3'>
-			<div className='card-header text-center'>
+			<div className='card-header text-center white text-uppercase fs-4'>
 				Vaccinated Percentage of the Population
 			</div>
 			<div className='card-body'>
