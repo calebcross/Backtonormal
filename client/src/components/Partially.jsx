@@ -17,6 +17,7 @@ function Partially({ title, data, population }) {
 
 		return total
 	}
+	
 
 	let total = calTotal(data)
 
