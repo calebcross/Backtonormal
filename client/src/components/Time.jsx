@@ -1,7 +1,7 @@
 import React from "react";
 import CountUp from 'react-countup';
 
-function Time() {
+function Time({population}) {
 
     let scope = {
         pop: 338472604,
@@ -10,7 +10,7 @@ function Time() {
     }
 
 
-    let US_population = scope.pop
+    let US_population = population
 let num_vaccinated=  94772329
 let num_infected  =  83100000
 let vaccine_efficacy  = 0.9
