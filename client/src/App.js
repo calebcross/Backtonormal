@@ -30,7 +30,7 @@ function App() {
 
   const { loading, error, data } = useQuery(getInfo);
 
-  let populationUs = 338472604;
+  let populationUs = 331996199;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
