@@ -39,9 +39,16 @@ const findDates = ({ entriesfrom }) => {
 };
 
 
-const calTotal = (data) => {
+const calTotal = (data, string) => {
 
-	
+	let total = 0
+
+		const { entries } = data
+
+		entries.forEach( entry => {
+			total = total + entry.[string]
+		})
+
 }
 function VacChart() {
 	const { loading, error, data } = useQuery(getChartInfo);
@@ -58,15 +65,15 @@ function VacChart() {
 		datasets: [
 			{
 				label: "Partially Vaccinated",
-				backgroundColor: "rgb(231,76,60)",
-				borderColor: "rgb(231,76,60)",
-				data: [0, 10, 5, 2, 20, 30, 45],
+				backgroundColor: "rgb(255,183,78)",
+				borderColor: "rgb(255,183,78)",
+				data: [6, 10],
 			},
 			{
 				label: "Fully Vaccinated",
 				backgroundColor: "rgb(52,153,219)",
 				borderColor: "rgb(52,153,219)",
-				data: [2, 45, 4, 30, 10, 40, 55],
+				data: [2, 45],
 			},
 		],
 	};
@@ -105,7 +112,7 @@ function VacChart() {
 
 	return (
 		<div className='card border-dark mb-3'>
-			<div className='card-header text-center white text-uppercase fs-4'>
+			<div className='card-header text-center white fs-4 fw-bold'>
 				Vaccinated Percentage of the Population
 			</div>
 			<div className='card-body'>
