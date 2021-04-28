@@ -24,7 +24,7 @@ function Time({population, data}) {
 
 //console.log( evaluate ( `((${scope.pop} * .7) - (${scope.vdd} * .5))/(${scope.advdg} * .5 )`))
 
-    let US_population = population
+/*     let US_population = population
 let num_vaccinated=  94772329
 let num_infected  =  83100000
 let vaccine_efficacy  = 0.9
@@ -47,7 +47,7 @@ let num_needed = herd_immunity_target - num_immune
 let num_vaccines_per_day = scope.advdg
  let num_new_immune_per_day = num_vaccines_per_day*portion_at_risk*vaccine_efficacy
 
-let days_to_herd_immunity = num_needed / num_new_immune_per_day
+let days_to_herd_immunity = num_needed / num_new_immune_per_day */
 	return (
 		<div className='time'>
 			<div className='card border-dark mb-3'>

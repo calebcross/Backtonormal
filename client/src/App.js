@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery, gql } from '@apollo/client';
+import { useState, useEffect } from 'react'
 
 //components
 import Time from "./components/Time";
@@ -22,6 +23,8 @@ const getInfo = gql`
   }
 `;
 
+
+
 function App() {
 
   const { loading, error, data } = useQuery(getInfo);
@@ -37,7 +40,7 @@ function App() {
 				<Time data ={data} population={populationUs} />
 				<Partially title='partially vaccinated' data={data} population={populationUs} />
 				<Fully title='fully vaccinated' data={data} population={populationUs} />
-        <VacChart/>
+        <VacChart population={populationUs} />
 			</div>
 
 	);
