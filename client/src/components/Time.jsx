@@ -1,16 +1,30 @@
 import React from "react";
 import CountUp from 'react-countup';
+import {evaluate} from 'mathjs'
 
-function Time() {
+const calTotals = (data) => {
+	let total = 0
+
+	const { entries } = data
+
+	entries.forEach( entry => {
+		total = total + entry.Total_Doses_Delivered
+	})
+
+	return total
+}
+
+function Time({population, data}) {
 
     let scope = {
-        pop: 338472604,
-        vdd: 290692005,
-        advdg: 2750656
+        pop: population,
+        vdd: calTotals(data), 
+        advdg: 1624873
     }
 
+//console.log( evaluate ( `((${scope.pop} * .7) - (${scope.vdd} * .5))/(${scope.advdg} * .5 )`))
 
-    let US_population = scope.pop
+/*     let US_population = population
 let num_vaccinated=  94772329
 let num_infected  =  83100000
 let vaccine_efficacy  = 0.9
@@ -33,7 +47,7 @@ let num_needed = herd_immunity_target - num_immune
 let num_vaccines_per_day = scope.advdg
  let num_new_immune_per_day = num_vaccines_per_day*portion_at_risk*vaccine_efficacy
 
-let days_to_herd_immunity = num_needed / num_new_immune_per_day
+let days_to_herd_immunity = num_needed / num_new_immune_per_day */
 	return (
 		<div className='time'>
 			<div className='card border-dark mb-3'>
@@ -42,7 +56,7 @@ let days_to_herd_immunity = num_needed / num_new_immune_per_day
 						Days until
 						normal:
 						<br /></h1>
-                        <h2 className=" display-3 text-center"><CountUp end={Math.ceil(days_to_herd_immunity)} /> days</h2>
+                        <h2 className=" display-3 text-center"><CountUp end={Math.ceil(evaluate ( `((${scope.pop} * .7) - (${scope.vdd} * .5))/(${scope.advdg} * .5 )`))} /> days</h2>
 					
 				</div>
 				<div className='d-flex justify-content-evenly flex-wrap'></div>
