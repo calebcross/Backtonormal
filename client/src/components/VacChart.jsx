@@ -6,7 +6,7 @@ import { Line } from "react-chartjs-2";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-04-23", to: "2021-04-28") {
+		entriesBy(state: "United States", from: "2021-03-08", to: "2021-04-28") {
 			date
 			Administered_Dose1_Pop_Pct
 			Series_Complete_Pop_Pct
@@ -22,14 +22,13 @@ const findDates = ({ entriesBy }) => {
 		}
 	});
 
-	let newLabels = labels.map((date) => {
-		let test = new Date(date);
+	let newLabels = [...labels].sort((a, b) => {
+		let x = new Date(a)
+		let y = new Date(b)
+		return x-y
+	})
 
-		const newLabel = test.getMonth()+1 + "-" + (test.getDate()+1);
-		return newLabel;
-	});
-
-	return newLabels.sort();
+	return newLabels.map((label) => label.split('2021-').[1]);
 };
 
 const pluck = ({ entriesBy }, key) => {
@@ -89,7 +88,7 @@ function VacChart() {
 		},
 		scales: {
 			y: {
-				suggestedMax: 100,
+				suggestedMax: 50,
 				ticks: {
 					callback: function (val, index) {
 						return val + "%";
