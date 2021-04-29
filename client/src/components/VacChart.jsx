@@ -1,114 +1,130 @@
 //import React, { useEffect, useRef, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import {evaluate} from 'mathjs'
 
 //import { Chart } from "chart.js";
-import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesfrom(from: "2021-04-26", to: "2021-04-27") {
+		entriesBy(state: "United States", from: "2021-04-01", to: "2021-04-28") {
 			date
-			People_Fully_Vaccinated
-			People_with_at_least_One_Dose
+			Administered_Dose1_Pop_Pct
+			Series_Complete_Pop_Pct
 		}
 	}
 `;
 
-const findDates = ({ entriesfrom }) => {
+const findDates = ({ entriesBy }) => {
 	let labels = [];
-	entriesfrom.forEach((entry) => {
+	entriesBy.forEach((entry) => {
 		if (!labels.includes(entry.date)) {
-
 			labels.push(entry.date);
 		}
 	});
 
-	
-		let newLabels = labels.map((date) => {
-			let test = new Date(parseInt(date));
+	let newLabels = [...labels].sort((a, b) => {
+		let x = new Date(a)
+		let y = new Date(b)
+		return x-y
+	})
 
-			const newLabel = test.getMonth() +
-				"-" +
-				test.getDate();
-			return newLabel;
-		})
-
-	return newLabels.sort();
+	return newLabels.map((label) => label.split('2021-').[1]);
 };
 
+const pluck = ({ entriesBy }, key) => {
+	let newArr = [...entriesBy].sort((a, b) => {
 
-const calTotal = (data, string) => {
+		if (a.date < b.date) {
+			return -1;
+		}
+		if (a.date > b.date) {
+			return 1;
+		}
+		return 0;
+	});
 
-	let total = 0
+	return newArr.map((entry) => {
+		return entry[key];
+	});
+};
 
-		const { entries } = data
-
-		entries.forEach( entry => {
-			total = total + entry.[string]
-		})
-
-}
 function VacChart() {
 	const { loading, error, data } = useQuery(getChartInfo);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 
-	
-
-	const labels = findDates(data);
+	let partially = "Administered_Dose1_Pop_Pct";
+	let fully = "Series_Complete_Pop_Pct";
 
 	const chartData = {
-		labels: labels,
+		labels: findDates(data),
 		datasets: [
 			{
 				label: "Partially Vaccinated",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				data: [6, 10],
+				lineTension: 0.4,
+				data: pluck(data, [partially]),
 			},
 			{
 				label: "Fully Vaccinated",
-				backgroundColor: "rgb(52,153,219)",
-				borderColor: "rgb(52,153,219)",
-				data: [2, 45],
+				backgroundColor: "rgb(187,222,251)",
+				borderColor: "rgb(187,222,251)",
+				lineTension: 0.4,
+				data: pluck(data, [fully]),
 			},
 		],
 	};
 
 	const options = {
-	 plugins: {
-		legend: {
-			display: true,
-			labels: {
-				color: "#fff"
+		tooltips: {
+			displayColors: false,
+			titleFontSize: 16,
+			bodyFontSize: 14,
+			xPadding: 10,
+			yPadding: 10,
+			callbacks: {
+				label: (tooltipItem, data) => {
+					return `${tooltipItem.value}%`
+				}
 			}
-		}
-	},
-	scales: {
-		y: {
-		  ticks: {
-			callback: function(val, index) {
-			  return val +'%';
-			},
-			color: 'white',
-		  },
-		  grid: {
-			  color: '#444'
-		  }
 		},
-		x: {
-		  ticks: {
-			color: 'white',
-		  },
-		  grid: {
-			  color: '#444'
-		  }
-		}
-	  }
-};
+		plugins: {
+			legend: {
+				display: true,
+				labels: {
+					color: "#fff",
+				},
+			},
+		},
+		scales: {
+			y: {
+				suggestedMax: 50,
+				ticks: {
+					callback: function (val, index) {
+						return val + "%";
+					},
+					color: "white",
+				},
+				grid: {
+					color: "#444",
+				},
+				stack: true,
+			},
+			x: {
+				ticks: {
+					callback: function(val, index) {
+						return index % 2 === 0 ? this.getLabelForValue(val) : '';
+					  },
+					color: "white",
+				},
+				grid: {
+					color: "#444",
+				},
+			},
+		},
+	};
 
 	return (
 		<div className='card border-dark mb-3'>
