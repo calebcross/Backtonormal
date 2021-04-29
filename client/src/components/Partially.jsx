@@ -1,27 +1,11 @@
 import React from "react";
-import {evaluate} from 'mathjs'
 import CountUp from 'react-countup';
 
 
-function Partially({ title, data, population }) {
+function Partially({ title, data}) {
 
-	
-	const calTotal = (data) => {
-		let total = 0
 
-		const { entries } = data
-
-		entries.forEach( entry => {
-			total = total + entry.People_with_at_least_One_Dose
-		})
-
-		return total
-	}
-	
-
-	let total = calTotal(data)
-
-	
+	const { Administered_Dose1_Recip, Administered_Dose1_Pop_Pct} = data.entry;
 	return (
 		<div className="partially">
 			<div className='card border-dark mb-3'>
@@ -30,11 +14,11 @@ function Partially({ title, data, population }) {
                 <strong>{title}</strong></div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold display-6'><strong>{total.toLocaleString()}</strong></h4>
-						<p className='card-text fw-bold'><strong>persons</strong></p>
+						<h4 className='card-title fw-bold display-6'><strong>{!Administered_Dose1_Recip ? 0 : Administered_Dose1_Recip.toLocaleString()}</strong></h4>
+						<p className='card-text fw-bold'><strong>people</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold display-6'>{<CountUp suffix={"%"} decimals={1} end={evaluate(`100*(${total}/${population})`)} />}</h4>
+						<h4 className='card-title fw-bold display-6'>{<CountUp suffix={"%"} decimals={Administered_Dose1_Pop_Pct.toString().length === 2 ? 0 : 1} end={Administered_Dose1_Pop_Pct} />}</h4>
 						<p className='card-text text-center fw-bold '>of the population</p>
 					</div>
 				</div>

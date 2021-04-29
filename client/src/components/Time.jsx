@@ -1,27 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CountUp from 'react-countup';
 import {evaluate} from 'mathjs'
+import axios from 'axios';
 
-const calTotals = (data) => {
-	let total = 0
 
-	const { entries } = data
+function Time({ data }) {
 
-	entries.forEach( entry => {
-		total = total + entry.Total_Doses_Delivered
-	})
+	const CDC_url = 'https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data'
 
-	return total
-}
-
-function Time({population, data}) {
+	useEffect( () => {
+			axios.get(CDC_url)
+			.then( response =>{} )
+			.catch(err => {console.log(err)})
+	}, [])
 
     let scope = {
-        pop: population,
-        vdd: calTotals(data), 
-        advdg: 1624873
+        pop: data.entry.Census,
+        vdd: data.entry.Doses_Distributed,
+        advdg: 1367822
     }
 
+
+	return (
+		<div className='time'>
+			<div className='card border-dark mb-3'>
+				<div className='card-header card-header-center text-uppercase'>
+					<h1 className='display-6 text-center fw-bold'>
+						Days until
+						normal:
+						<br /></h1>
+                         <h2 className=" display-3 text-center"><CountUp end={Math.ceil(evaluate ( `((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope))} /> days</h2>
+ 					
+				</div>
+				<div className='d-flex justify-content-evenly flex-wrap'></div>
+			</div>
+		</div>
+	);
+}
+
+export default Time;
 //console.log( evaluate ( `((${scope.pop} * .7) - (${scope.vdd} * .5))/(${scope.advdg} * .5 )`))
 
 /*     let US_population = population
@@ -48,21 +65,3 @@ let num_vaccines_per_day = scope.advdg
  let num_new_immune_per_day = num_vaccines_per_day*portion_at_risk*vaccine_efficacy
 
 let days_to_herd_immunity = num_needed / num_new_immune_per_day */
-	return (
-		<div className='time'>
-			<div className='card border-dark mb-3'>
-				<div className='card-header card-header-center text-uppercase'>
-					<h1 className='display-6 text-center fw-bold'>
-						Days until
-						normal:
-						<br /></h1>
-                        <h2 className=" display-3 text-center"><CountUp end={Math.ceil(evaluate ( `((${scope.pop} * .7) - (${scope.vdd} * .5))/(${scope.advdg} * .5 )`))} /> days</h2>
-					
-				</div>
-				<div className='d-flex justify-content-evenly flex-wrap'></div>
-			</div>
-		</div>
-	);
-}
-
-export default Time;

@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   client: "mysql",
   connection: {
@@ -5,6 +7,12 @@ module.exports = {
     user: ***REMOVED***,
     password: ***REMOVED***,
     database: ***REMOVED***,
-    charset: "utf8"
+    charset: "utf8",
+    typeCast: function (field, next) {
+      if (field.type == 'DATE') {
+        return moment(field.string()).format('YYYY-MM-DD');
+      }
+      return next();
+    }
   }
 };
