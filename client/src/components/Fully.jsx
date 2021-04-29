@@ -18,7 +18,7 @@ function Fully({ title, data} ) {
 						<p className='card-text '><strong>people</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold display-6'><strong>{<CountUp suffix={"%"} decimals={!Series_Complete_Yes ? 0 : (Series_Complete_Pop_Pct.toString().length == 2 ? 0 : 1)} end={Series_Complete_Pop_Pct}/>}</strong></h4>
+						<h4 className='card-title fw-bold display-6'><strong>{<CountUp suffix={"%"} decimals={!Series_Complete_Yes ? 0 : (Series_Complete_Pop_Pct.toString().length === 2 ? 0 : 1)} end={Series_Complete_Pop_Pct}/>}</strong></h4>
 						<p className='card-text text-center'><strong>of the population</strong></p>
 					</div>
 				</div>

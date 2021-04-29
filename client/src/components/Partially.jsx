@@ -18,7 +18,7 @@ function Partially({ title, data}) {
 						<p className='card-text fw-bold'><strong>people</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold display-6'>{<CountUp suffix={"%"} decimals={Administered_Dose1_Pop_Pct.toString().length == 2 ? 0 : 1} end={Administered_Dose1_Pop_Pct} />}</h4>
+						<h4 className='card-title fw-bold display-6'>{<CountUp suffix={"%"} decimals={Administered_Dose1_Pop_Pct.toString().length === 2 ? 0 : 1} end={Administered_Dose1_Pop_Pct} />}</h4>
 						<p className='card-text text-center fw-bold '>of the population</p>
 					</div>
 				</div>

@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery, gql } from '@apollo/client';
-import { useState, useEffect } from 'react'
 
 //components
 import Time from "./components/Time";
@@ -25,14 +24,6 @@ const getInfo = gql`
     
   }
 `;
-{/* <Card>
-    <Accordion.Toggle as={Card.Header} eventKey={1}>
-      {data.states[1].name}
-    </Accordion.Toggle>
-    <Accordion.Collapse eventKey={1}>
-      <Card.Body><Partially title='partially vaccinated' data={data.states[1]}/></Card.Body>
-    </Accordion.Collapse>
-  </Card> */}
 
 function App() {
 
