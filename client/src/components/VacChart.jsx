@@ -1,14 +1,12 @@
 //import React, { useEffect, useRef, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import {evaluate} from 'mathjs'
 
 //import { Chart } from "chart.js";
-import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States" from: "2021-04-23", to: "2021-04-28") {
+		entriesBy(state: "United States", from: "2021-04-23", to: "2021-04-28") {
 			date
 			Administered_Dose1_Pop_Pct
 			Series_Complete_Pop_Pct
@@ -20,24 +18,38 @@ const findDates = ({ entriesBy }) => {
 	let labels = [];
 	entriesBy.forEach((entry) => {
 		if (!labels.includes(entry.date)) {
-
 			labels.push(entry.date);
 		}
 	});
 
-	
-		let newLabels = labels.map((date) => {
-			let test = new Date(parseInt(date));
+	let newLabels = labels.map((date) => {
+		let test = new Date(date);
 
-			const newLabel = test.getMonth() +
-				"-" +
-				test.getDate();
-			return newLabel;
-		})
+		const newLabel = test.getMonth()+1 + "-" + (test.getDate()+1);
+		return newLabel;
+	});
 
 	return newLabels.sort();
 };
 
+const pluck = ({ entriesBy }, key) => {
+	let newArr = [...entriesBy].sort((a, b) => {
+		let fa = a.date;
+		let fb = b.date;
+
+		if (fa < fb) {
+			return -1;
+		}
+		if (fa > fb) {
+			return 1;
+		}
+		return 0;
+	});
+
+	return newArr.map((entry) => {
+		return entry[key];
+	});
+};
 
 function VacChart() {
 	const { loading, error, data } = useQuery(getChartInfo);
@@ -45,57 +57,64 @@ function VacChart() {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 
-	const labels = findDates(data);
+	let partially = "Administered_Dose1_Pop_Pct";
+	let fully = "Series_Complete_Pop_Pct";
 
 	const chartData = {
-		labels: labels,
+		labels: findDates(data),
 		datasets: [
 			{
 				label: "Partially Vaccinated",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				data: [6, 10, 8, 24, 56, 72, 34],
+				lineTension: 0.4,
+				data: pluck(data, [partially]),
 			},
 			{
 				label: "Fully Vaccinated",
 				backgroundColor: "rgb(187,222,251)",
 				borderColor: "rgb(187,222,251)",
-				data: [2, 45],
+				lineTension: 0.4,
+				data: pluck(data, [fully]),
 			},
 		],
 	};
 
 	const options = {
-	 plugins: {
-		legend: {
-			display: true,
-			labels: {
-				color: "#fff"
-			}
-		}
-	},
-	scales: {
-		y: {
-		  ticks: {
-			callback: function(val, index) {
-			  return val +'%';
+		plugins: {
+			legend: {
+				display: true,
+				labels: {
+					color: "#fff",
+				},
 			},
-			color: 'white',
-		  },
-		  grid: {
-			  color: '#444'
-		  }
 		},
-		x: {
-		  ticks: {
-			color: 'white',
-		  },
-		  grid: {
-			  color: '#444'
-		  }
-		}
-	  }
-};
+		scales: {
+			y: {
+				suggestedMax: 100,
+				ticks: {
+					callback: function (val, index) {
+						return val + "%";
+					},
+					color: "white",
+				},
+				grid: {
+					color: "#444",
+				},
+			},
+			x: {
+				ticks: {
+					/* callback: function(val, index) {
+						return index % 2 === 0 ? this.getLabelForValue(val) : '';
+					  }, */
+					color: "white",
+				},
+				grid: {
+					color: "#444",
+				},
+			},
+		},
+	};
 
 	return (
 		<div className='card border-dark mb-3'>
