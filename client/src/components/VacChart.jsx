@@ -78,6 +78,18 @@ function VacChart() {
 	};
 
 	const options = {
+		tooltips: {
+			displayColors: false,
+			titleFontSize: 16,
+			bodyFontSize: 14,
+			xPadding: 10,
+			yPadding: 10,
+			callbacks: {
+				label: (tooltipItem, data) => {
+					return `${tooltipItem.value}%`
+				}
+			}
+		},
 		plugins: {
 			legend: {
 				display: true,
@@ -102,9 +114,9 @@ function VacChart() {
 			},
 			x: {
 				ticks: {
-					/* callback: function(val, index) {
+					callback: function(val, index) {
 						return index % 2 === 0 ? this.getLabelForValue(val) : '';
-					  }, */
+					  },
 					color: "white",
 				},
 				grid: {

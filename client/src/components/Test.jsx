@@ -4,7 +4,8 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Partially from "./Partially";
 import Fully from "./Fully";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
+import { Chart } from 'chart.js'
 
 const getStateInfo = gql`
 	query getStateInfo {
@@ -40,6 +41,9 @@ function Test() {
 		return 0;
 	});
 
+
+const showData = "45" + "%";
+
 	const datas = {
 		labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
 		datasets: [
@@ -65,7 +69,39 @@ function Test() {
 				borderWidth: 1,
 			},
 		],
+		text: showData
 	};
+
+
+	const options = {
+		responsive: true,
+		elements: {
+			center: {
+			text: '90%',
+			color: "rgba(255, 99, 132, 1)",
+			fontStyle: 'Arial',
+			sidePadding: 20,
+			}
+			},
+          maintainAspectRatio: false,
+		  plugins: {
+			  legend: {
+				  display: false
+			  }
+		  },
+		  elements: {
+			center: {
+			  text: 'Red is 2/3 of the total numbers',
+			  color: '#FF6384', // Default is #000000
+			  fontStyle: 'Arial', // Default is Arial
+			  sidePadding: 20, // Default is 20 (as a percentage)
+			  minFontSize: 25, // Default is 20 (in px), set to false and text will not wrap.
+			  lineHeight: 25 // Default is 25 (in px), used for when text wraps
+			}
+		  }
+	}
+
+	
 
 	return (
 		<div className='partially'>
@@ -88,26 +124,11 @@ function Test() {
 				</div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<Pie
+						<Doughnut
 							data={datas}
-							width={100}
-							height={50}
-							
-						/>
-					</div>
-					<div className='card-body text-center '>
-						<Pie
-							data={datas}
-							width={100}
-							height={50}
-							
-						/>
-					</div>
-					<div className='card-body text-center '>
-						<Pie
-							data={datas}
-							width={100}
-							height={50}
+							width={300}
+							height={300}
+							options={options}
 							
 						/>
 					</div>
