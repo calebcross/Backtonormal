@@ -8,17 +8,17 @@ import { Line } from "react-chartjs-2";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesfrom(from: "2021-04-26", to: "2021-04-27") {
+		entriesBy(state: "United States" from: "2021-04-23", to: "2021-04-28") {
 			date
-			People_Fully_Vaccinated
-			People_with_at_least_One_Dose
+			Administered_Dose1_Pop_Pct
+			Series_Complete_Pop_Pct
 		}
 	}
 `;
 
-const findDates = ({ entriesfrom }) => {
+const findDates = ({ entriesBy }) => {
 	let labels = [];
-	entriesfrom.forEach((entry) => {
+	entriesBy.forEach((entry) => {
 		if (!labels.includes(entry.date)) {
 
 			labels.push(entry.date);
@@ -39,24 +39,11 @@ const findDates = ({ entriesfrom }) => {
 };
 
 
-const calTotal = (data, string) => {
-
-	let total = 0
-
-		const { entries } = data
-
-		entries.forEach( entry => {
-			total = total + entry.[string]
-		})
-
-}
 function VacChart() {
 	const { loading, error, data } = useQuery(getChartInfo);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
-
-	
 
 	const labels = findDates(data);
 
@@ -67,7 +54,7 @@ function VacChart() {
 				label: "Partially Vaccinated",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				data: [6, 10],
+				data: [6, 10, 8, 24, 56, 72, 34],
 			},
 			{
 				label: "Fully Vaccinated",

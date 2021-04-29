@@ -14,16 +14,17 @@ import Donut from "./components/Donut";
 
 const getInfo = gql`
   query GetInfo  {
-    entries (date:"2021-04-27" ){
-  
-      People_Fully_Vaccinated
-      People_with_at_least_One_Dose
-      Total_Doses_Delivered
+    entry (date:"2021-04-28" state:"United States" ){
+    Census
+    Administered_Dose1_Recip
+    Administered_Dose1_Pop_Pct
+    Series_Complete_Yes
+    Series_Complete_Pop_Pct
+    Doses_Distributed
     }
     
   }
 `;
-
 
 
 function App() {
@@ -38,11 +39,11 @@ function App() {
 	return (
 
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
-				<Time data ={data} population={populationUs} />
-				<Partially title='partially vaccinated' data={data} population={populationUs} />
-				<Fully title='fully vaccinated' data={data} population={populationUs} />
-        <VacChart population={populationUs} />
-        <Donut population={populationUs} />
+ 				<Time data ={data} />
+			<Partially title='partially vaccinated' data={data}/>
+					<Fully title='fully vaccinated' data={data} population={populationUs} />
+        <VacChart />
+       <Donut />
 			</div>
 
 	);
