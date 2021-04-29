@@ -121,7 +121,7 @@ const RootQuery = new GraphQLObjectType({
 				return knex.select().from("states");
 			},
 		},
-		entries: { 
+		entriesBy: { 
 			type: GraphQLList(EntryType),
 			args: { state: { type: GraphQLString }, from: { type: GraphQLString}, to: { type: GraphQLString}},
 			resolve(parent, args) {

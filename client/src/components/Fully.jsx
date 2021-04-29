@@ -2,24 +2,10 @@ import React from "react";
 import {evaluate} from 'mathjs'
 import CountUp from 'react-countup';
 
-function Fully({ title, data, population }) {
+function Fully({ title, data} ) {
 
-	
 
-	const calTotal = (data) => {
-		let total = 0
-
-		const { entries } = data
-
-		entries.forEach( entry => {
-			total = total + entry.People_Fully_Vaccinated
-		})
-
-		return total
-	}
-
-	let total = calTotal(data)
-
+	const { Series_Complete_Yes, Series_Complete_Pop_Pct} = data.entry
 
 	return (
 		<div className='fully'>
@@ -29,11 +15,11 @@ function Fully({ title, data, population }) {
                 <strong>{title}</strong></div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold display-6'><strong>{total.toLocaleString()}</strong></h4>
+						<h4 className='card-title fw-bold display-6'><strong>{Series_Complete_Yes.toLocaleString()}</strong></h4>
 						<p className='card-text '><strong>persons</strong></p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold display-6'><strong>{<CountUp suffix={"%"} decimals={1} end={evaluate(`100*(${total}/${population})`)}/>}</strong></h4>
+						<h4 className='card-title fw-bold display-6'><strong>{<CountUp suffix={"%"} decimals={1} end={Series_Complete_Pop_Pct}/>}</strong></h4>
 						<p className='card-text text-center'><strong>of the population</strong></p>
 					</div>
 				</div>
