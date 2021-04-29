@@ -8,7 +8,7 @@ import Fully from "./components/Fully";
 //style
 import "./scss/custom.scss";
 import VacChart from "./components/VacChart";
-import Donut from "./components/Donut";
+import Test from "./components/Test";
 import List from "./components/List";
 
 
@@ -41,7 +41,7 @@ function App() {
 			<Partially title='partially vaccinated' data={data}/>
 					<Fully title='fully vaccinated' data={data} />
         <VacChart />
-        <Donut />
+        <Test />
        <List />
 			</div>
 

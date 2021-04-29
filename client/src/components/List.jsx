@@ -28,7 +28,7 @@ function List() {
 	if (error) return <p>Error :(</p>;
 
 	const { states } = data;
-	
+
 	let newArr = [...states].sort((a, b) => {
 		if (a.entry.Series_Complete_Pop_Pct < b.entry.Series_Complete_Pop_Pct) {
 			return 1;
@@ -39,30 +39,32 @@ function List() {
 		return 0;
 	});
 
-
 	return (
 		<Accordion defaultActiveKey='0'>
-			{newArr.map((state, i) => {
-				
+			{newArr.reduce((renderArr, state, i) => {
 				const { name } = state;
-				
-				if (name === "United States") return; //Already shown
-				if(!state.entry.Series_Complete_Pop_Pct) return
 
-				return (
-					<Card key={i} >
-						<Accordion.Toggle as={Card.Header}  eventKey={i + 1}>
-							{name}
-						</Accordion.Toggle>
-						<Accordion.Collapse eventKey={i + 1}>
-							<Card.Body>
-								<Partially title='partially vaccinated' data={state} />
-								<Fully title='fully vaccinated' data={state} />
-							</Card.Body>
-						</Accordion.Collapse>
-					</Card>
-				);
-			})}
+				if (
+					name !== "United States" && 
+					state.entry.Series_Complete_Pop_Pct &&
+					state.entry.Administered_Dose1_Recip
+				) {
+					renderArr.push(
+						<Card key={i}>
+							<Accordion.Toggle as={Card.Header} eventKey={i + 1}>
+								{name}
+							</Accordion.Toggle>
+							<Accordion.Collapse eventKey={i + 1}>
+								<Card.Body>
+									<Partially title='partially vaccinated' data={state} />
+									<Fully title='fully vaccinated' data={state} />
+								</Card.Body>
+							</Accordion.Collapse>
+						</Card>
+					);
+				}
+				return renderArr;
+			}, [])}
 		</Accordion>
 	);
 }
