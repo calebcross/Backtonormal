@@ -34,13 +34,11 @@ const findDates = ({ entriesBy }) => {
 
 const pluck = ({ entriesBy }, key) => {
 	let newArr = [...entriesBy].sort((a, b) => {
-		let fa = a.date;
-		let fb = b.date;
 
-		if (fa < fb) {
+		if (a.date < b.date) {
 			return -1;
 		}
-		if (fa > fb) {
+		if (a.date > b.date) {
 			return 1;
 		}
 		return 0;
