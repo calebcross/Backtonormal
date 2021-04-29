@@ -1,5 +1,4 @@
 const graphql = require("graphql");
-const _ = require("lodash");
 const knex = require("knex")(require("../knexfile"));
 
 const {
@@ -41,6 +40,7 @@ const EntryType = new GraphQLObjectType({
 				return knex.first().from("states").where("id", parent.state_id);
 			},
 		},
+		Census: { type: GraphQLFloat },
 		Doses_Distributed: { type: GraphQLFloat },
 Doses_Administered: { type: GraphQLFloat },
 Dist_Per_100K: { type: GraphQLFloat },
