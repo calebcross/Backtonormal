@@ -1,77 +1,49 @@
 //import React, { useEffect, useRef, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import {evaluate} from 'mathjs'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
+import Partially from "./Partially";
+import Fully from "./Fully";
 
-//import { Chart } from "chart.js";
-import "chartjs-adapter-date-fns";
-import { Line } from "react-chartjs-2";
-
-const getChartInfo = gql`
-	query GetChartInfo {
-		entriesfrom(from: "2021-04-26", to: "2021-04-27") {
-			date
-			People_Fully_Vaccinated
-			People_with_at_least_One_Dose
+const getStateInfo = gql`
+	query getStateInfo {
+		states {
+		  name
+      entry (date: "2021-04-28") {
+        Census
+    Administered_Dose1_Recip
+    Administered_Dose1_Pop_Pct
+    Series_Complete_Yes
+    Series_Complete_Pop_Pct
+    Doses_Distributed
+      }
 		}
 	}
 `;
 
-const findDates = ({ entriesfrom }) => {
-	let labels = [];
-	entriesfrom.forEach((entry) => {
-		if (!labels.includes(entry.date)) {
-
-			labels.push(entry.date);
-		}
-	});
-
-	
-		let newLabels = labels.map((date) => {
-			let test = new Date(parseInt(date));
-
-			const newLabel = test.getMonth() +
-				"-" +
-				test.getDate();
-			return newLabel;
-		})
-
-	return newLabels.sort();
-};
-
-
-const calTotal = (data, string) => {
-
-	let total = 0
-
-		const { entries } = data
-
-		entries.forEach( entry => {
-			total = total + entry.[string]
-		})
-
-}
 function Donut() {
+
+	const { loading, error, data } = useQuery(getStateInfo);
+
+	if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 	
 	return (
 <Accordion defaultActiveKey="0">
-  <Card>
-    <Accordion.Toggle as={Card.Header} eventKey="0">
-      Click me!
+{data.states.map( (state, i) => {
+	const { name } = state
+	return(<Card>
+    <Accordion.Toggle as={Card.Header} eventKey={i+1}>
+      {name}
     </Accordion.Toggle>
-    <Accordion.Collapse eventKey="0">
-      <Card.Body>Hello! I'm the body</Card.Body>
+    <Accordion.Collapse eventKey={i+1}>
+      <Card.Body><Partially title='partially vaccinated' data={state}/>
+	  <Fully title='fully vaccinated' data={state} />
+	  </Card.Body>
     </Accordion.Collapse>
-  </Card>
-  <Card>
-    <Accordion.Toggle as={Card.Header} eventKey="1">
-      Click me!
-    </Accordion.Toggle>
-    <Accordion.Collapse eventKey="1">
-      <Card.Body>Hello! I'm another body</Card.Body>
-    </Accordion.Collapse>
-  </Card>
+  </Card>)
+})}
+  
 </Accordion>
 	);
 }

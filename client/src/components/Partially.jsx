@@ -1,12 +1,11 @@
 import React from "react";
-import {evaluate} from 'mathjs'
 import CountUp from 'react-countup';
 
 
 function Partially({ title, data}) {
 
 
-	const { Administered_Dose1_Recip, Administered_Dose1_Pop_Pct} = data.entry
+	const { Administered_Dose1_Recip, Administered_Dose1_Pop_Pct} = data.entry;
 	return (
 		<div className="partially">
 			<div className='card border-dark mb-3'>
@@ -15,7 +14,7 @@ function Partially({ title, data}) {
                 <strong>{title}</strong></div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold display-6'><strong>{Administered_Dose1_Recip.toLocaleString()}</strong></h4>
+						<h4 className='card-title fw-bold display-6'><strong>{!Administered_Dose1_Recip ? 0 : Administered_Dose1_Recip.toLocaleString()}</strong></h4>
 						<p className='card-text fw-bold'><strong>people</strong></p>
 					</div>
 					<div className='card-body text-center'>
