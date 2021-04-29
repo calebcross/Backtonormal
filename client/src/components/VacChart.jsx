@@ -6,7 +6,7 @@ import { Line } from "react-chartjs-2";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-04-28") {
+		entriesBy(state: "United States", from: "2021-04-01", to: "2021-04-28") {
 			date
 			Administered_Dose1_Pop_Pct
 			Series_Complete_Pop_Pct
@@ -98,6 +98,7 @@ function VacChart() {
 				grid: {
 					color: "#444",
 				},
+				stack: true,
 			},
 			x: {
 				ticks: {
