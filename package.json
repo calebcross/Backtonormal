@@ -8,7 +8,9 @@
     "client": "cd client && npm run start",
     "dev": "concurrently -kill-others \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && node server.js"
+    "start": "cd server && node server.js",
+    "heroku-postbuild": "cd client && npm start && npm run build"
+
   },
   "repository": {
     "type": "git",
