@@ -19684,5 +19684,500 @@ module.exports = [
 		"Series_Complete_18PlusPop_Pct": null,
 		"Series_Complete_65Plus": null,
 		"Series_Complete_65PlusPop_Pct": null
+	  },
+	  {
+		"date": "2021-02-27",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 96402290,
+		"Doses_Administered": 72806180,
+		"Administered_Dose1_Recip": 48435536,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-02-28",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 96402490,
+		"Doses_Administered": 75236003,
+		"Administered_Dose1_Recip": 49772180,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-01",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 96402490,
+		"Doses_Administered": 76899987,
+		"Administered_Dose1_Recip": 50732997,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-02",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 102353940,
+		"Doses_Administered": 78631601,
+		"Administered_Dose1_Recip": 51755447,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-03",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 107028890,
+		"Doses_Administered": 80540474,
+		"Administered_Dose1_Recip": 52855579,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-04",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 109905530,
+		"Doses_Administered": 82572848,
+		"Administered_Dose1_Recip": 54035670,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-05",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 114133115,
+		"Doses_Administered": 85008094,
+		"Administered_Dose1_Recip": 55547697,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-06",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 116355405,
+		"Doses_Administered": 87912323,
+		"Administered_Dose1_Recip": 57358849,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-07",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 116363405,
+		"Doses_Administered": 90351750,
+		"Administered_Dose1_Recip": 58873710,
+		"Series_Complete_Pop_Pct": null
+	  },
+	  {
+		"date": "2021-03-08",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 116378615,
+		"Doses_Administered": 92089852,
+		"Administered_Dose1_Recip": 60005231,
+		"Series_Complete_Pop_Pct": 9.5
+	  },
+	  {
+		"date": "2021-03-09",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 123232775,
+		"Doses_Administered": 93692598,
+		"Administered_Dose1_Recip": 61088527,
+		"Series_Complete_Pop_Pct": 9.7
+	  },
+	  {
+		"date": "2021-03-10",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 127869155,
+		"Doses_Administered": 95721290,
+		"Administered_Dose1_Recip": 62451150,
+		"Series_Complete_Pop_Pct": 9.9
+	  },
+	  {
+		"date": "2021-03-11",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 131131470,
+		"Doses_Administered": 98203893,
+		"Administered_Dose1_Recip": 64071674,
+		"Series_Complete_Pop_Pct": 10.2
+	  },
+	  {
+		"date": "2021-03-12",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 133337525,
+		"Doses_Administered": 101128005,
+		"Administered_Dose1_Recip": 65965305,
+		"Series_Complete_Pop_Pct": 10.5
+	  },
+	  {
+		"date": "2021-03-13",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 135846665,
+		"Doses_Administered": 105703501,
+		"Administered_Dose1_Recip": 68884011,
+		"Series_Complete_Pop_Pct": 11.1
+	  },
+	  {
+		"date": "2021-03-14",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 135847835,
+		"Doses_Administered": 107060274,
+		"Administered_Dose1_Recip": 69784210,
+		"Series_Complete_Pop_Pct": 11.3
+	  },
+	  {
+		"date": "2021-03-15",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 135847835,
+		"Doses_Administered": 109081860,
+		"Administered_Dose1_Recip": 71054445,
+		"Series_Complete_Pop_Pct": 11.5
+	  },
+	  {
+		"date": "2021-03-16",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 142918525,
+		"Doses_Administered": 110737856,
+		"Administered_Dose1_Recip": 72135616,
+		"Series_Complete_Pop_Pct": 11.8
+	  },
+	  {
+		"date": "2021-03-17",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 147590615,
+		"Doses_Administered": 113037627,
+		"Administered_Dose1_Recip": 73669956,
+		"Series_Complete_Pop_Pct": 12
+	  },
+	  {
+		"date": "2021-03-18",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 151108445,
+		"Doses_Administered": 115730008,
+		"Administered_Dose1_Recip": 75495716,
+		"Series_Complete_Pop_Pct": 12.3
+	  },
+	  {
+		"date": "2021-03-19",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 154199235,
+		"Doses_Administered": 118313818,
+		"Administered_Dose1_Recip": 77230061,
+		"Series_Complete_Pop_Pct": 12.6
+	  },
+	  {
+		"date": "2021-03-20",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 156734555,
+		"Doses_Administered": 121441497,
+		"Administered_Dose1_Recip": 79367225,
+		"Series_Complete_Pop_Pct": 13
+	  },
+	  {
+		"date": "2021-03-21",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 156734555,
+		"Doses_Administered": 124481412,
+		"Administered_Dose1_Recip": 81415769,
+		"Series_Complete_Pop_Pct": 13.3
+	  },
+	  {
+		"date": "2021-03-22",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 156734555,
+		"Doses_Administered": 126509736,
+		"Administered_Dose1_Recip": 82772416,
+		"Series_Complete_Pop_Pct": 13.5
+	  },
+	  {
+		"date": "2021-03-23",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 164300795,
+		"Doses_Administered": 128217029,
+		"Administered_Dose1_Recip": 83930495,
+		"Series_Complete_Pop_Pct": 13.7
+	  },
+	  {
+		"date": "2021-03-24",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 169223125,
+		"Doses_Administered": 130473853,
+		"Administered_Dose1_Recip": 85472166,
+		"Series_Complete_Pop_Pct": 14
+	  },
+	  {
+		"date": "2021-03-25",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 173525335,
+		"Doses_Administered": 133305295,
+		"Administered_Dose1_Recip": 87343622,
+		"Series_Complete_Pop_Pct": 14.3
+	  },
+	  {
+		"date": "2021-03-26",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 177501775,
+		"Doses_Administered": 136684688,
+		"Administered_Dose1_Recip": 89559225,
+		"Series_Complete_Pop_Pct": 14.7
+	  },
+	  {
+		"date": "2021-03-27",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 180644125,
+		"Doses_Administered": 140180735,
+		"Administered_Dose1_Recip": 91707729,
+		"Series_Complete_Pop_Pct": 15.1
+	  },
+	  {
+		"date": "2021-03-28",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 180646465,
+		"Doses_Administered": 143462691,
+		"Administered_Dose1_Recip": 93631163,
+		"Series_Complete_Pop_Pct": 15.5
+	  },
+	  {
+		"date": "2021-03-29",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 180646565,
+		"Doses_Administered": 145812835,
+		"Administered_Dose1_Recip": 95015762,
+		"Series_Complete_Pop_Pct": 15.8
+	  },
+	  {
+		"date": "2021-03-30",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 189451285,
+		"Doses_Administered": 147602345,
+		"Administered_Dose1_Recip": 96044046,
+		"Series_Complete_Pop_Pct": 16.1
+	  },
+	  {
+		"date": "2021-03-31",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 195581725,
+		"Doses_Administered": 150273292,
+		"Administered_Dose1_Recip": 97593290,
+		"Series_Complete_Pop_Pct": 16.4
+	  },
+	  {
+		"date": "2021-04-01",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 200496635,
+		"Doses_Administered": 153631404,
+		"Administered_Dose1_Recip": 99565311,
+		"Series_Complete_Pop_Pct": 16.9
+	  },
+	  {
+		"date": "2021-04-02",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 204719335,
+		"Doses_Administered": 157606463,
+		"Administered_Dose1_Recip": 101804762,
+		"Series_Complete_Pop_Pct": 17.5
+	  },
+	  {
+		"date": "2021-04-03",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 207866645,
+		"Doses_Administered": 161688422,
+		"Administered_Dose1_Recip": 104213478,
+		"Series_Complete_Pop_Pct": 18
+	  },
+	  {
+		"date": "2021-04-04",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 207891295,
+		"Doses_Administered": 165053746,
+		"Administered_Dose1_Recip": 106214924,
+		"Series_Complete_Pop_Pct": 18.5
+	  },
+	  {
+		"date": "2021-04-05",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 207891395,
+		"Doses_Administered": 167187795,
+		"Administered_Dose1_Recip": 107515428,
+		"Series_Complete_Pop_Pct": 18.8
+	  },
+	  {
+		"date": "2021-04-06",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 219194215,
+		"Doses_Administered": 168592075,
+		"Administered_Dose1_Recip": 108301234,
+		"Series_Complete_Pop_Pct": 19
+	  },
+	  {
+		"date": "2021-04-07",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 225294435,
+		"Doses_Administered": 171476655,
+		"Administered_Dose1_Recip": 109995734,
+		"Series_Complete_Pop_Pct": 19.4
+	  },
+	  {
+		"date": "2021-04-08",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 229398685,
+		"Doses_Administered": 174879716,
+		"Administered_Dose1_Recip": 112046611,
+		"Series_Complete_Pop_Pct": 19.9
+	  },
+	  {
+		"date": "2021-04-09",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 233591955,
+		"Doses_Administered": 178837781,
+		"Administered_Dose1_Recip": 114436039,
+		"Series_Complete_Pop_Pct": 20.5
+	  },
+	  {
+		"date": "2021-04-10",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 237791735,
+		"Doses_Administered": 183467709,
+		"Administered_Dose1_Recip": 117142879,
+		"Series_Complete_Pop_Pct": 21.3
+	  },
+	  {
+		"date": "2021-04-11",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 237796105,
+		"Doses_Administered": 187047131,
+		"Administered_Dose1_Recip": 119242902,
+		"Series_Complete_Pop_Pct": 21.9
+	  },
+	  {
+		"date": "2021-04-12",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 237796305,
+		"Doses_Administered": 189692045,
+		"Administered_Dose1_Recip": 120848490,
+		"Series_Complete_Pop_Pct": 22.3
+	  },
+	  {
+		"date": "2021-04-13",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 245364805,
+		"Doses_Administered": 192282781,
+		"Administered_Dose1_Recip": 122295530,
+		"Series_Complete_Pop_Pct": 22.7
+	  },
+	  {
+		"date": "2021-04-14",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 250998265,
+		"Doses_Administered": 194791836,
+		"Administered_Dose1_Recip": 123917385,
+		"Series_Complete_Pop_Pct": 23.1
+	  },
+	  {
+		"date": "2021-04-15",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 255400665,
+		"Doses_Administered": 198317040,
+		"Administered_Dose1_Recip": 125822868,
+		"Series_Complete_Pop_Pct": 23.6
+	  },
+	  {
+		"date": "2021-04-16",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 258502815,
+		"Doses_Administered": 202282923,
+		"Administered_Dose1_Recip": 127743096,
+		"Series_Complete_Pop_Pct": 24.3
+	  },
+	  {
+		"date": "2021-04-17",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 264499715,
+		"Doses_Administered": 205871913,
+		"Administered_Dose1_Recip": 129494179,
+		"Series_Complete_Pop_Pct": 24.8
+	  },
+	  {
+		"date": "2021-04-18",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 264505725,
+		"Doses_Administered": 209406814,
+		"Administered_Dose1_Recip": 131247546,
+		"Series_Complete_Pop_Pct": 25.4
+	  },
+	  {
+		"date": "2021-04-19",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 264505725,
+		"Doses_Administered": 211581309,
+		"Administered_Dose1_Recip": 132321628,
+		"Series_Complete_Pop_Pct": 25.7
+	  },
+	  {
+		"date": "2021-04-20",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 272030795,
+		"Doses_Administered": 213388238,
+		"Administered_Dose1_Recip": 133266995,
+		"Series_Complete_Pop_Pct": 26
+	  },
+	  {
+		"date": "2021-04-21",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 277938875,
+		"Doses_Administered": 215951909,
+		"Administered_Dose1_Recip": 134445595,
+		"Series_Complete_Pop_Pct": 26.4
+	  },
+	  {
+		"date": "2021-04-22",
+		"name": "United States",
+		"Census": 331996199,
+		"Doses_Distributed": 282183915,
+		"Doses_Administered": 218947643,
+		"Administered_Dose1_Recip": 135791031,
+		"Series_Complete_Pop_Pct": 26.9
 	  }
 	 ]
