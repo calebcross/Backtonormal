@@ -25,13 +25,19 @@ const getInfo = gql`
     
   }
 `;
-
+{/* <Card>
+    <Accordion.Toggle as={Card.Header} eventKey={1}>
+      {data.states[1].name}
+    </Accordion.Toggle>
+    <Accordion.Collapse eventKey={1}>
+      <Card.Body><Partially title='partially vaccinated' data={data.states[1]}/></Card.Body>
+    </Accordion.Collapse>
+  </Card> */}
 
 function App() {
 
   const { loading, error, data } = useQuery(getInfo);
 
-  let populationUs = 331996199;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -41,7 +47,7 @@ function App() {
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
  				<Time data ={data} />
 			<Partially title='partially vaccinated' data={data}/>
-					<Fully title='fully vaccinated' data={data} population={populationUs} />
+					<Fully title='fully vaccinated' data={data} />
         <VacChart />
        <Donut />
 			</div>

@@ -24,6 +24,19 @@ const StateType = new GraphQLObjectType({
 				return knex.select().from("entries").where("state_id", parent.id);
 			},
 		},
+		entry: {
+			type: EntryType,
+			args: { date: { type: GraphQLString }},
+			resolve(parent, args) {
+				return knex
+					.first()
+					.from("entries")
+					.where({
+						date: `${args.date}`,
+						name: `${parent.name}`,
+					})
+			},
+		},
 	}),
 });
 
