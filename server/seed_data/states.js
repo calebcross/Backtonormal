@@ -252,7 +252,7 @@ module.exports = [
     "division": "Mountain"
   },
   {
-    "name": "New York",
+    "name": "New York State",
     "stateCode": "NY",
     "region": "Northeast",
     "division": "Middle Atlantic"
