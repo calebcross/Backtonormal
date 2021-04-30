@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CountUp from 'react-countup';
 import {evaluate} from 'mathjs'
-//import axios from 'axios';
+import axios from 'axios';
 
 
 function Time({ data }) {
@@ -12,8 +12,8 @@ function Time({ data }) {
 			axios.get(CDC_url)
 			.then( response =>{} )
 			.catch(err => {console.log(err)})
-	}, [])
- */
+	}, []) */
+
     let scope = {
         pop: data.entry.Census,
         vdd: data.entry.Doses_Distributed,
