@@ -128,7 +128,7 @@ function VacChart() {
 
 	return (
 		<div className='card border-dark mb-3'>
-			<div className='card-header text-center white fs-4 fw-bold'>
+			<div className='card-header text-center green fs-4 fw-bold'>
 				Vaccinated Percentage of the Population
 			</div>
 			<div className='card-body'>
