@@ -10,9 +10,17 @@ svg{
     height: 15px;
     margin-right: 1rem;
 }
+.svg-small{
+    width: 10px;
+    height: 10px;
+    margin-left: 1rem;
+}
 
 .partially {
     color: $orange;
+}
+.age {
+    color: $pink;
 }
 
 .fully {
@@ -24,6 +32,14 @@ svg{
 .white {
     color: $white;
 }
+.purple {
+    color: $purple;
+}
+
+.donut{
+    width: 40%;
+    height: 40%;
+}
 
 .card-header-vcenter{
     display: flex;
@@ -34,6 +50,13 @@ svg{
 .card-header-center{
     background-color: rgb(0, 0, 0, 0);
     border: none;
+}
+
+.card-header-dark{
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    //background-color: #444;
+    //border-bottom: 1px solid $pink;
 }
 
 * {
