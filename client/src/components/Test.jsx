@@ -70,7 +70,7 @@ function Test({ data }) {
 		datasets: [
 			{
 				label: "# of Votes",
-				data: sixtyFiveData,
+				data: eighteenData,
 				backgroundColor: [
 					"rgba(255,183,79,1)", // Partially
 					"rgba(187,222,251,1)", // Fully
@@ -120,11 +120,11 @@ function Test({ data }) {
 
 				<div className='d-flex justify-content-around flex-wrap'>
 					<div className='card-body text-center donut'>
-						<div className=''>18 years of Age</div>
+						<div className='fs-6 purple pb-3 text-uppercase'> At 18 Years Of Age</div>
 						<Doughnut data={chartData_18} options={options} />
 					</div>
 					<div className='card-body text-center donut'>
-						<div className=''>65 years of age</div>
+						<div className='fs-6 purple pb-3 text-uppercase'>65 years of age</div>
 						<Doughnut data={chartData_65} options={options} />
 					</div>
 				</div>

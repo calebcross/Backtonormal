@@ -52,7 +52,7 @@ function App() {
 
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
  				<Time data ={data} />
-			<Partially title='partially vaccinated' data={data}/>
+			<Partially title='at least partially vaccinated' data={data}/>
 					<Fully title='fully vaccinated' data={data} />
         <VacChart />
         <Test data={data} />

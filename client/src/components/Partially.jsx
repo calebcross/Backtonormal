@@ -6,7 +6,7 @@ function Partially({ title, data }) {
 	return (
 		<div className='partially'>
 			<div className='card border-dark mb-3'>
-				<div className='card-header card-header-vcenter text-uppercase'>
+				<div className='card-header card-header-vcenter text-uppercase '>
 					<svg
 						aria-hidden='true'
 						focusable='false'
