@@ -64,25 +64,19 @@ function VacChart() {
 				label: "Partially Vaccinated",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				lineTension: 0.4,
 				data: pluck(data, [partially]),
 			},
 			{
 				label: "Fully Vaccinated",
 				backgroundColor: "rgb(187,222,251)",
 				borderColor: "rgb(187,222,251)",
-				lineTension: 0.4,
 				data: pluck(data, [fully]),
 			},
 		],
 	};
 
 	const options = {
-		tooltips: {
-			mode: 'interpolate',
-			intersect: false
-		  },
-/* 		plugins: {
+ 		plugins: {
 			legend: {
 				display: true,
 				labels: {
@@ -101,7 +95,7 @@ function VacChart() {
 				  suppressTooltips: false   // suppress tooltips when showing a synced tracer
 				},
 		},
-	}, */
+	}, 
 		scales: {
 			y: {
 				suggestedMax: 50,
