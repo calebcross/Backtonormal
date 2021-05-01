@@ -76,14 +76,6 @@ function Test({ data }) {
 
 	const options = {
 		responsive: true,
-		elements: {
-			center: {
-				text: "90%",
-				color: "rgba(255, 99, 132, 1)",
-				fontStyle: "Arial",
-				sidePadding: 20,
-			},
-		},
 		maintainAspectRatio: true,
 		legend: {
 			display: false,
@@ -102,7 +94,10 @@ function Test({ data }) {
 				  fontColor: '#FFF',
 				  fontStyle: 'bold',
 				  position: 'outside',
-				  arc: true
+				  arc: true,
+				  outsidePadding: 4,
+				  textMargin: 4,
+				  overlap: false
 				},
 				{
 				  render: 'percentage',
@@ -142,15 +137,15 @@ function Test({ data }) {
 
 				<div className='d-flex justify-content-around flex-wrap'>
 					<div className='card-body text-center donut'>
-						<div className='fs-6 white pb-3 text-uppercase'>
+						<div className='fs-5 white pb-3 text-uppercase fw-bold'>
 							{" "}
-							At Least 18 Years Of Age
+							≥ 18 Years Of Age
 						</div>
 						<Doughnut data={chartData(eighteenData)} options={options} />
 					</div>
 					<div className='card-body text-center donut'>
-						<div className='fs-6 white pb-3 text-uppercase'>
-							65 years of age
+						<div className='fs-5 white pb-3 text-uppercase fw-bold'>
+						≥ 65 years of Age
 						</div>
 						<Doughnut data={chartData(sixtyFiveData)} options={options} />
 					</div>
