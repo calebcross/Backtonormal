@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import CountUp from 'react-countup';
 import {evaluate} from 'mathjs'
-import axios from 'axios';
+//import axios from 'axios';
 
 
 function Time({ data }) {
 
 	const CDC_url = 'https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data'
-
+/* 
 	useEffect( () => {
 			axios.get(CDC_url)
 			.then( response =>{} )
 			.catch(err => {console.log(err)})
-	}, [])
+	}, []) */
 
     let scope = {
         pop: data.entry.Census,

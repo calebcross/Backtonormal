@@ -79,25 +79,29 @@ function VacChart() {
 
 	const options = {
 		tooltips: {
-			displayColors: false,
-			titleFontSize: 16,
-			bodyFontSize: 14,
-			xPadding: 10,
-			yPadding: 10,
-			callbacks: {
-				label: (tooltipItem, data) => {
-					return `${tooltipItem.value}%`
-				}
-			}
-		},
-		plugins: {
+			mode: 'interpolate',
+			intersect: false
+		  },
+/* 		plugins: {
 			legend: {
 				display: true,
 				labels: {
 					color: "#fff",
 				},
 			},
+			crosshair: {
+				line: {
+				  color: '#F66',        // crosshair line color
+				  width: 1,             // crosshair line width
+				  dashPattern: [5, 5]   // crosshair line dash pattern
+				},
+				sync: {
+				  enabled: true,            // enable trace line syncing with other charts
+				  group: 1,                 // chart group
+				  suppressTooltips: false   // suppress tooltips when showing a synced tracer
+				},
 		},
+	}, */
 		scales: {
 			y: {
 				suggestedMax: 50,
@@ -110,7 +114,6 @@ function VacChart() {
 				grid: {
 					color: "#444",
 				},
-				stack: true,
 			},
 			x: {
 				ticks: {
@@ -128,7 +131,7 @@ function VacChart() {
 
 	return (
 		<div className='card border-dark mb-3'>
-			<div className='card-header text-center green fs-4 fw-bold'>
+			<div className='card-header-dark text-center green fs-4 fw-bold'>
 				Vaccinated Percentage of the Population
 			</div>
 			<div className='card-body'>

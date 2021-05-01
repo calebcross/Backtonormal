@@ -1,7 +1,9 @@
 //import React, { useEffect, useRef, useState } from "react";
 /* eslint-disable no-loss-of-precision */
 import { Doughnut } from "react-chartjs-2";
-import { evaluate } from "mathjs";
+//import "chartjs-plugin-datalabels";
+import "chartjs-plugin-labels";
+
 
 function Test({ data }) {
 	const {
@@ -42,48 +44,34 @@ function Test({ data }) {
 	);
 
 	const { partially, fully } = sixtyFiveScope;
-	const sixtyFiveData = [partially, fully, sixtyFivePop - partially - fully]
-	const eighteenData = [eighteenPlusScope.partially, eighteenPlusScope.fully, eighteenPlusPop - eighteenPlusScope.partially - eighteenPlusScope.fully]
+	const sixtyFiveData = [partially, fully, sixtyFivePop - partially - fully];
+	const eighteenData = [
+		eighteenPlusScope.partially,
+		eighteenPlusScope.fully,
+		eighteenPlusPop - eighteenPlusScope.partially - eighteenPlusScope.fully,
+	];
 
-	const chartData_65 = {
-		labels: ["Partially Vaccinated", "Fully Vaccinated", "Not Vaccinated"],
-		datasets: [
-			{
-				label: "# of Votes",
-				data: sixtyFiveData,
-				backgroundColor: [
-					"rgba(255,183,79,1)", // Partially
-					"rgba(187,222,251,1)", // Fully
-					"rgba(255,100,132,1)", // Not
-				],
-				borderColor: [
-					"rgba(255,183,79,1)",
-					"rgba(187,222,251,1)",
-					"rgba(255,100,132, 1)",
-				],
-				borderWidth: 0,
-			},
-		],
-	};
-	const chartData_18 = {
-		labels: ["Partially Vaccinated", "Fully Vaccinated", "Not Vaccinated"],
-		datasets: [
-			{
-				label: "# of Votes",
-				data: eighteenData,
-				backgroundColor: [
-					"rgba(255,183,79,1)", // Partially
-					"rgba(187,222,251,1)", // Fully
-					"rgba(255,100,132,1)", // Not
-				],
-				borderColor: [
-					"rgba(255,183,79,1)",
-					"rgba(187,222,251,1)",
-					"rgba(255,100,132, 1)",
-				],
-				borderWidth: 0,
-			},
-		],
+	const chartData = (data) => {
+		return {
+			labels: ["Partially Vaccinated", "Fully Vaccinated", "Not Vaccinated"],
+			datasets: [
+				{
+					label: "# of Votes",
+					data: data,
+					backgroundColor: [
+						"rgba(255,183,79,1)", // Partially
+						"rgba(187,222,251,1)", // Fully
+						"rgba(255,100,132,1)", // Not
+					],
+					borderColor: [
+						"rgba(255,183,79,1)",
+						"rgba(187,222,251,1)",
+						"rgba(255,100,132, 1)",
+					],
+					borderWidth: 0,
+				},
+			],
+		};
 	};
 
 	const options = {
@@ -97,35 +85,74 @@ function Test({ data }) {
 			},
 		},
 		maintainAspectRatio: true,
-		plugins: {
-			legend: {
+		legend: {
+			display: false,
+			position: "bottom",
+			align: "start",
+			/* 				title: {
 				display: true,
-				position: "bottom",
-				align: "start",
-/* 				title: {
-					display: true,
-					text: "65 plus",
-					color: "rgba(255, 99, 132, 1)"
-				} */
-			},
+				text: "65 plus",
+				color: "rgba(255, 99, 132, 1)"
+			} */
+		},
+		plugins: {
+			labels: [
+				{
+				  render: 'label',
+				  fontColor: '#FFF',
+				  fontStyle: 'bold',
+				  position: 'outside',
+				  arc: true
+				},
+				{
+				  render: 'percentage',
+				  fontStyle: 'bold',
+				  fontColor: '#000',
+				}
+			  ]
+/* 			datalabels: {
+				formatter: (value, ctx) => {
+					let datasets = ctx.chart.data.datasets;
+
+					if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+						let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+						let percentage = Math.round((value / sum) * 100) + "%";
+						return percentage;
+					} else {
+						let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+						let percentage = Math.round((value / sum) * 100) + "%";
+						return percentage;
+					}
+				},
+				color: "black",
+				font: {
+					weight: 'bold'
+				  }
+			}, */
 		},
 	};
+
 
 	return (
 		<div className='age'>
 			<div className='card border-dark mb-3'>
-				<div className='card-header-dark text-center fs-4 fw-bold white'>
+				<div className='card-header-dark text-center fs-4 fw-bold '>
 					Vaccinated Percentage by Age Group
 				</div>
 
 				<div className='d-flex justify-content-around flex-wrap'>
 					<div className='card-body text-center donut'>
-						<div className='fs-6 purple pb-3 text-uppercase'> At 18 Years Of Age</div>
-						<Doughnut data={chartData_18} options={options} />
+						<div className='fs-6 white pb-3 text-uppercase'>
+							{" "}
+							At Least 18 Years Of Age
+						</div>
+						<Doughnut data={chartData(eighteenData)} options={options} />
 					</div>
 					<div className='card-body text-center donut'>
-						<div className='fs-6 purple pb-3 text-uppercase'>65 years of age</div>
-						<Doughnut data={chartData_65} options={options} />
+						<div className='fs-6 white pb-3 text-uppercase'>
+							65 years of age
+						</div>
+						<Doughnut data={chartData(sixtyFiveData)} options={options} />
 					</div>
 				</div>
 			</div>
