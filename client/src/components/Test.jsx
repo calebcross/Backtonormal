@@ -104,26 +104,11 @@ function Test({ data }) {
 				  fontStyle: 'bold',
 				  fontColor: '#000',
 				}
-			  ]
-/* 			datalabels: {
-				formatter: (value, ctx) => {
-					let datasets = ctx.chart.data.datasets;
-
-					if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
-						let sum = datasets[0].data.reduce((a, b) => a + b, 0);
-						let percentage = Math.round((value / sum) * 100) + "%";
-						return percentage;
-					} else {
-						let sum = datasets[0].data.reduce((a, b) => a + b, 0);
-						let percentage = Math.round((value / sum) * 100) + "%";
-						return percentage;
-					}
-				},
-				color: "black",
-				font: {
-					weight: 'bold'
-				  }
-			}, */
+			  ],
+			  datalabels: {
+				color: 'white',
+				display: false
+			  }
 		},
 	};
 
