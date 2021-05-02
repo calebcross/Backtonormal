@@ -22,5 +22,8 @@
   "homepage": "https://github.com/calebcross/Backtonormal#readme",
   "devDependencies": {
     "concurrently": "^6.0.2"
+  },
+  "dependencies": {
+    "chartjs-plugin-deferred": "^1.0.2"
   }
 }
