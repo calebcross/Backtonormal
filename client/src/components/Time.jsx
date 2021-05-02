@@ -22,14 +22,14 @@ function Time({ data }) {
 
 
 	return (
-		<div className="green">
+		<div className="red">
 			<div className='card border-dark mb-3'>
 				<div className='card-header card-header-center text-uppercase'>
 					<h1 className='display-6 text-center fw-bold'>
 						Days until
 						normal <strong>:</strong>
 						<br /></h1>
-                         <h2 className=" display-3 text-center"><CountUp end={Math.ceil(evaluate ( `((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope))} /> days</h2>
+                         <h2 className=" display-3 text-center fully"><CountUp end={Math.ceil(evaluate ( `((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope))} /> days</h2>
  					
 				</div>
 				<div className='d-flex justify-content-evenly flex-wrap'></div>
