@@ -1,29 +1,28 @@
 {
-  "name": "Capstone",
+  "name": "herd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Serve up data from CDC vaccinations website",
   "main": "index.js",
   "scripts": {
-    "server": "cd server && nodemon server.js",
+    "server": "nodemon server.js",
     "client": "cd client && npm run start",
     "dev": "concurrently -kill-others \"npm run server\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/calebcross/Backtonormal.git"
-  },
-  "keywords": [],
-  "author": "",
+  "author": "Caleb Cross",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/calebcross/Backtonormal/issues"
-  },
-  "homepage": "https://github.com/calebcross/Backtonormal#readme",
-  "devDependencies": {
-    "concurrently": "^6.0.2"
-  },
   "dependencies": {
-    "chartjs-plugin-deferred": "^1.0.2"
+    "bookshelf": "^1.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.0",
+    "knex": "^0.21.19",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
