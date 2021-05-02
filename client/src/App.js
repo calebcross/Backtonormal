@@ -18,9 +18,23 @@ const getInfo = gql`
     Census
     Administered_Dose1_Recip
     Administered_Dose1_Pop_Pct
+    Administered_Dose2_Pop_Pct
+    Administered_Dose1_Recip_65Plus
+    Administered_Dose1_Recip_18Plus
     Series_Complete_Yes
     Series_Complete_Pop_Pct
     Doses_Distributed
+    Series_Complete_Yes
+    Series_Complete_Pop_Pct
+    Series_Complete_18PlusPop_Pct
+    Series_Complete_18Plus
+    Series_Complete_65PlusPop_Pct
+    Administered_Dose1_Recip_65PlusPop_Pct
+    Administered_Dose1_Recip_18PlusPop_Pct
+    Series_Complete_65Plus
+    Series_Complete_Moderna
+    Series_Complete_Pfizer
+    Series_Complete_Janssen
     }
     
   }
@@ -38,10 +52,10 @@ function App() {
 
 			<div className='d-flex flex-column justify-content-center my-5 mx-2'>
  				<Time data ={data} />
-			<Partially title='partially vaccinated' data={data}/>
+			<Partially title='at least partially vaccinated' data={data}/>
 					<Fully title='fully vaccinated' data={data} />
         <VacChart />
-        <Test />
+        <Test data={data} />
        <List />
 			</div>
 
