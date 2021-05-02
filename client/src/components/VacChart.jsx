@@ -47,7 +47,7 @@ const pluck = ({ entriesBy }, key) => {
 		if (a.date > b.date) {
 			return 1;
 		}
-		return 0;
+		return a.date - b.date
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
@@ -115,18 +115,14 @@ function VacChart() {
 					return `${context.dataset.data[context.dataIndex]}%`;
 				},
 				font: {
-					weight: "bold",
+					weight: "normal",
+					family: "Montserrat"
 				},
 				formatter: function (value) {
 					return `${value}%`;
 				},
 				
-			},
-			deferred: {
-				xOffset: 150,   // defer until 150px of the canvas width are inside the viewport
-				yOffset: '50%', // defer until 50% of the canvas height are inside the viewport
-				delay: 1000      // delay of 500 ms after the canvas is considered inside the viewport
-			  }
+			}
 		},
 		tooltips: {
             mode: 'index'
@@ -135,19 +131,24 @@ function VacChart() {
             display: true,
             labels: {
                 fontColor: 'white',
-				fontStyle: 'bold'
+				fontFamily: "Montserrat",
+				fontStyle: 'normal'
             }
         },
 		scales: {
 			yAxes: [
 				{
 					stacked: true,
+					
 					ticks: {
+
+						stepSize: 10,
 						callback: function (value, index, values) {
 							return `${value}%`;
 						},
 						fontColor: "white",
-						fontStyle: "bold",
+						fontStyle: "normal",
+						fontFamily: "Montserrat"
 					},
 					gridLines: {
 						color: "#444",
@@ -160,7 +161,8 @@ function VacChart() {
 					stacked: true,
 					ticks: {
 						fontColor: "white",
-						fontStyle: "bold",
+						fontStyle: "normal",
+						fontFamily: "Montserrat"
 					},
 					gridLines: {
 						color: "#444",

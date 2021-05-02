@@ -4,6 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Partially from "./Partially";
 import Fully from "./Fully";
+import Test from "./Test";
 
 const getStateInfo = gql`
 	query getStateInfo {
@@ -13,9 +14,23 @@ const getStateInfo = gql`
 				Census
 				Administered_Dose1_Recip
 				Administered_Dose1_Pop_Pct
+				Administered_Dose2_Pop_Pct
+				Administered_Dose1_Recip_65Plus
+				Administered_Dose1_Recip_18Plus
 				Series_Complete_Yes
 				Series_Complete_Pop_Pct
 				Doses_Distributed
+				Series_Complete_Yes
+				Series_Complete_Pop_Pct
+				Series_Complete_18PlusPop_Pct
+				Series_Complete_18Plus
+				Series_Complete_65PlusPop_Pct
+				Administered_Dose1_Recip_65PlusPop_Pct
+				Administered_Dose1_Recip_18PlusPop_Pct
+				Series_Complete_65Plus
+				Series_Complete_Moderna
+				Series_Complete_Pfizer
+				Series_Complete_Janssen
 			}
 		}
 	}
@@ -71,6 +86,7 @@ function List() {
 								<Card.Body>
 									<Partially title='partially vaccinated' data={state} />
 									<Fully title='fully vaccinated' data={state} />
+									<Test data={state} />
 								</Card.Body>
 							</Accordion.Collapse>
 						</Card>
