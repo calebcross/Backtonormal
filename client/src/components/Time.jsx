@@ -20,7 +20,7 @@ function Time({ data }) {
 	}, [])
 
     let scope = {
-        pop: data.entry.Census,
+        pop: 331449281,
         vdd: data.entry.Doses_Distributed,
         advdg: avg ? avg : 1431517
     }
