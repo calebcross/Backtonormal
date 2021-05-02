@@ -1,15 +1,17 @@
 import { useQuery, gql } from "@apollo/client";
 import { HorizontalBar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
-import { format } from "date-fns";
-import { round } from "mathjs";
+import { formatDistance } from "date-fns";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-04-28") {
+		entriesBy(state: "United States", from: "2021-03-08", to: "2021-05-01") {
 			date
-			Administered_Dose1_Pop_Pct
-			Series_Complete_Pop_Pct
+			Series_Complete_Yes
+			Series_Complete_Moderna
+			Series_Complete_Pfizer
+			Series_Complete_Janssen
+			Series_Complete_Unk_Manuf
 		}
 	}
 `;
@@ -28,17 +30,17 @@ const findDates = ({ entriesBy }) => {
 		return x - y;
 	});
 
-	return newLabels.reduce((renderArr, label, i) => {
-		if (i % 7 === 0) {
+	return newLabels.reverse().reduce((renderArr, label, i) => {
+		if ( i % 14 === 0) {
 			//renderArr.push(label.split('2021-').[1])
-			renderArr.push(format(new Date(label), "MMMM do"));
+			renderArr.push(`${formatDistance(new Date(label), new Date())} ago`);
 			//renderArr.push( formatDistance( new Date (label), new Date() ) )
 		}
 		return renderArr;
 	}, []);
 };
 
-const pluck = ({ entriesBy }, key) => {
+const plucky = ({ entriesBy }, key, total) => {
 	let newArr = [];
 	newArr = [...entriesBy].sort((a, b) => {
 		if (a.date < b.date) {
@@ -51,21 +53,8 @@ const pluck = ({ entriesBy }, key) => {
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
-		if (i % 7 === 0) {
-			renderArr.push(entry[key]);
-		}
-		return renderArr;
-	}, []);
-};
-const plucky = ({ entriesBy }, key, minus) => {
-	let newArr = [];
-	newArr = [...entriesBy].sort((a, b) => {
-		return a.date - b.date;
-	});
-
-	return newArr.reduce((renderArr, entry, i) => {
-		if (i % 7 === 0) {
-			renderArr.push(round(entry[key] - entry[minus], 3));
+		if ( i % 14 === 0) {
+			renderArr.push( Math.ceil( (entry[key] / (entry.Series_Complete_Moderna + entry.Series_Complete_Pfizer + entry.Series_Complete_Janssen + entry.Series_Complete_Unk_Manuf )) * 100));
 		}
 		return renderArr;
 	}, []);
@@ -77,51 +66,57 @@ function Manufact() {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 
-	let partially = "Administered_Dose1_Pop_Pct";
-	let fully = "Series_Complete_Pop_Pct";
+	let unk = "Series_Complete_Unk_Manuf"
+	let series = "Series_Complete_Yes"
+	let pfizer = "Series_Complete_Pfizer"
+	let moderna = "Series_Complete_Moderna"
+	let janssen = "Series_Complete_Janssen"
+
 
 	const chartData = {
-		labels: ['Manufacturer'],
+		labels: findDates(data),
 		datasets: [
 			{
-				label: "Moderna",
-				backgroundColor: "rgb(187,222,251)",
-				borderColor: "rgb(187,222,251)",
-				data: pluck(data, [fully]),
-			},
-			{
-				label: "Pfizer",
-				backgroundColor: "rgb(255,183,78)",
-				borderColor: "rgb(255,183,78)",
-				data: plucky(data, [partially], [fully]),
-			},
-			{
-				label: "Janssen",
 				backgroundColor: "rgb(179,157,219)",
 				borderColor: "rgb(179,157,219)",
-				data: [45],
+				data: plucky(data, [janssen], [series]),
+				label: "Janssen",
+			},{
+				backgroundColor: "rgb(255,183,78)",
+				borderColor: "rgb(255,183,78)",
+				data: plucky(data, [pfizer] , [series]),
+				label: "Pfizer",
+			},{
+				backgroundColor: "rgb(252,126,152)",
+				borderColor: "rgb(252,126,152)",
+				data: plucky(data, [unk], [series]),
+				label: "Unknown",
 			},
-		],
+			{
+				backgroundColor: "rgb(187,222,251)",
+				borderColor: "rgb(187,222,251)",
+				data: plucky(data, [moderna], [series]),
+				label: "Moderna",
+			}
+		]
 	};
 
 	const options = {
 		plugins: {
 			labels: [
 				{
-					render: (args) => {
-						return  args.value;
-					}
+					render: 'percentage'
 				},
 			],
 			datalabels: {
+					family: "Roboto Slab",
+					weight: "bold",
 				color: "#303030",
 				display: true,
 				font: {
-					weight: "bold",
-					family: "Roboto Slab"
 				},
 				formatter: function (value) {
-					return `${value}`;
+					return ( value > 1 ? value + " %" : '');
 				},
 				
 			}
@@ -161,9 +156,13 @@ function Manufact() {
 				{
 					stacked: true,
 					ticks: {
+						max: 100,
 						fontColor: "white",
 						fontStyle: "normal",
-						fontFamily: "Montserrat"
+						fontFamily: "Montserrat",
+						callback: function (value, index, values) {
+							return `${value}%`;
+						},
 					},
 					gridLines: {
 						color: "#444",
