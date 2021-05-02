@@ -4,7 +4,8 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
 svg{
     width: 15px;
     height: 15px;
@@ -64,4 +65,10 @@ svg{
 
 * {
     font-family: 'Roboto Slab', serif;
+}
+.roboto {
+    font-family: 'Roboto', serif;
+}
+.monts {
+    font-family: 'Montserrat', serif;
 }
