@@ -1,10 +1,8 @@
 import { useQuery, gql } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
-import "chartjs-plugin-labels";
 import "chartjs-plugin-datalabels";
 import { format } from "date-fns";
 import { round } from "mathjs";
-//import "chartjs-plugin-crosshair";
 
 const getChartInfo = gql`
 	query GetChartInfo {
@@ -33,7 +31,7 @@ const findDates = ({ entriesBy }) => {
 	return newLabels.reduce((renderArr, label, i) => {
 		if (i % 7 === 0) {
 			//renderArr.push(label.split('2021-').[1])
-			renderArr.push(format(new Date(label), "MMM do"));
+			renderArr.push(format(new Date(label), "MMMM do"));
 			//renderArr.push( formatDistance( new Date (label), new Date() ) )
 		}
 		return renderArr;
@@ -94,7 +92,7 @@ function VacChart() {
 			},
 			{
 				type: "bar",
-				label: "Partially Vaccinated",
+				label: "Only 1 Dose",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
 				data: plucky(data, [partially], [fully]),
@@ -108,8 +106,7 @@ function VacChart() {
 				{
 					render: (args) => {
 						return; /* round( args.value , 3) + '%' */
-					},
-					display: false,
+					}
 				},
 			],
 			datalabels: {
@@ -123,8 +120,24 @@ function VacChart() {
 				formatter: function (value) {
 					return `${value}%`;
 				},
+				
 			},
+			deferred: {
+				xOffset: 150,   // defer until 150px of the canvas width are inside the viewport
+				yOffset: '50%', // defer until 50% of the canvas height are inside the viewport
+				delay: 1000      // delay of 500 ms after the canvas is considered inside the viewport
+			  }
 		},
+		tooltips: {
+            mode: 'index'
+        },
+		legend: {
+            display: true,
+            labels: {
+                fontColor: 'white',
+				fontStyle: 'bold'
+            }
+        },
 		scales: {
 			yAxes: [
 				{
@@ -159,8 +172,8 @@ function VacChart() {
 
 	return (
 		<div className='card border-dark mb-3'>
-			<div className='card-header-dark text-center red fs-4 fw-bold'>
-				Vaccinated Percentage of the Population
+			<div className='card-header-dark text-center green fs-4 fw-bold'>
+				Vaccinated Percentage of US Population
 			</div>
 			<div className='card-body'>
 				<Bar data={chartData} options={options} />

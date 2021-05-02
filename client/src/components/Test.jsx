@@ -1,7 +1,6 @@
-//import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 /* eslint-disable no-loss-of-precision */
 import { Doughnut } from "react-chartjs-2";
-//import "chartjs-plugin-datalabels";
 import "chartjs-plugin-labels";
 
 
@@ -53,7 +52,7 @@ function Test({ data }) {
 
 	const chartData = (data) => {
 		return {
-			labels: ["Partially Vaccinated", "Fully Vaccinated", "Not Vaccinated"],
+			labels: ["Only 1 Dose", "Fully Vaccinated", "Not Vaccinated"],
 			datasets: [
 				{
 					label: "# of Votes",
@@ -61,12 +60,12 @@ function Test({ data }) {
 					backgroundColor: [
 						"rgba(255,183,79,1)", // Partially
 						"rgba(187,222,251,1)", // Fully
-						"rgba(255,100,132,1)", // Not
+						"rgba(252,126,151,1)", // Not
 					],
 					borderColor: [
 						"rgba(255,183,79,1)",
 						"rgba(187,222,251,1)",
-						"rgba(255,100,132, 1)",
+						"rgba(252,126,151,1)",
 					],
 					borderWidth: 0,
 				},
@@ -91,7 +90,7 @@ function Test({ data }) {
 			labels: [
 				{
 				  render: 'label',
-				  fontColor: '#FFF',
+				  fontColor: '#FFF', //TODO: Maybe
 				  fontStyle: 'bold',
 				  position: 'outside',
 				  arc: true,
@@ -102,7 +101,7 @@ function Test({ data }) {
 				{
 				  render: 'percentage',
 				  fontStyle: 'bold',
-				  fontColor: '#000',
+				  fontColor: '#303030',
 				}
 			  ],
 			  datalabels: {
@@ -116,7 +115,7 @@ function Test({ data }) {
 	return (
 		<div className='age'>
 			<div className='card border-dark mb-3'>
-				<div className='card-header-dark text-center fs-4 fw-bold '>
+				<div className='card-header-dark text-center fs-4 fw-bold red'>
 					Vaccinated Percentage by Age Group
 				</div>
 
@@ -129,8 +128,8 @@ function Test({ data }) {
 						<Doughnut data={chartData(eighteenData)} options={options} />
 					</div>
 					<div className='card-body text-center donut'>
-						<div className='fs-5 white pb-3 text-uppercase fw-bold'>
-						≥ 65 years of Age
+						<div className='fs-5 white pb-3 fw-bold'>
+						65 +
 						</div>
 						<Doughnut data={chartData(sixtyFiveData)} options={options} />
 					</div>
