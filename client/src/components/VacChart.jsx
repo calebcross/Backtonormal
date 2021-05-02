@@ -6,7 +6,7 @@ import { round } from "mathjs";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-04-28") {
+		entriesBy(state: "United States", from: "2021-03-15", to: "2021-05-01") {
 			date
 			Administered_Dose1_Pop_Pct
 			Series_Complete_Pop_Pct
@@ -119,13 +119,15 @@ function VacChart() {
 					family: "Montserrat"
 				},
 				formatter: function (value) {
-					return `${value}%`;
+					return `${round (value)}%`;
 				},
 				
 			}
 		},
 		tooltips: {
-            mode: 'index'
+            mode: 'index',
+			xAlign: 'center',
+			yAlign: 'bottom'
         },
 		legend: {
             display: true,
@@ -141,7 +143,7 @@ function VacChart() {
 					stacked: true,
 					
 					ticks: {
-
+						max: 50,
 						stepSize: 10,
 						callback: function (value, index, values) {
 							return `${value}%`;
