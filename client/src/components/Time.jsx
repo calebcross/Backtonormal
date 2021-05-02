@@ -34,7 +34,7 @@ function Time({ data }) {
 						Days until
 						normal :
 						<br /></h1>
-                         <h2 className=" display-3 text-center fully fw-bold"><CountUp end={Math.ceil(evaluate ( `((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope))} /></h2>
+                         <h2 className=" display-3 text-center fully fw-bold monts"><CountUp end={Math.ceil(evaluate ( `((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope))} /></h2>
 						 <p className="text-center fw-bold"> days</p>
  					
 				</div>

@@ -5,11 +5,13 @@ import { useQuery, gql } from '@apollo/client';
 import Time from "./components/Time";
 import Partially from "./components/Partially";
 import Fully from "./components/Fully";
-//style
-import "./scss/custom.scss";
+import Manufact from "./components/Manufact";
 import VacChart from "./components/VacChart";
 import Test from "./components/Test";
 import List from "./components/List";
+//style
+import "./scss/custom.scss";
+
 
 
 const getInfo = gql`
@@ -56,6 +58,7 @@ function App() {
 					<Fully title='fully vaccinated' data={data} />
         <VacChart />
         <Test data={data} />
+        <Manufact data={data} />
        <List />
 			</div>
 

@@ -131,7 +131,7 @@ const RootQuery = new GraphQLObjectType({
 		states: {
 			type: GraphQLList(StateType),
 			resolve(parent, args) {
-				return knex.select().from("states");
+				return knex.select().from("states").orderBy('name', 'asc');
 			},
 		},
 		entriesBy: { 
@@ -139,7 +139,7 @@ const RootQuery = new GraphQLObjectType({
 			args: { state: { type: GraphQLString }, from: { type: GraphQLString}, to: { type: GraphQLString}},
 			resolve(parent, args) {
 				const { state, from, to } = args
-				return knex.select().from("entries").where("name", state).whereBetween('date', [from, to]);
+				return knex.select().from("entries").where("name", state).whereBetween('date', [from, to]).orderBy('date', 'desc');
 			},
 		},
 		entriesfrom: { 
@@ -147,7 +147,7 @@ const RootQuery = new GraphQLObjectType({
 			args: {from: { type: GraphQLString}, to: { type: GraphQLString}},
 			resolve(parent, args) {
 				const { from, to } = args
-				return knex.select().from("entries").whereBetween('date', [from, to]);
+				return knex.select().from("entries").whereBetween('date', [from, to]).orderBy('date', 'desc');
 			},
 		},
 		entries: {
@@ -155,7 +155,7 @@ const RootQuery = new GraphQLObjectType({
 			args: { date: { type: GraphQLString}},
 			resolve(parent, args) {
 				const { date } = args
-				return knex.select().from("entries").where('date', date);
+				return knex.select().from("entries").where('date', date).orderBy('date', 'desc');
 			},
 		},
 	},

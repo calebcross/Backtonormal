@@ -24,19 +24,18 @@ function Partially({ title, data }) {
 				</div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold display-6'>
-							<strong>
+						<h4 className='card-title display-6 monst'>
+
 								{!Administered_Dose1_Recip
 									? 0
 									: Administered_Dose1_Recip.toLocaleString()}
-							</strong>
 						</h4>
 						<p className='card-text fw-bold'>
 							<strong>people</strong>
 						</p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold display-6'>
+						<h4 className='card-title display-6 monts'>
 							{
 								<CountUp
 									suffix={"%"}
