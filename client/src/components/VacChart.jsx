@@ -6,7 +6,7 @@ import { round } from "mathjs";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-04-28") {
+		entriesBy(state: "United States", from: "2021-03-15", to: "2021-05-01") {
 			date
 			Administered_Dose1_Pop_Pct
 			Series_Complete_Pop_Pct
@@ -47,7 +47,7 @@ const pluck = ({ entriesBy }, key) => {
 		if (a.date > b.date) {
 			return 1;
 		}
-		return 0;
+		return a.date - b.date
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
@@ -101,7 +101,9 @@ function VacChart() {
 	};
 
 	const options = {
+		maintainAspectRatio: false,
 		plugins: {
+			
 			labels: [
 				{
 					render: (args) => {
@@ -116,20 +118,20 @@ function VacChart() {
 				},
 				font: {
 					weight: "bold",
+					family: "Montserrat"
 				},
 				formatter: function (value) {
-					return `${value}%`;
+					return `${round (value)}%`;
 				},
-				
-			},
-			deferred: {
-				xOffset: 150,   // defer until 150px of the canvas width are inside the viewport
-				yOffset: '50%', // defer until 50% of the canvas height are inside the viewport
-				delay: 1000      // delay of 500 ms after the canvas is considered inside the viewport
-			  }
+				formatter: function (value) {
+					return value > 1 ? value + " %" : "";
+				}
+			}
 		},
 		tooltips: {
-            mode: 'index'
+            mode: 'index',
+			xAlign: 'center',
+			yAlign: 'bottom'
         },
 		legend: {
             display: true,
@@ -142,7 +144,10 @@ function VacChart() {
 			yAxes: [
 				{
 					stacked: true,
+					
 					ticks: {
+						max: 50,
+						stepSize: 10,
 						callback: function (value, index, values) {
 							return `${value}%`;
 						},
@@ -171,12 +176,13 @@ function VacChart() {
 	};
 
 	return (
-		<div className='card border-dark mb-3'>
+		<div className='card border-dark mb-3 ocd'>
 			<div className='card-header-dark text-center green fs-4 fw-bold'>
-				Vaccinated Percentage of US Population
+				Vaccinations of US Population
 			</div>
-			<div className='card-body'>
-				<Bar data={chartData} options={options} />
+			<div className='card-body d-flex align-items-center'>
+			<div className='vacchart'>
+				<Bar data={chartData} options={options} /></div>
 			</div>
 		</div>
 	);

@@ -2,10 +2,12 @@ import React from "react";
 import CountUp from "react-countup";
 
 function Partially({ title, data }) {
-	const { Administered_Dose1_Recip, Administered_Dose1_Pop_Pct } = data.entry;
+	const { Administered_Dose1_Recip, Administered_Dose1_Pop_Pct, Series_Complete_Yes, Series_Complete_Pop_Pct, Census } = data.entry;
+
+	const oneDose = Administered_Dose1_Recip - Series_Complete_Yes
 	return (
 		<div className='partially'>
-			<div className='card border-dark mb-3'>
+			<div className='card  mb-3'>
 				<div className='card-header card-header-vcenter text-uppercase '>
 					<svg
 						aria-hidden='true'
@@ -24,26 +26,24 @@ function Partially({ title, data }) {
 				</div>
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
-						<h4 className='card-title fw-bold display-6'>
-							<strong>
-								{!Administered_Dose1_Recip
-									? 0
-									: Administered_Dose1_Recip.toLocaleString()}
-							</strong>
+						<h4 className='card-title display-6 monst'>
+							{!Administered_Dose1_Recip
+								? 'N/A'
+								: oneDose.toLocaleString()}
 						</h4>
 						<p className='card-text fw-bold'>
 							<strong>people</strong>
 						</p>
 					</div>
 					<div className='card-body text-center'>
-						<h4 className='card-title fw-bold display-6'>
+						<h4 className='card-title display-6 monts'>
 							{
 								<CountUp
 									suffix={"%"}
 									decimals={
-										Administered_Dose1_Pop_Pct.toString().length === 2 ? 0 : 1
+										((oneDose/Census)*100).toString().length === 2 ? 0 : 1
 									}
-									end={Administered_Dose1_Pop_Pct}
+									end={((oneDose/Census)*100)}
 								/>
 							}
 						</h4>
