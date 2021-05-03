@@ -222,13 +222,11 @@ function Test({ data }) {
 	};
 
 	return (
-		<div className='age'>
-			<div className='card border-dark mb-3'>
+			<div className='card border-dark mx-2 mb-1'>
 				<div className='card-header-dark text-center fs-4 fw-bold purple'>
 					Vaccinated Percentage by Age Group
 				</div>
 
-				<div className=''>
 					<div className='donuts'>
 						<div className='card-body text-center donut'>
 							<div className='fs-5 white pb-3 fw-bold'>
@@ -248,8 +246,6 @@ function Test({ data }) {
 					<div className='hbar'>
 					<HorizontalBar  data={horizontalData} options={barOptions} /></div>
 				</div>
-			</div>
-		</div>
 	);
 }
 

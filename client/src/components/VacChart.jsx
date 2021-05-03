@@ -47,7 +47,7 @@ const pluck = ({ entriesBy }, key) => {
 		if (a.date > b.date) {
 			return 1;
 		}
-		return a.date - b.date
+		return a.date - b.date;
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
@@ -103,12 +103,11 @@ function VacChart() {
 	const options = {
 		maintainAspectRatio: false,
 		plugins: {
-			
 			labels: [
 				{
 					render: (args) => {
 						return; /* round( args.value , 3) + '%' */
-					}
+					},
 				},
 			],
 			datalabels: {
@@ -118,33 +117,32 @@ function VacChart() {
 				},
 				font: {
 					weight: "bold",
-					family: "Montserrat"
 				},
 				formatter: function (value) {
-					return `${round (value)}%`;
+					return `${round(value)}%`;
 				},
 				formatter: function (value) {
 					return value > 1 ? value + " %" : "";
-				}
-			}
+				},
+			},
 		},
 		tooltips: {
-            mode: 'index',
-			xAlign: 'center',
-			yAlign: 'bottom'
-        },
+			mode: "index",
+			xAlign: "center",
+			yAlign: "bottom",
+		},
 		legend: {
-            display: true,
-            labels: {
-                fontColor: 'white',
-				fontStyle: 'bold'
-            }
-        },
+			display: true,
+			labels: {
+				fontColor: "white",
+				fontStyle: "bold",
+			},
+		},
 		scales: {
 			yAxes: [
 				{
 					stacked: true,
-					
+
 					ticks: {
 						max: 50,
 						stepSize: 10,
@@ -176,17 +174,17 @@ function VacChart() {
 	};
 
 	return (
-		<div className='card border-dark mb-3 ocd'>
+		<div className='card border-dark m-2'>
 			<div className='card-header-dark text-center green fs-4 fw-bold'>
 				Vaccinations of US Population
 			</div>
 			<div className='card-body d-flex align-items-center'>
-			<div className='vacchart'>
-				<Bar data={chartData} options={options} /></div>
+				<div className='vacchart'>
+					<Bar data={chartData} options={options} />
+				</div>
 			</div>
 		</div>
 	);
 }
 
 export default VacChart;
-
