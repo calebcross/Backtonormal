@@ -41,8 +41,8 @@ const findDates = ({ entriesBy }) => {
 };
 
 const plucky = ({ entriesBy }, key, total) => {
-	let newArr = [];
-	newArr = [...entriesBy].sort((a, b) => {
+	
+	let newArr = [...entriesBy].sort((a, b) => {
 		if (a.date < b.date) {
 			return -1;
 		}
@@ -109,16 +109,16 @@ function Manufact() {
 				},
 			],
 			datalabels: {
-					family: "Roboto Slab",
-					weight: "bold",
 				color: "#303030",
-				display: true,
+				display: function (context) {
+					return `${context.dataset.data[context.dataIndex]}%`;
+				},
 				font: {
+					weight: "bold",
 				},
 				formatter: function (value) {
-					return ( value > 1 ? value + " %" : '');
-				},
-				
+					return value > 8 ? value + "%" : "";
+				}
 			}
 		},
 		tooltips: {
@@ -126,11 +126,11 @@ function Manufact() {
             axis: 'y'
         },
 		legend: {
-            display: true,
+            display: false,
+			position: 'bottom',
             labels: {
                 fontColor: 'white',
-				fontFamily: "Montserrat",
-				fontStyle: 'normal'
+				fontStyle: 'bold'
             }
         },
 		scales: {
@@ -143,12 +143,10 @@ function Manufact() {
 							return `${value}`;
 						},
 						fontColor: "white",
-						fontStyle: "normal",
-						fontFamily: "Montserrat"
+						fontStyle: 'bold',
 					},
 					gridLines: {
-						color: "#444",
-						zeroLineColor: "white",
+						display: false,
 					},
 				},
 			],
@@ -158,14 +156,13 @@ function Manufact() {
 					ticks: {
 						max: 100,
 						fontColor: "white",
-						fontStyle: "normal",
-						fontFamily: "Montserrat",
+						fontStyle: 'bold',
 						callback: function (value, index, values) {
 							return `${value}%`;
 						},
 					},
 					gridLines: {
-						color: "#444",
+						display: false,
 					},
 				},
 			],
