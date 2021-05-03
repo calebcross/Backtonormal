@@ -31,7 +31,7 @@ const findDates = ({ entriesBy }) => {
 	});
 
 	return newLabels.reverse().reduce((renderArr, label, i) => {
-		if ( i % 14 === 0) {
+		if (i % 14 === 0) {
 			//renderArr.push(label.split('2021-').[1])
 			renderArr.push(`${formatDistance(new Date(label), new Date())} ago`);
 			//renderArr.push( formatDistance( new Date (label), new Date() ) )
@@ -41,7 +41,6 @@ const findDates = ({ entriesBy }) => {
 };
 
 const plucky = ({ entriesBy }, key, total) => {
-	
 	let newArr = [...entriesBy].sort((a, b) => {
 		if (a.date < b.date) {
 			return -1;
@@ -53,8 +52,17 @@ const plucky = ({ entriesBy }, key, total) => {
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
-		if ( i % 14 === 0) {
-			renderArr.push( Math.ceil( (entry[key] / (entry.Series_Complete_Moderna + entry.Series_Complete_Pfizer + entry.Series_Complete_Janssen + entry.Series_Complete_Unk_Manuf )) * 100));
+		if (i % 14 === 0) {
+			renderArr.push(
+				Math.ceil(
+					(entry[key] /
+						(entry.Series_Complete_Moderna +
+							entry.Series_Complete_Pfizer +
+							entry.Series_Complete_Janssen +
+							entry.Series_Complete_Unk_Manuf)) *
+						100
+				)
+			);
 		}
 		return renderArr;
 	}, []);
@@ -66,12 +74,11 @@ function Manufact() {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 
-	let unk = "Series_Complete_Unk_Manuf"
-	let series = "Series_Complete_Yes"
-	let pfizer = "Series_Complete_Pfizer"
-	let moderna = "Series_Complete_Moderna"
-	let janssen = "Series_Complete_Janssen"
-
+	let unk = "Series_Complete_Unk_Manuf";
+	let series = "Series_Complete_Yes";
+	let pfizer = "Series_Complete_Pfizer";
+	let moderna = "Series_Complete_Moderna";
+	let janssen = "Series_Complete_Janssen";
 
 	const chartData = {
 		labels: findDates(data),
@@ -81,12 +88,14 @@ function Manufact() {
 				borderColor: "rgb(179,157,219)",
 				data: plucky(data, [janssen], [series]),
 				label: "Janssen",
-			},{
+			},
+			{
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				data: plucky(data, [pfizer] , [series]),
+				data: plucky(data, [pfizer], [series]),
 				label: "Pfizer",
-			},{
+			},
+			{
 				backgroundColor: "rgb(252,126,152)",
 				borderColor: "rgb(252,126,152)",
 				data: plucky(data, [unk], [series]),
@@ -97,8 +106,8 @@ function Manufact() {
 				borderColor: "rgb(187,222,251)",
 				data: plucky(data, [moderna], [series]),
 				label: "Moderna",
-			}
-		]
+			},
+		],
 	};
 
 	const options = {
@@ -106,7 +115,7 @@ function Manufact() {
 		plugins: {
 			labels: [
 				{
-					render: 'percentage'
+					render: "percentage",
 				},
 			],
 			datalabels: {
@@ -119,32 +128,32 @@ function Manufact() {
 				},
 				formatter: function (value) {
 					return value > 8 ? value + "%" : "";
-				}
-			}
+				},
+			},
 		},
 		tooltips: {
-            mode: 'index',
-            axis: 'y'
-        },
+			mode: "index",
+			axis: "y",
+		},
 		legend: {
-            display: false,
-			position: 'bottom',
-            labels: {
-                fontColor: 'white',
-				fontStyle: 'bold'
-            }
-        },
+			display: false,
+			position: "bottom",
+			labels: {
+				fontColor: "white",
+				fontStyle: "bold",
+			},
+		},
 		scales: {
 			yAxes: [
 				{
 					stacked: true,
-					
+
 					ticks: {
 						callback: function (value, index, values) {
 							return `${value}`;
 						},
 						fontColor: "white",
-						fontStyle: 'bold',
+						fontStyle: "bold",
 					},
 					gridLines: {
 						display: false,
@@ -157,7 +166,7 @@ function Manufact() {
 					ticks: {
 						max: 100,
 						fontColor: "white",
-						fontStyle: 'bold',
+						fontStyle: "bold",
 						callback: function (value, index, values) {
 							return `${value}%`;
 						},
@@ -171,7 +180,7 @@ function Manufact() {
 	};
 
 	return (
-		<div className='card border-dark mb-3'>
+		<div className='card border-dark m-2'>
 			<div className='card-header-dark text-center green fs-4 fw-bold'>
 				Vaccinations By Manufacturer
 			</div>
@@ -183,4 +192,3 @@ function Manufact() {
 }
 
 export default Manufact;
-
