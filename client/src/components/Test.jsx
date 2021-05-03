@@ -121,6 +121,7 @@ function Test({ data }) {
 	};
 
 	const barOptions = {
+		maintainAspectRatio: false,
 		plugins: {
 			labels: [
 				{
@@ -145,7 +146,7 @@ function Test({ data }) {
 			axis: "y",
 		},
 		legend: {
-			display: true,
+			display: false,
 			labels: {
 				fontColor: "white",
 				fontStyle: "bold",
@@ -174,7 +175,6 @@ function Test({ data }) {
 						max: 100,
 						fontColor: "white",
 						fontStyle: "bold",
-						fontFamily: "Montserrat",
 						callback: function (value, index, values) {
 							return `${value}%`;
 						},
@@ -229,23 +229,24 @@ function Test({ data }) {
 				</div>
 
 				<div className=''>
-					<div className=''>
+					<div className='donuts'>
 						<div className='card-body text-center donut'>
-							<div className='fs-5 white pb-3 text-uppercase fw-bold'>
+							<div className='fs-5 white pb-3 fw-bold'>
 								{" "}
-								≥ 18 Years Of Age
+								Adults 18 and Older
 							</div>
 							<Doughnut data={chartData(eighteenData)} options={donutOptions} />
 						</div>
 						<div className='card-body text-center donut'>
-							<div className='fs-5 white pb-3 fw-bold'>≥ 65 Years Of Age</div>
+							<div className='fs-5 white pb-3 fw-bold'>Adults 65 and Older</div>
 							<Doughnut
 								data={chartData(sixtyFiveData)}
 								options={donutOptions}
 							/>
 						</div>
 					</div>
-					<HorizontalBar data={horizontalData} options={barOptions} />
+					<div className='hbar'>
+					<HorizontalBar  data={horizontalData} options={barOptions} /></div>
 				</div>
 			</div>
 		</div>

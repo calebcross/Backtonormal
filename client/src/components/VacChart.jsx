@@ -101,7 +101,9 @@ function VacChart() {
 	};
 
 	const options = {
+		maintainAspectRatio: false,
 		plugins: {
+			
 			labels: [
 				{
 					render: (args) => {
@@ -135,8 +137,7 @@ function VacChart() {
             display: true,
             labels: {
                 fontColor: 'white',
-				fontFamily: "Montserrat",
-				fontStyle: 'normal'
+				fontStyle: 'bold'
             }
         },
 		scales: {
@@ -151,8 +152,7 @@ function VacChart() {
 							return `${value}%`;
 						},
 						fontColor: "white",
-						fontStyle: "normal",
-						fontFamily: "Montserrat"
+						fontStyle: "bold",
 					},
 					gridLines: {
 						color: "#444",
@@ -165,8 +165,7 @@ function VacChart() {
 					stacked: true,
 					ticks: {
 						fontColor: "white",
-						fontStyle: "normal",
-						fontFamily: "Montserrat"
+						fontStyle: "bold",
 					},
 					gridLines: {
 						color: "#444",
@@ -177,12 +176,13 @@ function VacChart() {
 	};
 
 	return (
-		<div className='card border-dark mb-3'>
+		<div className='card border-dark mb-3 ocd'>
 			<div className='card-header-dark text-center green fs-4 fw-bold'>
-				Vaccinated Percentage of US Population
+				Vaccinations of US Population
 			</div>
-			<div className='card-body'>
-				<Bar data={chartData} options={options} />
+			<div className='card-body d-flex align-items-center'>
+			<div className='vacchart'>
+				<Bar data={chartData} options={options} /></div>
 			</div>
 		</div>
 	);
