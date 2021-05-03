@@ -6,7 +6,7 @@ function Fully({ title, data }) {
 
 	return (
 		<div className='fully'>
-			<div className='card border-dark mb-3'>
+			<div className='card mb-3'>
 				<div className='card-header card-header-vcenter text-uppercase'>
 					<svg
 						aria-hidden='true'
