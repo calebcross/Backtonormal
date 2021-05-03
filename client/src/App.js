@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 //components
 import Time from "./components/Time";
 import Partially from "./components/Partially";
+import Atleast from "./components/Atleast";
 import Fully from "./components/Fully";
 import Not from "./components/Not";
 import Manufact from "./components/Manufact";
@@ -53,15 +54,16 @@ function App() {
 	if (error) return <p>Error :(</p>;
 
 	return (
-		<div className='d-flex flex-column justify-content-center my-6 mx-2'>
-			<h1 className='title text-center'>Covid Vaccinations in the US</h1>
+		<div className='d-flex flex-column justify-content-center my-6'>
+			<h1 className='title title-mobile text-center'>COVID-19 Vaccinations in the US</h1>
 			<section className='main'>
 				<div className='top'>
 					<div className='info'>
 						<Time data={data} />
-						<Partially title='Only 1 Dose' data={data} />
-						<Fully title='fully vaccinated' data={data} />
-						<Not title='not vaccinated' data={data} />
+						<Atleast title="At Least One Dose"  data={data} />
+						<Partially title='Only One Dose' data={data} />
+						<Fully title='Fully Vaccinated' data={data} />
+						<Not title='Not Vaccinated' data={data} />
 					</div>
 					<div className='data'>
 						<VacChart />
@@ -70,7 +72,7 @@ function App() {
 				</div>
 				<Manufact data={data} />
 			</section>
-			<List />
+			{/* <List /> */}
 		</div>
 	);
 }
