@@ -102,6 +102,7 @@ function Manufact() {
 	};
 
 	const options = {
+		maintainAspectRatio: false,
 		plugins: {
 			labels: [
 				{
@@ -172,7 +173,7 @@ function Manufact() {
 	return (
 		<div className='card border-dark mb-3'>
 			<div className='card-header-dark text-center green fs-4 fw-bold'>
-				By Manufacturer
+				Vaccinations By Manufacturer
 			</div>
 			<div className='card-body'>
 				<HorizontalBar data={chartData} options={options} />

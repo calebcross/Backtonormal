@@ -4,6 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Partially from "./Partially";
 import Fully from "./Fully";
+import Not from "./Not";
 import Test from "./Test";
 
 const getStateInfo = gql`
@@ -90,9 +91,11 @@ function List() {
 							</Accordion.Toggle>
 							<Accordion.Collapse eventKey={i + 1}>
 								<Card.Body>
-									<Partially title='partially vaccinated' data={state} />
+									<Partially title='Only 1 Dose' data={state} />
 									<Fully title='fully vaccinated' data={state} />
+									<Not title='not vaccinated' data={state} />
 									<Test data={state} />
+									
 								</Card.Body>
 							</Accordion.Collapse>
 						</Card>
