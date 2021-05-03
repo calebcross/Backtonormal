@@ -1,16 +1,47 @@
-@use './variables' as *;
+@use './variables'as *;
 @import "~bootstrap/scss/bootstrap";
 @import './bootswatch';
 
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
 
-svg{
+@mixin mobile {
+    @media (min-width: 375px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 1440px) {
+        @content;
+    }
+}
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+%flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+svg {
     width: 15px;
     height: 15px;
     margin-right: 1rem;
 }
-.svg-small{
+
+.svg-small {
     width: 10px;
     height: 10px;
     margin-left: 1rem;
@@ -19,6 +50,7 @@ svg{
 .partially {
     color: $orange;
 }
+
 .age {
     color: $pink;
 }
@@ -26,36 +58,70 @@ svg{
 .fully {
     color: $blue;
 }
+
 .green {
     color: $green;
 }
+
 .white {
     color: $white;
 }
+
 .purple {
     color: $purple;
 }
+
 .red {
     color: $red;
 }
-
-.donut{
-    width: 65%;
-    height: 65%;
+.border-partially {
+    border : 1px solid;
+    border-color: $orange;
 }
 
-.card-header-vcenter{
+.border-age {
+    border-color: $pink;
+}
+
+.border-fully {
+    border-color: $blue;
+}
+
+.border-green {
+    border-color: $green;
+}
+
+.border-white {
+    border-color: $white;
+}
+
+.border-purple {
+    border-color: $purple;
+}
+
+.border-red {
+    border-color: $red;
+}
+
+.border-donut {
+    width: 100%;
+    height: 100%;
+}
+
+
+.card-header-vcenter {
     display: flex;
     align-items: center;
     background-color: rgb(0, 0, 0, 0);
     border: none;
 }
-.card-header-center{
+
+.card-header-center {
     background-color: rgb(0, 0, 0, 0);
     border: none;
 }
 
-.card-header-dark{
+.card-header-dark {
     padding: 0.5rem 1rem;
     margin-bottom: 0;
     //background-color: #444;
@@ -65,3 +131,77 @@ svg{
 * {
     font-family: 'Roboto Slab', serif;
 }
+
+.roboto {
+    font-family: 'Roboto', serif;
+}
+
+.monts {
+    font-family: 'Montserrat', serif;
+}
+
+.top {
+
+
+    @include tablet {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.info {
+    @include tablet {
+        width: 30%;
+        margin: 1rem;
+    }
+}
+
+.data {
+    @include tablet {
+        width: 70%;
+        margin: 1rem;
+    }
+}
+
+.donut {
+
+    @include tablet {
+        width: 50%;
+        height: 50%;
+    }
+}
+.donuts {
+
+    width: 100%;
+    @include tablet {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+.hbar {
+
+    @include tablet {
+        height: 50%;
+        width: 90%;
+        margin: 1rem 1rem;
+    }
+}
+
+.vacchart {
+
+     @include tablet {
+        height:100%;
+        width: 100%;
+    } 
+}
+
+.ocd{
+
+    @include tablet {
+        height: 30%;
+        
+    }
+}
+
