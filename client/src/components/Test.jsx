@@ -2,7 +2,12 @@ import React from "react";
 /* eslint-disable no-loss-of-precision */
 import { Doughnut } from "react-chartjs-2";
 import { HorizontalBar } from "react-chartjs-2";
+import { add } from 'mathjs'
 import "chartjs-plugin-labels";
+
+const calPct = (value, total) => {
+	return Math.ceil( (value/total) * 100 )
+}
 
 function Test({ data }) {
 	const {
@@ -14,8 +19,14 @@ function Test({ data }) {
 		Series_Complete_18PlusPop_Pct,
 		Series_Complete_65Plus,
 		Series_Complete_65PlusPop_Pct,
-		date
-
+		Series_Complete_Pfizer_65Plus,
+		Series_Complete_Pfizer_18Plus,
+		Series_Complete_Janssen_18Plus,
+		Series_Complete_Janssen_65Plus,
+		Series_Complete_Moderna_18Plus,
+		Series_Complete_Moderna_65Plus,
+		Series_Complete_Unk_Manuf_18Plus,
+		Series_Complete_Unk_Manuf_65Plus,
 	} = data.entry;
 
 	const sixtyFiveScope = {
@@ -57,7 +68,6 @@ function Test({ data }) {
 			labels: ["Only 1 Dose", "Fully Vaccinated", "Not Vaccinated"],
 			datasets: [
 				{
-					label: "# of Votes",
 					data: data,
 					backgroundColor: [
 						"rgba(255,183,79,1)", // Partially
@@ -75,7 +85,7 @@ function Test({ data }) {
 		};
 	};
 
-	const options = {
+	const donutOptions = {
 		responsive: true,
 		maintainAspectRatio: true,
 		legend: {
@@ -110,32 +120,104 @@ function Test({ data }) {
 		},
 	};
 
+	const barOptions = {
+		plugins: {
+			labels: [
+				{
+					render: "percentage",
+				},
+			],
+			datalabels: {
+				color: "#303030",
+				display: function (context) {
+					return `${context.dataset.data[context.dataIndex]}%`;
+				},
+				font: {
+					weight: "bold",
+				},
+				formatter: function (value) {
+					return value > 8 ? value + "%" : "";
+				}
+			}
+		},
+		tooltips: {
+			mode: "index",
+			axis: "y",
+		},
+		legend: {
+			display: true,
+			labels: {
+				fontColor: "white",
+				fontStyle: "bold",
+			},
+		},
+		scales: {
+			yAxes: [
+				{
+					stacked: true,
+					ticks: {
+						callback: function (value, index, values) {
+							return `${value}`;
+						},
+						fontColor: "white",
+						fontStyle: "bold",
+					},
+					gridLines: {
+						display: false,
+					},
+				},
+			],
+			xAxes: [
+				{
+					stacked: true,
+					ticks: {
+						max: 100,
+						fontColor: "white",
+						fontStyle: "bold",
+						fontFamily: "Montserrat",
+						callback: function (value, index, values) {
+							return `${value}%`;
+						},
+					},
+					gridLines: {
+						display: false,
+					},
+				},
+			],
+		},
+	};
+
+	const eighteenTotal = Series_Complete_Pfizer_18Plus + Series_Complete_Moderna_18Plus + Series_Complete_Janssen_18Plus + Series_Complete_Unk_Manuf_18Plus;
+	const sixtyFiveTotal = Series_Complete_Pfizer_65Plus + Series_Complete_Moderna_65Plus + Series_Complete_Janssen_65Plus + Series_Complete_Unk_Manuf_65Plus;
+
+
 	const horizontalData = {
-		labels: ['≥ 18', '≥ 65'],
+		labels: ["≥ 18 Years Of Age", "≥ 65 Years Of Age"],
 		datasets: [
 			{
 				label: "Janssen",
 				backgroundColor: "rgb(179,157,219)",
 				borderColor: "rgb(179,157,219)",
-				data: []//plucky(data, [janssen], [series]),
-			},{
+				data: [calPct(Series_Complete_Janssen_18Plus, eighteenTotal), calPct(Series_Complete_Janssen_65Plus, sixtyFiveTotal)],
+			},
+			{
 				label: "Pfizer",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				data: []//plucky(data, [pfizer] , [series]),
-			},{
+				data: [calPct(Series_Complete_Pfizer_18Plus, eighteenTotal), calPct(Series_Complete_Pfizer_65Plus, sixtyFiveTotal)],
+			},
+			{
 				label: "Unknown",
 				backgroundColor: "rgb(252,126,152)",
 				borderColor: "rgb(252,126,152)",
-				data: []//plucky(data, [unk], [series]),
+				data: [calPct(Series_Complete_Unk_Manuf_18Plus, eighteenTotal), calPct(Series_Complete_Unk_Manuf_65Plus, sixtyFiveTotal)],
 			},
 			{
 				label: "Moderna",
 				backgroundColor: "rgb(187,222,251)",
 				borderColor: "rgb(187,222,251)",
-				data: []//plucky(data, [moderna], [series]),
-			}
-			
+				data: [calPct(Series_Complete_Moderna_18Plus, eighteenTotal), calPct(Series_Complete_Moderna_65Plus, sixtyFiveTotal)],
+			},
 		],
 	};
 
@@ -153,14 +235,17 @@ function Test({ data }) {
 								{" "}
 								≥ 18 Years Of Age
 							</div>
-							<Doughnut data={chartData(eighteenData)} options={options} />
+							<Doughnut data={chartData(eighteenData)} options={donutOptions} />
 						</div>
 						<div className='card-body text-center donut'>
 							<div className='fs-5 white pb-3 fw-bold'>≥ 65 Years Of Age</div>
-							<Doughnut data={chartData(sixtyFiveData)} options={options} />
+							<Doughnut
+								data={chartData(sixtyFiveData)}
+								options={donutOptions}
+							/>
 						</div>
 					</div>
-					<HorizontalBar data={horizontalData} options={options} />
+					<HorizontalBar data={horizontalData} options={barOptions} />
 				</div>
 			</div>
 		</div>

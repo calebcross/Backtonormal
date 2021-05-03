@@ -41,7 +41,6 @@ const getInfo = gql`
 			Series_Complete_Unk_Manuf_18Plus
 			Series_Complete_Unk_Manuf_65Plus
 			Series_Complete_Yes
-
 		}
 	}
 `;
