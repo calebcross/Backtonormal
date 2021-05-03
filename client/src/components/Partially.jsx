@@ -25,10 +25,9 @@ function Partially({ title, data }) {
 				<div className='d-flex justify-content-evenly flex-wrap'>
 					<div className='card-body text-center '>
 						<h4 className='card-title display-6 monst'>
-
-								{!Administered_Dose1_Recip
-									? 0
-									: Administered_Dose1_Recip.toLocaleString()}
+							{!Administered_Dose1_Recip
+								? 0
+								: Administered_Dose1_Recip.toLocaleString()}
 						</h4>
 						<p className='card-text fw-bold'>
 							<strong>people</strong>

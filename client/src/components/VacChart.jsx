@@ -115,13 +115,15 @@ function VacChart() {
 					return `${context.dataset.data[context.dataIndex]}%`;
 				},
 				font: {
-					weight: "normal",
+					weight: "bold",
 					family: "Montserrat"
 				},
 				formatter: function (value) {
 					return `${round (value)}%`;
 				},
-				
+				formatter: function (value) {
+					return value > 1 ? value + " %" : "";
+				}
 			}
 		},
 		tooltips: {
