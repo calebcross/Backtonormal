@@ -9,7 +9,7 @@ import Fully from "./components/Fully";
 import Not from "./components/Not";
 import Manufact from "./components/Manufact";
 import VacChart from "./components/VacChart";
-import Test from "./components/Test";
+import Donuts from "./components/Donuts";
 import List from "./components/List";
 //style
 import "./scss/custom.scss";
@@ -51,28 +51,30 @@ function App() {
 	const { loading, error, data } = useQuery(getInfo);
 
 	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+	if (error) return `Error! ${error}`;
 
 	return (
-		<div className='d-flex flex-column justify-content-center my-6'>
-			<h1 className='title title-mobile text-center'>COVID-19 Vaccinations in the US</h1>
+		<div className='d-flex flex-column justify-content-center my-6 wrap'>
+			<h1 className='title title-mobile text-center'>
+				COVID-19 Vaccinations in the US
+			</h1>
 			<section className='main'>
 				<div className='top'>
 					<div className='info'>
 						<Time data={data} />
-						<Atleast title="At Least One Dose"  data={data} />
+						<Atleast title='At Least One Dose' data={data} />
 						<Partially title='Only One Dose' data={data} />
 						<Fully title='Fully Vaccinated' data={data} />
 						<Not title='Not Vaccinated' data={data} />
 					</div>
 					<div className='data'>
 						<VacChart />
-						<Test data={data} />
+						<Donuts data={data} />
 					</div>
 				</div>
 				<Manufact data={data} />
+				{/* //<List /> */}
 			</section>
-			{/* <List /> */}
 		</div>
 	);
 }

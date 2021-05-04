@@ -1,4 +1,4 @@
-//import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
@@ -6,7 +6,7 @@ import Atleast from "./Atleast";
 import Partially from "./Partially";
 import Fully from "./Fully";
 import Not from "./Not";
-import Test from "./Test";
+import Donuts from "./Donuts";
 
 const getStateInfo = gql`
 	query getStateInfo {
@@ -14,31 +14,31 @@ const getStateInfo = gql`
 			name
 			entry(date: "2021-05-01") {
 				Administered_Dose1_Pop_Pct
-			Administered_Dose1_Recip
-			Administered_Dose1_Recip_18Plus
-			Administered_Dose1_Recip_18PlusPop_Pct
-			Administered_Dose1_Recip_65Plus
-			Administered_Dose1_Recip_65PlusPop_Pct
-			Census
-			Doses_Distributed
-			Series_Complete_18Plus
-			Series_Complete_18PlusPop_Pct
-			Series_Complete_65Plus
-			Series_Complete_65PlusPop_Pct
-			Series_Complete_Janssen
-			Series_Complete_Janssen_18Plus
-			Series_Complete_Janssen_65Plus
-			Series_Complete_Moderna
-			Series_Complete_Moderna_18Plus
-			Series_Complete_Moderna_65Plus
-			Series_Complete_Pfizer
-			Series_Complete_Pfizer_18Plus
-			Series_Complete_Pfizer_65Plus
-			Series_Complete_Pop_Pct
-			Series_Complete_Unk_Manuf_18Plus
-			Series_Complete_Unk_Manuf_65Plus
-			Series_Complete_Yes
-			date
+				Administered_Dose1_Recip
+				Administered_Dose1_Recip_18Plus
+				Administered_Dose1_Recip_18PlusPop_Pct
+				Administered_Dose1_Recip_65Plus
+				Administered_Dose1_Recip_65PlusPop_Pct
+				Census
+				Doses_Distributed
+				Series_Complete_18Plus
+				Series_Complete_18PlusPop_Pct
+				Series_Complete_65Plus
+				Series_Complete_65PlusPop_Pct
+				Series_Complete_Janssen
+				Series_Complete_Janssen_18Plus
+				Series_Complete_Janssen_65Plus
+				Series_Complete_Moderna
+				Series_Complete_Moderna_18Plus
+				Series_Complete_Moderna_65Plus
+				Series_Complete_Pfizer
+				Series_Complete_Pfizer_18Plus
+				Series_Complete_Pfizer_65Plus
+				Series_Complete_Pop_Pct
+				Series_Complete_Unk_Manuf_18Plus
+				Series_Complete_Unk_Manuf_65Plus
+				Series_Complete_Yes
+				date
 			}
 		}
 	}
@@ -91,13 +91,13 @@ function List() {
 								{name}
 							</Accordion.Toggle>
 							<Accordion.Collapse eventKey={i + 1}>
-								<Card.Body>
-								<div className="info">
-								<Atleast title="At Least One Dose"  data={state} />
-						<Partially title='Only One Dose' data={state} />
-						<Fully title='Fully Vaccinated' data={state} />
-						<Not title='Not Vaccinated' data={state} />
-									<Test data={state} />
+								<Card.Body className='list_container'>
+									<div className='list'>
+										<Atleast title='At Least One Dose' data={state} />
+										<Partially title='Only One Dose' data={state} />
+										<Fully title='Fully Vaccinated' data={state} />
+										<Not title='Not Vaccinated' data={state} />
+										<Donuts data={state} />
 									</div>
 								</Card.Body>
 							</Accordion.Collapse>
