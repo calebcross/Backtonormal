@@ -25,27 +25,11 @@
     }
 }
 
-%flex-column {
-    display: flex;
-    flex-direction: column;
-}
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+  }
 
-%flex-row {
-    display: flex;
-    flex-direction: row;
-}
-
-svg {
-    width: 15px;
-    height: 15px;
-    margin-right: 1rem;
-}
-
-.svg-small {
-    width: 10px;
-    height: 10px;
-    margin-left: 1rem;
-}
 
 .partially {
     color: $orange;
@@ -112,14 +96,21 @@ svg {
 
 .card-header-vcenter {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    align-items: baseline;
     background-color: rgb(0, 0, 0, 0);
     border: none;
+
+    @include tablet {
+        justify-content: flex-start;
+    }
 }
 
 .card-header-center {
     background-color: rgb(0, 0, 0, 0);
     border: none;
+
+
 }
 
 .card-header-dark {
@@ -137,18 +128,50 @@ svg {
     font-family: 'Roboto', serif;
 }
 
-.monts {
-    font-family: 'Montserrat', serif;
+.monts { //Todo: remove?
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.wrap {
+
+    @include tablet {
+        margin: 0 1rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+        margin: 0 3rem;
+    }
+
+    @include desktop {
+        margin: 2vh 5vw;
+    }
 }
 
 .main {
     min-width: 320px;
 
-    @include tablet {
-        margin: 0 3rem;
+
+    .chart_title{
+
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        @include media-breakpoint-up(md) {
+            font-size: calc(1.2rem + .3vw);
+         }
     }
-    @include desktop {
-        margin: 0 9rem;
+    
+    .donut_title{
+
+        font-size: .8rem;
+        font-weight: bold;
+
+        @include media-breakpoint-up(md) {
+            font-size: calc(.8rem + .5vw);
+         }
     }
 }
 
@@ -158,9 +181,91 @@ svg {
     display: flex;
     flex-direction: column;
 
+    svg {
+
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1rem;
+
+        @include media-breakpoint-up(md) {
+            @include size(calc(.8rem + .1vw), calc(.8rem + .1vw));
+        }
+    }
+
     @include tablet {
         display: flex;
         flex-direction: row;
+    }
+
+    .data {
+
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            margin-left: 1rem;
+        }
+
+        &_head {
+
+            @include mobile {
+                margin: .5rem;
+            }
+
+            @include tablet {
+                margin: 0 0 1rem 0;
+            }
+        }
+
+        &_stack {
+
+            @include mobile {
+                margin: .5rem;
+            }
+
+            @include tablet {
+                margin: 0 0 1rem 0;
+            }
+        }
+
+        .donuts {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            @include media-breakpoint-up(xl){
+                flex-direction: row;
+            }
+
+
+        }
+
+        .donut {
+
+            width: 60%;
+            min-width: 400px;
+
+            @include media-breakpoint-up(lg) {
+                width: 100%;
+            }
+
+        }
+    }
+}
+
+.days {
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    @include tablet {
+        font-size: 1.2rem;
+    }
+
+    @include desktop {
+        font-size: 1.5rem;
     }
 }
 
@@ -173,92 +278,241 @@ svg {
     @include tablet {
         width: 30%;
     }
+
+    .stacks {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        margin: .5rem;
+
+        .card-inner {
+            min-width: max-content;
+            width: 45%;
+        }
+
+        @include tablet {
+            width: 100%;
+            flex-grow: unset;
+            margin: 0 0 1rem 0;
+        }
+
+        @include media-breakpoint-up(xl) {
+        justify-content: flex-start;
+        }
+
+        &-header {
+
+            font-size: 1rem;
+
+            @include media-breakpoint-up(md) {
+                margin: 0;
+                font-size: calc(1rem + .1vw);
+             }
+
+             .card-inner{
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+             }
+        }
+
+        .inner_container{
+
+            flex-wrap: wrap;
+            height: 100%;
+            align-items: center;
+
+            .inner_container:first-child{
+                width: 60%;
+            }
+
+            @include desktop {
+                flex-wrap: nowrap;
+            }
+
+            h2.days{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    h5.title {
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Roboto Slab';
+        line-height: 1.2;
+
+        @include media-breakpoint-up(md) {
+            margin: 0;
+            font-size: calc(1rem + .1vw);
+         }
+    }
+    h4.card-title {
+        font-size: calc(1.375rem + 1vw);
+        font-weight: 300;
+        line-height: 1.2;
+
+        @include media-breakpoint-between(md, lg) {
+            font-size: calc(1.375rem + .25vw);
+         }
+
+        @include desktop {
+            font-size: calc(1.375rem + .5vw);
+        }
+    }
+
+    h4.num-days{
+        font-size: 3rem;
+        font-weight: 300;
+    }
+    h4.date{
+        font-size: 3rem;
+        font-weight: 300;
+    }
+
+    strong{
+        height: min-height;
+    }
 }
 
 .stacks_head {
     flex-grow: 2;
     width: 100%;
+    margin-bottom: .25rem;
 
     @include tablet {
-        height: 25vh;
-    }
-}
-
-.stacks{
-    flex-grow: 1;
-    margin: auto;
-    
-    .card-inner{
-        min-width: max-content;
-        width: 45%;
+        margin-bottom: 1rem;
     }
 
-    @include mobile {
-        width: 45%;
-    }
-    @include tablet {
-        width: 100%;
-        flex-grow: unset;
-    }
 }
 
-.data {
-
-    
-    @include tablet {
-        display: flex;
-        flex-direction: column;
-        width: 70%;
-    }
-}
-
-.donuts {
-    display: flex;
-
-}
-.donut {
-    width: 50%;
-}
 
 .hbar {
 
     @include tablet {
-        height: 50%;
-        width: 90%;
-        margin: 1rem 1rem;
+        height: 70%;
+        width: 100%;
     }
 }
 
 .vacchart {
 
-    height: 100%;
     width: 100%;
+    height: 200px;
 
-    @include tablet {}
+    @include media-breakpoint-up(md) {
+        height: 200px;
+    }
+
 }
 
 
 
-h1.title {
-
-    &-mobile{
-        
-    }
-
-    @include mobile {
-    font-size: 5vw;
-    margin-top: 1rem;
-    }
-}
-.stacks-header {
+h3.title {
 
     font-size: 1rem;
+    font-weight: bold;
 
-    @include tablet{
-
+    @include tablet {
+        font-size: 1.2rem;
     }
 
     @include desktop {
+        font-size: 1.5rem;
+    }
+}
+
+
+.accordion {
+    svg {
+
+        width: 15px;
+        height: 15px;
+        margin-right: 1rem;
+    }
+}
+
+
+.list_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .card-body {
+        padding: .25rem .25rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+
+        .card-title {
+            margin-bottom: 0;
+        }
+    }
+
+    svg {
+
+        @include media-breakpoint-down(md) {
+            display: none;
+        }
+    }
+}
+
+.list {
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .stacks {
+        width: 50%;
+
+        @include media-breakpoint-down(sm) {
+            margin-bottom: 1rem;
+        }
+
+
+        .card-inner {
+            min-width: min-content;
+            width: 45%;
+        }
+    }
+
+    .data_stack {
+        flex-grow: 2;
+    }
+
+    .donuts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        @include media-breakpoint-up(xl) {
+            flex-direction: row;
+        }
+    }
+
+    .donut {
+        position: relative;
+        min-width: 400px;
+        overflow: hidden;
+
+        @include media-breakpoint-up(sm) { width: 10vw }
+
+        h4.card-title {
+            font-size: calc(1.375rem + 1vw);
+            font-weight: 300;
+            line-height: 1.2;
+    
+            @include media-breakpoint-up(md) {
+                font-size: calc(1.375rem + 1.25vw);
+            }
+        }
 
     }
+
 }

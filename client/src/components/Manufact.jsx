@@ -111,6 +111,9 @@ function Manufact() {
 	};
 
 	const options = {
+		animation: {
+			duration: 0,
+		},
 		maintainAspectRatio: false,
 		plugins: {
 			labels: [
@@ -180,8 +183,8 @@ function Manufact() {
 	};
 
 	return (
-		<div className='card border-dark m-2'>
-			<div className='card-header-dark text-center green fs-4 fw-bold'>
+		<div className='card border-dark'>
+			<div className='card-header-dark text-center partially chart_title'>
 				Vaccinations By Manufacturer
 			</div>
 			<div className='card-body'>
