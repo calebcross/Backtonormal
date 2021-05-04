@@ -101,7 +101,11 @@ function VacChart() {
 	};
 
 	const options = {
+		animation: {
+			duration: 0,
+		},
 		maintainAspectRatio: false,
+		responsive: true,
 		plugins: {
 			labels: [
 				{
@@ -117,9 +121,7 @@ function VacChart() {
 				},
 				font: {
 					weight: "bold",
-				},
-				formatter: function (value) {
-					return `${round(value)}%`;
+					fontFamily: "Montserrat",
 				},
 				formatter: function (value) {
 					return value > 1 ? value + " %" : "";
@@ -136,6 +138,7 @@ function VacChart() {
 			labels: {
 				fontColor: "white",
 				fontStyle: "bold",
+				fontFamily: "Montserrat",
 			},
 		},
 		scales: {
@@ -151,6 +154,7 @@ function VacChart() {
 						},
 						fontColor: "white",
 						fontStyle: "bold",
+						fontFamily: "Montserrat",
 					},
 					gridLines: {
 						color: "#444",
@@ -164,6 +168,7 @@ function VacChart() {
 					ticks: {
 						fontColor: "white",
 						fontStyle: "bold",
+						fontFamily: "Montserrat",
 					},
 					gridLines: {
 						color: "#444",
@@ -174,11 +179,11 @@ function VacChart() {
 	};
 
 	return (
-		<div className='card border-dark m-2'>
-			<div className='card-header-dark text-center green fs-4 fw-bold'>
+		<div className='card border-dark data_head'>
+			<div className='card-header-dark text-center green chart_title'>
 				Vaccinations of US Population
 			</div>
-			<div className='card-body d-flex align-items-center'>
+			<div className='card-body d-flex justify-content-center align-items-center'>
 				<div className='vacchart'>
 					<Bar data={chartData} options={options} />
 				</div>

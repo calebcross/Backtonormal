@@ -2,14 +2,13 @@ import React from "react";
 /* eslint-disable no-loss-of-precision */
 import { Doughnut } from "react-chartjs-2";
 import { HorizontalBar } from "react-chartjs-2";
-import { add } from 'mathjs'
 import "chartjs-plugin-labels";
 
 const calPct = (value, total) => {
-	return Math.ceil( (value/total) * 100 )
-}
+	return Math.ceil((value / total) * 100);
+};
 
-function Test({ data }) {
+function Donuts({ data }) {
 	const {
 		Administered_Dose1_Recip_18Plus,
 		Administered_Dose1_Recip_18PlusPop_Pct,
@@ -86,6 +85,10 @@ function Test({ data }) {
 	};
 
 	const donutOptions = {
+		animation: {
+			duration: 0,
+		},
+		cutoutPercentage: 40,
 		responsive: true,
 		maintainAspectRatio: true,
 		legend: {
@@ -121,7 +124,11 @@ function Test({ data }) {
 	};
 
 	const barOptions = {
+		animation: {
+			duration: 0,
+		},
 		maintainAspectRatio: false,
+		aspectRatio: 1,
 		plugins: {
 			labels: [
 				{
@@ -138,8 +145,8 @@ function Test({ data }) {
 				},
 				formatter: function (value) {
 					return value > 8 ? value + "%" : "";
-				}
-			}
+				},
+			},
 		},
 		tooltips: {
 			mode: "index",
@@ -187,9 +194,16 @@ function Test({ data }) {
 		},
 	};
 
-	const eighteenTotal = Series_Complete_Pfizer_18Plus + Series_Complete_Moderna_18Plus + Series_Complete_Janssen_18Plus + Series_Complete_Unk_Manuf_18Plus;
-	const sixtyFiveTotal = Series_Complete_Pfizer_65Plus + Series_Complete_Moderna_65Plus + Series_Complete_Janssen_65Plus + Series_Complete_Unk_Manuf_65Plus;
-
+	const eighteenTotal =
+		Series_Complete_Pfizer_18Plus +
+		Series_Complete_Moderna_18Plus +
+		Series_Complete_Janssen_18Plus +
+		Series_Complete_Unk_Manuf_18Plus;
+	const sixtyFiveTotal =
+		Series_Complete_Pfizer_65Plus +
+		Series_Complete_Moderna_65Plus +
+		Series_Complete_Janssen_65Plus +
+		Series_Complete_Unk_Manuf_65Plus;
 
 	const horizontalData = {
 		labels: ["≥ 18 Years Of Age", "≥ 65 Years Of Age"],
@@ -198,55 +212,67 @@ function Test({ data }) {
 				label: "Janssen",
 				backgroundColor: "rgb(179,157,219)",
 				borderColor: "rgb(179,157,219)",
-				data: [calPct(Series_Complete_Janssen_18Plus, eighteenTotal), calPct(Series_Complete_Janssen_65Plus, sixtyFiveTotal)],
+				data: [
+					calPct(Series_Complete_Janssen_18Plus, eighteenTotal),
+					calPct(Series_Complete_Janssen_65Plus, sixtyFiveTotal),
+				],
 			},
 			{
 				label: "Pfizer",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
-				data: [calPct(Series_Complete_Pfizer_18Plus, eighteenTotal), calPct(Series_Complete_Pfizer_65Plus, sixtyFiveTotal)],
+				data: [
+					calPct(Series_Complete_Pfizer_18Plus, eighteenTotal),
+					calPct(Series_Complete_Pfizer_65Plus, sixtyFiveTotal),
+				],
 			},
 			{
 				label: "Unknown",
 				backgroundColor: "rgb(252,126,152)",
 				borderColor: "rgb(252,126,152)",
-				data: [calPct(Series_Complete_Unk_Manuf_18Plus, eighteenTotal), calPct(Series_Complete_Unk_Manuf_65Plus, sixtyFiveTotal)],
+				data: [
+					calPct(Series_Complete_Unk_Manuf_18Plus, eighteenTotal),
+					calPct(Series_Complete_Unk_Manuf_65Plus, sixtyFiveTotal),
+				],
 			},
 			{
 				label: "Moderna",
 				backgroundColor: "rgb(187,222,251)",
 				borderColor: "rgb(187,222,251)",
-				data: [calPct(Series_Complete_Moderna_18Plus, eighteenTotal), calPct(Series_Complete_Moderna_65Plus, sixtyFiveTotal)],
+				data: [
+					calPct(Series_Complete_Moderna_18Plus, eighteenTotal),
+					calPct(Series_Complete_Moderna_65Plus, sixtyFiveTotal),
+				],
 			},
 		],
 	};
 
 	return (
-			<div className='card border-dark mx-2 mb-1'>
-				<div className='card-header-dark text-center fs-4 fw-bold purple'>
-					Vaccinated Percentage by Age Group
-				</div>
+		<div className='card border-dark data_stack'>
+			<div className='card-header-dark text-center chart_title purple'>
+				Vaccinated Percentage by Age Group
+			</div>
 
-					<div className='donuts'>
-						<div className='card-body text-center donut'>
-							<div className='fs-5 white pb-3 fw-bold'>
-								{" "}
-								Adults 18 and Older
-							</div>
-							<Doughnut data={chartData(eighteenData)} options={donutOptions} />
-						</div>
-						<div className='card-body text-center donut'>
-							<div className='fs-5 white pb-3 fw-bold'>Adults 65 and Older</div>
-							<Doughnut
-								data={chartData(sixtyFiveData)}
-								options={donutOptions}
-							/>
-						</div>
+			<div className='donuts'>
+				<div className='card-body text-center donut'>
+					<div className='donut_title white pb-3 fw-bold'>
+						{" "}
+						Adults 18 and Older
 					</div>
-					<div className='hbar'>
-					<HorizontalBar  data={horizontalData} options={barOptions} /></div>
+					<Doughnut data={chartData(eighteenData)} options={donutOptions} />
 				</div>
+				<div className='card-body text-center donut'>
+					<div className='donut_title white pb-3 fw-bold'>
+						Adults 65 and Older
+					</div>
+					<Doughnut data={chartData(sixtyFiveData)} options={donutOptions} />
+				</div>
+			</div>
+			<div className='card-body'>
+				<HorizontalBar data={horizontalData} options={barOptions} />
+			</div>
+		</div>
 	);
 }
 
-export default Test;
+export default Donuts;

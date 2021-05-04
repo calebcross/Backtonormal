@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
 import { evaluate } from "mathjs";
+import { formatDistance, addDays, format } from "date-fns";
 import axios from "axios";
 
 function Time({ data }) {
@@ -27,32 +28,49 @@ function Time({ data }) {
 		vdd: data.entry.Doses_Distributed,
 		advdg: avg ? avg : 1431517,
 	};
+	const today = new Date();
+	const numDays = Math.ceil(
+		evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)
+	);
+	let monthDay = format(addDays(today, 106), "MMM Lo, yyyy");
 
 	return (
-		<div className='card border-secondarydark mb-1 mt-2 green stacks_head'>
-			<div className='card-header card-header-vcenter text-capitalizes tacks-header '>
+		<div className='card border-dark green stacks_head'>
+			<div className='card-header card-header-vcenter text-capitalize stacks-header '>
 				<svg
 					aria-hidden='true'
 					focusable='false'
 					data-prefix='fas'
-					data-icon='syringe'
-					className='svg-inline--fa fa-syringe fa-w-16'
+					data-icon='calendar-check'
+					class='svg-inline--fa fa-calendar-check fa-w-14'
 					role='img'
 					xmlns='http://www.w3.org/2000/svg'
-					viewBox='0 0 512 512'>
+					viewBox='0 0 448 512'>
 					<path
 						fill='currentColor'
-						d='M201.5 174.8l55.7 55.8c3.1 3.1 3.1 8.2 0 11.3l-11.3 11.3c-3.1 3.1-8.2 3.1-11.3 0l-55.7-55.8-45.3 45.3 55.8 55.8c3.1 3.1 3.1 8.2 0 11.3l-11.3 11.3c-3.1 3.1-8.2 3.1-11.3 0L111 265.2l-26.4 26.4c-17.3 17.3-25.6 41.1-23 65.4l7.1 63.6L2.3 487c-3.1 3.1-3.1 8.2 0 11.3l11.3 11.3c3.1 3.1 8.2 3.1 11.3 0l66.3-66.3 63.6 7.1c23.9 2.6 47.9-5.4 65.4-23l181.9-181.9-135.7-135.7-64.9 65zm308.2-93.3L430.5 2.3c-3.1-3.1-8.2-3.1-11.3 0l-11.3 11.3c-3.1 3.1-3.1 8.2 0 11.3l28.3 28.3-45.3 45.3-56.6-56.6-17-17c-3.1-3.1-8.2-3.1-11.3 0l-33.9 33.9c-3.1 3.1-3.1 8.2 0 11.3l17 17L424.8 223l17 17c3.1 3.1 8.2 3.1 11.3 0l33.9-34c3.1-3.1 3.1-8.2 0-11.3l-73.5-73.5 45.3-45.3 28.3 28.3c3.1 3.1 8.2 3.1 11.3 0l11.3-11.3c3.1-3.2 3.1-8.2 0-11.4z'></path>
+						d='M436 160H12c-6.627 0-12-5.373-12-12v-36c0-26.51 21.49-48 48-48h48V12c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v52h128V12c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v52h48c26.51 0 48 21.49 48 48v36c0 6.627-5.373 12-12 12zM12 192h424c6.627 0 12 5.373 12 12v260c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V204c0-6.627 5.373-12 12-12zm333.296 95.947l-28.169-28.398c-4.667-4.705-12.265-4.736-16.97-.068L194.12 364.665l-45.98-46.352c-4.667-4.705-12.266-4.736-16.971-.068l-28.397 28.17c-4.705 4.667-4.736 12.265-.068 16.97l82.601 83.269c4.667 4.705 12.265 4.736 16.97.068l142.953-141.805c4.705-4.667 4.736-12.265.068-16.97z'></path>
 				</svg>
-				<strong>Days Until Normal:</strong>
+				<h5 className='title'>Back To Normal:</h5>
 			</div>
-			<h4 className='text-center card-title monst'>
-				<CountUp
-					end={Math.ceil(
-						evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)
-					)}
-				/>
-			</h4>
+			<div className='d-flex justify-content-evenly align-items-center inner_container'>
+				<div className='card-body text-center card-inner '>
+					<h4 className='num-days card-title '>
+					{<CountUp end={numDays} />}
+					</h4>
+					<p className='card-text fw-bold '>
+						<strong>days</strong>
+					</p>
+				</div>
+				<strong>or</strong>
+				<div className='card-body text-center card-inner'>
+					<h4 className='date card-title '>
+					{monthDay.split(',')[0]}
+					</h4>
+					<p className='card-text text-center'>
+						<strong>{monthDay.split(',')[1]}</strong>
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 }
