@@ -1,5 +1,5 @@
 import React from "react";
-import CountUp from "react-countup";
+
 
 function Not({ title, data }) {
 	const {
@@ -39,17 +39,7 @@ function Not({ title, data }) {
 				</div>
 				<div className='card-body text-center card-inner'>
 					<h4 className='card-title .4 '>
-						{
-							<CountUp
-								suffix={"%"}
-								decimals={
-									(100 - Administered_Dose1_Pop_Pct).toString().length === 2
-										? 0
-										: 1
-								}
-								end={100 - Administered_Dose1_Pop_Pct}
-							/>
-						}
+					{Number.parseFloat(100 - Administered_Dose1_Pop_Pct).toPrecision(3)}%
 					</h4>
 					<p className='card-text text-center'>
 						<strong>of the population</strong>

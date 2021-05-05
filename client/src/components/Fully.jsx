@@ -1,5 +1,5 @@
 import React from "react";
-import CountUp from "react-countup";
+
 
 function Fully({ title, data }) {
 	const { Series_Complete_Yes, Series_Complete_Pop_Pct } = data.entry;
@@ -32,21 +32,7 @@ function Fully({ title, data }) {
 					</p>
 				</div>
 				<div className='card-body text-center card-inner'>
-					<h4 className='card-title .4 '>
-						{
-							<CountUp
-								suffix={"%"}
-								decimals={
-									!Series_Complete_Yes
-										? 0
-										: Series_Complete_Pop_Pct.toString().length === 2
-										? 0
-										: 1
-								}
-								end={Series_Complete_Pop_Pct}
-							/>
-						}
-					</h4>
+					<h4 className='card-title .4 '>{Number.parseFloat(Series_Complete_Pop_Pct).toPrecision(3)}%</h4>
 					<p className='card-text text-center'>
 						<strong>of the population</strong>
 					</p>

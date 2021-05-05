@@ -1,13 +1,10 @@
 import React from "react";
-import CountUp from "react-countup";
+
 
 function Atleast({ title, data }) {
 	const {
 		Administered_Dose1_Recip,
 		Administered_Dose1_Pop_Pct,
-		Series_Complete_Yes,
-		Series_Complete_Pop_Pct,
-		Census,
 	} = data.entry;
 
 	return (
@@ -41,15 +38,7 @@ function Atleast({ title, data }) {
 				</div>
 				<div className='card-body text-center card-inner'>
 					<h4 className='card-title '>
-						{
-							<CountUp
-								suffix={"%"}
-								decimals={
-									Administered_Dose1_Pop_Pct.toString().length === 2 ? 0 : 1
-								}
-								end={Administered_Dose1_Pop_Pct}
-							/>
-						}
+						{Number.parseFloat(Administered_Dose1_Pop_Pct).toPrecision(3)}%
 					</h4>
 					<p className='card-text text-center fw-bold '>
 						of the population
