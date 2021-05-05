@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 
 function Partially({ title, data }) {
 	const {
@@ -38,7 +39,15 @@ function Partially({ title, data }) {
 				</div>
 				<div className='card-body text-center card-inner'>
 					<h4 className='card-title .4 '>
-						{Number.parseFloat(pct).toPrecision(3)}%
+					{
+							<CountUp
+								suffix={"%"}
+								decimals={
+									((oneDose / Census) * 100).toString().length === 2 ? 0 : 1
+								}
+								end={(oneDose / Census) * 100}
+							/>
+						}
 					</h4>
 					<p className='card-text text-center fw-bold '>
 						of the population
