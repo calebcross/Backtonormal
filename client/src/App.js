@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 //components
 import Time from "./components/Time";
 import Partially from "./components/Partially";
@@ -47,33 +49,46 @@ const getInfo = gql`
 	}
 `;
 
-
 function App() {
-
 	const [location, setLocation] = useState("United States");
 
 	const pushState = (location) => {
-		setLocation(location)
+		setLocation(location);
+	};
+
+	let date = "2021-05-04";
+
+	const { loading, error, data } = useQuery(getInfo, {
+		variables: { date: date, state: location },
+	});
+
+	if (loading)
+		return (
+			<div className='App-header'>
+				<Button variant='secondary' disabled>
+					<Spinner
+						as='span'
+						animation='grow'
+						size='xl'
+						role='status'
+						aria-hidden='true'
+						className='sr-only App-logo'
+					/>
+					Loading...
+				</Button>
+			</div>
+		);
+
+	if (error) {
+		return `Error! ${error}`;
 	}
-	
-
-	let date = "2021-05-04"
-
-	const { loading, error, data } = useQuery(getInfo, { variables: { date: date, state: location } });
-	
-
-	if (loading) return <p>Loading...</p>;
-
-	if (error){ 
-		return `Error! ${error}`};
-
 
 	return (
 		<div className='d-flex flex-column justify-content-center my-6 wrap'>
 			<h1 className='title title-mobile text-center'>
 				COVID-19 Vaccinations in
-    
-			</h1>{<Location pushState={pushState} location={location} />}
+			</h1>
+			{<Location pushState={pushState} location={location} />}
 			<section className='main'>
 				<div className='top'>
 					<div className='info'>
@@ -82,7 +97,6 @@ function App() {
 						<Partially title='Only One Dose' data={data} />
 						<Fully title='Fully Vaccinated' data={data} />
 						<Not title='Not Vaccinated' data={data} />
-						
 					</div>
 					<div className='data'>
 						<VacChart />
