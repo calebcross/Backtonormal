@@ -129,7 +129,7 @@ function VacChart() {
 					fontFamily: "Montserrat",
 				},
 				formatter: function (value) {
-					return value > 1 ? value + " %" : "";
+					return value > 1 ? value + "%" : "";
 				},
 			},
 		},
@@ -186,7 +186,7 @@ function VacChart() {
 	return (
 		<div className='card border-dark data_head'>
 			<div className='card-header-dark text-center green chart_title'>
-				Vaccinations of US Population
+				Vaccinated percentage of the population
 			</div>
 			<div className='card-body d-flex justify-content-center align-items-center'>
 				<div className='vacchart'>

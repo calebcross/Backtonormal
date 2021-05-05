@@ -147,7 +147,7 @@
     }
 
     @include desktop {
-        margin: 2vh 5vw;
+        margin: 1vh 5vw;
     }
 }
 
@@ -529,4 +529,23 @@ h3.title {
     .card-header-vcenter {
         justify-content: center;
     }
+}
+
+select{
+    //width: 25vw;
+    height: 2rem;
+    min-width: max-content;
+    font-size: 1rem;
+    color: $white;
+    margin: 0 auto 1rem;
+
+    @include media-breakpoint-up(md) {
+        font-size: calc(1rem + 1vw);
+        height: calc(1.5rem + 1.5vw);
+    }
+}
+
+.card_option{
+    background-color: black;
+    color: white;
 }
