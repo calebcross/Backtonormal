@@ -3,6 +3,8 @@ import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
 import { format, addDays } from "date-fns";
 import { round } from "mathjs";
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
 	query GetChartInfo {
@@ -31,7 +33,7 @@ const findDates = ({ entriesBy }) => {
 	return newLabels.reduce((renderArr, label, i) => {
 		//console.log(`${i} ${label}`)
 		if (i === newLabels.length - 1) {
-			renderArr.push(format(addDays(new Date(label),1), "MMMM do"));
+			renderArr.push(format(addDays(new Date(label), 1), "MMMM do"));
 		} else if (i % 7 === 0) {
 			//renderArr.push(label.split('2021-').[1])
 			renderArr.push(format(new Date(label), "MMMM do"));
@@ -79,7 +81,20 @@ const plucky = ({ entriesBy }, key, minus) => {
 function VacChart() {
 	const { loading, error, data } = useQuery(getChartInfo);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading)
+		return (
+			<Button variant='secondary' disabled>
+				<Spinner
+					as='span'
+					animation='grow'
+					size='xl'
+					role='status'
+					aria-hidden='true'
+					className='sr-only App-logo'
+				/>
+				Loading...
+			</Button>
+		);
 	if (error) return <p>Error :(</p>;
 
 	let partially = "Administered_Dose1_Pop_Pct";

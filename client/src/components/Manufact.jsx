@@ -2,7 +2,8 @@ import "chartjs-plugin-datalabels";
 import { HorizontalBar } from "react-chartjs-2";
 import { formatDistance } from "date-fns";
 import { useQuery, gql } from "@apollo/client";
-
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
 	query GetChartInfo {
@@ -32,7 +33,7 @@ const findDates = ({ entriesBy }) => {
 	});
 
 	return newLabels.reverse().reduce((renderArr, label, i) => {
-		if ( i % 14 === 0) {
+		if (i % 14 === 0) {
 			//renderArr.push(label.split('2021-').[1])
 			renderArr.push(`${formatDistance(new Date(label), new Date())} ago`);
 			//renderArr.push( formatDistance( new Date (label), new Date() ) )
@@ -72,7 +73,20 @@ const plucky = ({ entriesBy }, key, total) => {
 function Manufact() {
 	const { loading, error, data } = useQuery(getChartInfo);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading)
+		return (
+			<Button variant='secondary' disabled>
+				<Spinner
+					as='span'
+					animation='grow'
+					size='xl'
+					role='status'
+					aria-hidden='true'
+					className='sr-only App-logo'
+				/>
+				Loading...
+			</Button>
+		);
 	if (error) return <p>Error :(</p>;
 
 	let unk = "Series_Complete_Unk_Manuf";
