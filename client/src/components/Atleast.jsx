@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 
 
 function Atleast({ title, data }) {
@@ -38,7 +39,15 @@ function Atleast({ title, data }) {
 				</div>
 				<div className='card-body text-center card-inner'>
 					<h4 className='card-title '>
-						{Number.parseFloat(Administered_Dose1_Pop_Pct).toPrecision(3)}%
+					{
+							<CountUp
+								suffix={"%"}
+								decimals={
+									Administered_Dose1_Pop_Pct.toString().length === 2 ? 0 : 1
+								}
+								end={Administered_Dose1_Pop_Pct}
+							/>
+						}
 					</h4>
 					<p className='card-text text-center fw-bold '>
 						of the population
