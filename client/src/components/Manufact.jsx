@@ -6,7 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-05-01") {
+		entriesBy(state: "United States", from: "2021-03-08", to: "2021-05-04") {
 			date
 			Series_Complete_Yes
 			Series_Complete_Moderna
@@ -32,7 +32,7 @@ const findDates = ({ entriesBy }) => {
 	});
 
 	return newLabels.reverse().reduce((renderArr, label, i) => {
-		if (i % 14 === 0) {
+		if ( i % 14 === 0) {
 			//renderArr.push(label.split('2021-').[1])
 			renderArr.push(`${formatDistance(new Date(label), new Date())} ago`);
 			//renderArr.push( formatDistance( new Date (label), new Date() ) )
