@@ -30,15 +30,23 @@ const findDates = ({ entriesBy }) => {
 		return x - y;
 	});
 
+	let newA = [];
+
+	for (let i = newLabels.length - 1; i > 0; i = i - 7) {
+		if (i === newLabels.length - 1) {
+			newA.push(format(addDays(new Date(newLabels[i]), 1), "MMMM do"));
+		} else {
+			newA.push(format(new Date(newLabels[i]), "MMMM do"));
+		}
+	}
 
 
 
 
 
 
-	
 
-	return newLabels.reduce((renderArr, label, i) => {
+	return newA.reverse()/* newLabels.reduce((renderArr, label, i) => {
 		//console.log(`${i} ${label}`)
 		if (i === newLabels.length - 1) {
 			renderArr.push(format(addDays(new Date(label), 1), "MMMM do"));
@@ -50,7 +58,7 @@ const findDates = ({ entriesBy }) => {
 		}
 
 		return renderArr;
-	}, []);
+	}, []); */
 };
 
 const pluck = ({ entriesBy }, key) => {
@@ -65,12 +73,21 @@ const pluck = ({ entriesBy }, key) => {
 		return a.date - b.date;
 	});
 
-	return newArr.reduce((renderArr, entry, i) => {
+
+	let newA = [];
+
+	for (let i = newArr.length - 1; i > 0; i = i - 7) {
+			newA.push(newArr[i][key])
+	}
+
+	console.log(newA)
+
+	return newA.reverse() /* newArr.reduce((renderArr, entry, i) => {
 		if (i === newArr.length - 1 || i % 7 === 0) {
 			renderArr.push(entry[key]);
 		}
 		return renderArr;
-	}, []);
+	}, []); */
 };
 const plucky = ({ entriesBy }, key, minus) => {
 	let newArr = [];
@@ -78,12 +95,20 @@ const plucky = ({ entriesBy }, key, minus) => {
 		return a.date - b.date;
 	});
 
-	return newArr.reduce((renderArr, entry, i) => {
+	let newA = [];
+
+	for (let i = newArr.length - 1; i > 0; i = i - 7) {
+			newA.push(round(newArr[i][key] - newArr[i][minus], 3))
+	}
+
+	console.log(newA)
+
+	return newA.reverse() /* newArr.reduce((renderArr, entry, i) => {
 		if (i === newArr.length - 1 || i % 7 === 0) {
 			renderArr.push(round(entry[key] - entry[minus], 3));
 		}
 		return renderArr;
-	}, []);
+	}, []); */
 };
 
 function VacChart() {
@@ -129,9 +154,6 @@ function VacChart() {
 	};
 
 	const options = {
-		animation: {
-			duration: 0,
-		},
 		maintainAspectRatio: false,
 		responsive: true,
 		plugins: {
