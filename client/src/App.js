@@ -11,7 +11,6 @@ import Not from "./components/Not";
 import Manufact from "./components/Manufact";
 import VacChart from "./components/VacChart";
 import Donuts from "./components/Donuts";
-import List from "./components/List";
 import Location from "./components/Location";
 //style
 import "./scss/custom.scss";

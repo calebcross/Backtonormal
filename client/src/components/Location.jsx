@@ -43,9 +43,8 @@ function Location({ pushState, location }) {
 		<>
 			<select
 				className='rounded card text-center'
-				defaultValue={location}
-				onChange={changeHandler}>
-				<option className='card card_option' value='United States' selected>
+				onChange={changeHandler} value={location}>
+				<option className='card card_option' value='United States'>
 					United States
 				</option>
 				<option className='card card_option' disabled>
