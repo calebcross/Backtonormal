@@ -1,12 +1,12 @@
 import { useQuery, gql } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import { round } from "mathjs";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-15", to: "2021-05-01") {
+		entriesBy(state: "United States", from: "2021-03-21", to: "2021-05-04") {
 			date
 			Administered_Dose1_Pop_Pct
 			Series_Complete_Pop_Pct
@@ -29,11 +29,16 @@ const findDates = ({ entriesBy }) => {
 	});
 
 	return newLabels.reduce((renderArr, label, i) => {
-		if (i % 7 === 0) {
+		//console.log(`${i} ${label}`)
+		if (i === newLabels.length - 1) {
+			renderArr.push(format(addDays(new Date(label),1), "MMMM do"));
+		} else if (i % 7 === 0) {
 			//renderArr.push(label.split('2021-').[1])
 			renderArr.push(format(new Date(label), "MMMM do"));
+			//console.log(renderArr);
 			//renderArr.push( formatDistance( new Date (label), new Date() ) )
 		}
+
 		return renderArr;
 	}, []);
 };
@@ -51,7 +56,7 @@ const pluck = ({ entriesBy }, key) => {
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
-		if (i % 7 === 0) {
+		if (i === newArr.length - 1 || i % 7 === 0) {
 			renderArr.push(entry[key]);
 		}
 		return renderArr;
@@ -64,7 +69,7 @@ const plucky = ({ entriesBy }, key, minus) => {
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
-		if (i % 7 === 0) {
+		if (i === newArr.length - 1 || i % 7 === 0) {
 			renderArr.push(round(entry[key] - entry[minus], 3));
 		}
 		return renderArr;

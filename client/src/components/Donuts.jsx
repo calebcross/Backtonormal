@@ -86,7 +86,7 @@ function Donuts({ data }) {
 
 	const donutOptions = {
 		animation: {
-			duration: 0,
+			duration: 2000,
 		},
 		cutoutPercentage: 40,
 		responsive: true,

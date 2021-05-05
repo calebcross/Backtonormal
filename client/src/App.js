@@ -49,12 +49,7 @@ const getInfo = gql`
 
 function App() {
 	let location = "United States";
-	let date = "2021-05-01"
-
-	let ob = {
-		"$date": "2021-05-01",
-		"$state": "Arkansas"
-	  }
+	let date = "2021-05-04"
 
 	const { loading, error, data } = useQuery(getInfo, { variables: { date: date, state: location } }
 	);
@@ -62,10 +57,7 @@ function App() {
 	if (loading) return <p>Loading...</p>;
 
 	if (error){ 
-		console.log(error)
 		return `Error! ${error}`};
-
-	console.log(data)
 
 
 	return (
