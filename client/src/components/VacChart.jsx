@@ -47,7 +47,7 @@ const pluck = ({ entriesBy }, key) => {
 		if (a.date > b.date) {
 			return 1;
 		}
-		return a.date - b.date
+		return a.date - b.date;
 	});
 
 	return newArr.reduce((renderArr, entry, i) => {
@@ -101,14 +101,17 @@ function VacChart() {
 	};
 
 	const options = {
+		animation: {
+			duration: 0,
+		},
 		maintainAspectRatio: false,
+		responsive: true,
 		plugins: {
-			
 			labels: [
 				{
 					render: (args) => {
 						return; /* round( args.value , 3) + '%' */
-					}
+					},
 				},
 			],
 			datalabels: {
@@ -118,33 +121,31 @@ function VacChart() {
 				},
 				font: {
 					weight: "bold",
-					family: "Montserrat"
-				},
-				formatter: function (value) {
-					return `${round (value)}%`;
+					fontFamily: "Montserrat",
 				},
 				formatter: function (value) {
 					return value > 1 ? value + " %" : "";
-				}
-			}
+				},
+			},
 		},
 		tooltips: {
-            mode: 'index',
-			xAlign: 'center',
-			yAlign: 'bottom'
-        },
+			mode: "index",
+			xAlign: "center",
+			yAlign: "bottom",
+		},
 		legend: {
-            display: true,
-            labels: {
-                fontColor: 'white',
-				fontStyle: 'bold'
-            }
-        },
+			display: true,
+			labels: {
+				fontColor: "white",
+				fontStyle: "bold",
+				fontFamily: "Montserrat",
+			},
+		},
 		scales: {
 			yAxes: [
 				{
 					stacked: true,
-					
+
 					ticks: {
 						max: 50,
 						stepSize: 10,
@@ -153,6 +154,7 @@ function VacChart() {
 						},
 						fontColor: "white",
 						fontStyle: "bold",
+						fontFamily: "Montserrat",
 					},
 					gridLines: {
 						color: "#444",
@@ -166,6 +168,7 @@ function VacChart() {
 					ticks: {
 						fontColor: "white",
 						fontStyle: "bold",
+						fontFamily: "Montserrat",
 					},
 					gridLines: {
 						color: "#444",
@@ -176,17 +179,17 @@ function VacChart() {
 	};
 
 	return (
-		<div className='card border-dark mb-3 ocd'>
-			<div className='card-header-dark text-center green fs-4 fw-bold'>
+		<div className='card border-dark data_head'>
+			<div className='card-header-dark text-center green chart_title'>
 				Vaccinations of US Population
 			</div>
-			<div className='card-body d-flex align-items-center'>
-			<div className='vacchart'>
-				<Bar data={chartData} options={options} /></div>
+			<div className='card-body d-flex justify-content-center align-items-center'>
+				<div className='vacchart'>
+					<Bar data={chartData} options={options} />
+				</div>
 			</div>
 		</div>
 	);
 }
 
 export default VacChart;
-

@@ -4,18 +4,19 @@ import { useQuery, gql } from "@apollo/client";
 //components
 import Time from "./components/Time";
 import Partially from "./components/Partially";
+import Atleast from "./components/Atleast";
 import Fully from "./components/Fully";
 import Not from "./components/Not";
 import Manufact from "./components/Manufact";
 import VacChart from "./components/VacChart";
-import Test from "./components/Test";
+import Donuts from "./components/Donuts";
 import List from "./components/List";
 //style
 import "./scss/custom.scss";
 
 const getInfo = gql`
-	query GetInfo {
-		entry(date: "2021-05-01", state: "United States") {
+	query GetInfo($date: String!, $state: String!) {
+		entry(date: $date, state: $state) {
 			Administered_Dose1_Pop_Pct
 			Administered_Dose1_Recip
 			Administered_Dose1_Recip_18Plus
@@ -47,30 +48,48 @@ const getInfo = gql`
 `;
 
 function App() {
-	const { loading, error, data } = useQuery(getInfo);
+	let location = "United States";
+	let date = "2021-05-01"
+
+	let ob = {
+		"$date": "2021-05-01",
+		"$state": "Arkansas"
+	  }
+
+	const { loading, error, data } = useQuery(getInfo, { variables: { date: date, state: location } }
+	);
 
 	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+
+	if (error){ 
+		console.log(error)
+		return `Error! ${error}`};
+
+	console.log(data)
+
 
 	return (
-		<div className='d-flex flex-column justify-content-center my-6 mx-2'>
-			<h1 className='title text-center'>Covid Vaccinations in the US</h1>
+		<div className='d-flex flex-column justify-content-center my-6 wrap'>
+			<h1 className='title title-mobile text-center'>
+				COVID-19 Vaccinations in the US
+			</h1>
 			<section className='main'>
 				<div className='top'>
 					<div className='info'>
 						<Time data={data} />
-						<Partially title='Only 1 Dose' data={data} />
-						<Fully title='fully vaccinated' data={data} />
-						<Not title='not vaccinated' data={data} />
+						<Atleast title='At Least One Dose' data={data} />
+						<Partially title='Only One Dose' data={data} />
+						<Fully title='Fully Vaccinated' data={data} />
+						<Not title='Not Vaccinated' data={data} />
 					</div>
 					<div className='data'>
 						<VacChart />
-						<Test data={data} />
+						<Donuts data={data} />
 					</div>
 				</div>
 				<Manufact data={data} />
+				<List />
 			</section>
-			<List />
 		</div>
 	);
 }
