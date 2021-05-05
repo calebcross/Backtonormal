@@ -57,6 +57,7 @@ function Location({ pushState, location }) {
 						state.name !== "United States" &&
 						state.name !== "Dept of Defense" &&
 						state.name !== "Long Term Care" &&
+						state.name !== "Veterans Health" &&
 						state.name !== "Bureau of Prisons"
 					)
 						reduceArr.push(
