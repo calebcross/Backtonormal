@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 import { evaluate } from "mathjs";
 import { addDays, format } from "date-fns";
 
-function Time({ data }) {
+function Time({ data, location }) {
 	const CDC_url =
 		"https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data";
 
@@ -22,7 +22,7 @@ function Time({ data }) {
 	}, []); */
 
 	let scope = {
-		pop: 331449281,
+		pop: data.entry.Census,
 		vdd: data.entry.Doses_Distributed,
 		advdg: 1240139,
 	};
@@ -52,25 +52,28 @@ function Time({ data }) {
 			<div className='d-flex flex-row-reverse justify-content-evenly align-items-center inner_container'>
 				<div className='card-body text-center card-inner card-inner-big'>
 					<h4 className='num-days card-title '>
-					{<CountUp end={numDays} delay={.25} duration={1} />}
+					{location === "United States" ? <CountUp end={numDays} delay={.25} duration={1} /> : 'N/A'}
 					</h4>
 					<p className='card-text fw-bold '>
-						<strong>days</strong>
+					{location === "United States" ? <strong>days</strong> : ''}
+						
 					</p>
 				</div>
 				<strong>OR<br/>IN</strong>
 				<div className='card-body text-center card-inner'>
 					<h4 className='date card-title '>
-					{monthDay.split(',')[0]}
+					{location === "United States" ? monthDay.split(',')[0]: 'N/A'}
+					
 					</h4>
 					<p className='card-text text-center'>
-						<strong>{monthDay.split(',')[1]}</strong>
+					
+						
 					</p>
 				</div>
 			</div>
 		</div>
 
-	);
+	)
 }
 
 export default Time;
