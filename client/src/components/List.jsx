@@ -93,11 +93,6 @@ function List() {
 							<Accordion.Collapse eventKey={i + 1}>
 								<Card.Body className='list_container'>
 									<div className='list'>
-										<Atleast title='At Least One Dose' data={state} />
-										<Partially title='Only One Dose' data={state} />
-										<Fully title='Fully Vaccinated' data={state} />
-										<Not title='Not Vaccinated' data={state} />
-										<Donuts data={state} />
 									</div>
 								</Card.Body>
 							</Accordion.Collapse>

@@ -15,8 +15,8 @@ import List from "./components/List";
 import "./scss/custom.scss";
 
 const getInfo = gql`
-	query GetInfo {
-		entry(date: "2021-05-01", state: "United States") {
+	query GetInfo($date: String!, $state: String!) {
+		entry(date: $date, state: $state) {
 			Administered_Dose1_Pop_Pct
 			Administered_Dose1_Recip
 			Administered_Dose1_Recip_18Plus
@@ -48,10 +48,25 @@ const getInfo = gql`
 `;
 
 function App() {
-	const { loading, error, data } = useQuery(getInfo);
+	let location = "United States";
+	let date = "2021-05-01"
+
+	let ob = {
+		"$date": "2021-05-01",
+		"$state": "Arkansas"
+	  }
+
+	const { loading, error, data } = useQuery(getInfo, { variables: { date: date, state: location } }
+	);
 
 	if (loading) return <p>Loading...</p>;
-	if (error) return `Error! ${error}`;
+
+	if (error){ 
+		console.log(error)
+		return `Error! ${error}`};
+
+	console.log(data)
+
 
 	return (
 		<div className='d-flex flex-column justify-content-center my-6 wrap'>
@@ -73,7 +88,7 @@ function App() {
 					</div>
 				</div>
 				<Manufact data={data} />
-				{/* //<List /> */}
+				<List />
 			</section>
 		</div>
 	);
