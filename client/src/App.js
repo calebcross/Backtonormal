@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-
 //components
 import Time from "./components/Time";
 import Partially from "./components/Partially";
@@ -11,6 +10,7 @@ import Manufact from "./components/Manufact";
 import VacChart from "./components/VacChart";
 import Donuts from "./components/Donuts";
 import List from "./components/List";
+import Location from "./components/Location";
 //style
 import "./scss/custom.scss";
 
@@ -47,12 +47,20 @@ const getInfo = gql`
 	}
 `;
 
+
 function App() {
-	let location = "United States";
+
+	const [location, setLocation] = useState("United States");
+
+	const pushState = (location) => {
+		setLocation(location)
+	}
+	
+
 	let date = "2021-05-04"
 
-	const { loading, error, data } = useQuery(getInfo, { variables: { date: date, state: location } }
-	);
+	const { loading, error, data } = useQuery(getInfo, { variables: { date: date, state: location } });
+	
 
 	if (loading) return <p>Loading...</p>;
 
@@ -63,16 +71,18 @@ function App() {
 	return (
 		<div className='d-flex flex-column justify-content-center my-6 wrap'>
 			<h1 className='title title-mobile text-center'>
-				COVID-19 Vaccinations in the US
-			</h1>
+				COVID-19 Vaccinations in
+    
+			</h1>{<Location pushState={pushState} location={location} />}
 			<section className='main'>
 				<div className='top'>
 					<div className='info'>
-						<Time data={data} />
+						<Time data={data} location={location} />
 						<Atleast title='At Least One Dose' data={data} />
 						<Partially title='Only One Dose' data={data} />
 						<Fully title='Fully Vaccinated' data={data} />
 						<Not title='Not Vaccinated' data={data} />
+						
 					</div>
 					<div className='data'>
 						<VacChart />
