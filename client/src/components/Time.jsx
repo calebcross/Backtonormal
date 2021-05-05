@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CountUp from "react-countup";
 import { evaluate } from "mathjs";
 import { addDays, format } from "date-fns";
-import axios from "axios";
 
 function Time({ data }) {
 	const CDC_url =
 		"https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data";
 
-	const [avg, setAvg] = useState();
 
-	useEffect(() => {
+/* 	useEffect(() => {
 		axios
 			.get(CDC_url)
 			.then((response) => {
@@ -21,18 +19,17 @@ function Time({ data }) {
 			.catch((err) => {
 				console.log(err);
 			});
-	}, []);
+	}, []); */
 
 	let scope = {
 		pop: 331449281,
 		vdd: data.entry.Doses_Distributed,
-		advdg: avg ? avg : 1431517,
+		advdg: 1240139,
 	};
-	const today = new Date();
-	const numDays = Math.ceil(
-		evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)
-	);
-	let monthDay = format(addDays(today, 106), "MMM Lo, yyyy");
+
+	let numDays = evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)
+
+	let monthDay = format(addDays(new Date(), numDays+30), "MMM Lo, yyyy");
 
 	return (
 		<div className='card border-dark green stacks_head'>
@@ -42,7 +39,7 @@ function Time({ data }) {
 					focusable='false'
 					data-prefix='fas'
 					data-icon='calendar-check'
-					class='svg-inline--fa fa-calendar-check fa-w-14'
+					className='svg-inline--fa fa-calendar-check fa-w-14'
 					role='img'
 					xmlns='http://www.w3.org/2000/svg'
 					viewBox='0 0 448 512'>
@@ -55,7 +52,7 @@ function Time({ data }) {
 			<div className='d-flex flex-row-reverse justify-content-evenly align-items-center inner_container'>
 				<div className='card-body text-center card-inner card-inner-big'>
 					<h4 className='num-days card-title '>
-					{<CountUp end={numDays} delay={.5} duration={1} />}
+					{<CountUp end={numDays} delay={.25} duration={1} />}
 					</h4>
 					<p className='card-text fw-bold '>
 						<strong>days</strong>
