@@ -90,7 +90,6 @@ function App() {
 					</div>
 				</div>
 				<Manufact data={data} />
-				<List />
 			</section>
 		</div>
 	);
