@@ -1,7 +1,8 @@
-import { useQuery, gql } from "@apollo/client";
-import { HorizontalBar } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
+import { HorizontalBar } from "react-chartjs-2";
 import { formatDistance } from "date-fns";
+import { useQuery, gql } from "@apollo/client";
+
 
 const getChartInfo = gql`
 	query GetChartInfo {
