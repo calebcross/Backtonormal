@@ -6,7 +6,7 @@ import Atleast from "./Atleast";
 import Partially from "./Partially";
 import Fully from "./Fully";
 import Not from "./Not";
-import Donuts from "./Donuts";
+//import Donuts from "./Donuts";
 
 const getStateInfo = gql`
 	query getStateInfo {
@@ -93,6 +93,10 @@ function List() {
 							<Accordion.Collapse eventKey={i + 1}>
 								<Card.Body className='list_container'>
 									<div className='list'>
+									<Atleast title='At Least One Dose' data={state} />
+						<Partially title='Only One Dose' data={state} />
+						<Fully title='Fully Vaccinated' data={state} />
+						<Not title='Not Vaccinated' data={state} />
 									</div>
 								</Card.Body>
 							</Accordion.Collapse>
