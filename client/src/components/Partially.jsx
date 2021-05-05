@@ -43,9 +43,9 @@ function Partially({ title, data }) {
 							<CountUp
 								suffix={"%"}
 								decimals={
-									((oneDose / Census) * 100).toString().length === 2 ? 0 : 1
+									pct.toString().length === 2 ? 0 : 1
 								}
-								end={(oneDose / Census) * 100}
+								end={pct}
 							/>
 						}
 					</h4>

@@ -1,6 +1,6 @@
 import "chartjs-plugin-datalabels";
 import { HorizontalBar } from "react-chartjs-2";
-import { formatDistance } from "date-fns";
+import { formatDistance, addDays} from "date-fns";
 import { useQuery, gql } from "@apollo/client";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
@@ -32,14 +32,19 @@ const findDates = ({ entriesBy }) => {
 		return x - y;
 	});
 
-	return newLabels.reverse().reduce((renderArr, label, i) => {
-		if (i % 14 === 0) {
-			//renderArr.push(label.split('2021-').[1])
-			renderArr.push(`${formatDistance(new Date(label), new Date())} ago`);
-			//renderArr.push( formatDistance( new Date (label), new Date() ) )
+	let newA = [];
+
+	for (let i = newLabels.length - 1; i > 0; i = i - 14) {
+		if (i === newLabels.length - 1) {
+			newA.push(
+				`${formatDistance(addDays(new Date(newLabels[i]), 1), new Date())} ago`
+			);
+		} else {
+			newA.push(`${formatDistance(new Date(newLabels[i]), new Date())} ago`);
 		}
-		return renderArr;
-	}, []);
+	}
+
+	return newA;
 };
 
 const plucky = ({ entriesBy }, key, total) => {
@@ -53,21 +58,22 @@ const plucky = ({ entriesBy }, key, total) => {
 		return 0;
 	});
 
-	return newArr.reduce((renderArr, entry, i) => {
-		if (i % 14 === 0) {
-			renderArr.push(
-				Math.ceil(
-					(entry[key] /
-						(entry.Series_Complete_Moderna +
-							entry.Series_Complete_Pfizer +
-							entry.Series_Complete_Janssen +
-							entry.Series_Complete_Unk_Manuf)) *
-						100
-				)
-			);
-		}
-		return renderArr;
-	}, []);
+	let newA = [];
+
+	for (let i = newArr.length - 1; i > 0; i = i - 14) {
+		newA.push(
+			Math.ceil(
+				(newArr[i][key] /
+					(newArr[i].Series_Complete_Moderna +
+						newArr[i].Series_Complete_Pfizer +
+						newArr[i].Series_Complete_Janssen +
+						newArr[i].Series_Complete_Unk_Manuf)) *
+					100
+			)
+		);
+	}
+
+	return newA;
 };
 
 function Manufact() {
@@ -145,7 +151,7 @@ function Manufact() {
 					weight: "bold",
 				},
 				formatter: function (value) {
-					return value > 8 ? value + "%" : "";
+					return value > 5 ? value + "%" : "";
 				},
 			},
 		},

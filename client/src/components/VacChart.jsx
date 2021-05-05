@@ -30,6 +30,14 @@ const findDates = ({ entriesBy }) => {
 		return x - y;
 	});
 
+
+
+
+
+
+
+	
+
 	return newLabels.reduce((renderArr, label, i) => {
 		//console.log(`${i} ${label}`)
 		if (i === newLabels.length - 1) {
