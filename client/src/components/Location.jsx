@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useQuery, gql } from "@apollo/client";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";

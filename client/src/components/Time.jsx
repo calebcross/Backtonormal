@@ -4,11 +4,11 @@ import { evaluate } from "mathjs";
 import { addDays, format } from "date-fns";
 
 function Time({ data, location }) {
-	const CDC_url =
+/* 	const CDC_url =
 		"https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data";
 
 
-/* 	useEffect(() => {
+	useEffect(() => {
 		axios
 			.get(CDC_url)
 			.then((response) => {
@@ -24,7 +24,7 @@ function Time({ data, location }) {
 	let scope = {
 		pop: data.entry.Census,
 		vdd: data.entry.Doses_Distributed,
-		advdg: 1088215,
+		advdg: 1797771,
 	};
 
 	let numDays = evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)

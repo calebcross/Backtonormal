@@ -41,19 +41,7 @@ const findDates = ({ entriesBy }) => {
 		}
 	}
 
-	return newA.reverse(); /* newLabels.reduce((renderArr, label, i) => {
-		//console.log(`${i} ${label}`)
-		if (i === newLabels.length - 1) {
-			renderArr.push(format(addDays(new Date(label), 1), "MMMM do"));
-		} else if (i % 7 === 0) {
-			//renderArr.push(label.split('2021-').[1])
-			renderArr.push(format(new Date(label), "MMMM do"));
-			//console.log(renderArr);
-			//renderArr.push( formatDistance( new Date (label), new Date() ) )
-		}
-
-		return renderArr;
-	}, []); */
+	return newA.reverse(); 
 };
 
 const pluck = ({ entriesBy }, key) => {
@@ -120,14 +108,15 @@ function VacChart({ location, from,  to }) {
 			/* {
 				type: "line",
 				label: "At least One Dose",
-				backgroundColor: "rgb(178,157,219)",
 				borderColor: "rgb(178,157,219)",
 				data: pluck(data, [partially]),
 				fill: false,
 				index: 2,
 				datalabels: {
-					align: 'end',
-					anchor: 'end'
+					color: "white",
+					align: 'top',
+					anchor: 'center',
+					padding: 3
 				  }
 			}, */
 			{
@@ -148,8 +137,8 @@ function VacChart({ location, from,  to }) {
 				borderColor: "rgb(187,222,251)",
 				data: pluck(data, [fully]),
 				datalabels: {
-					align: 'end',
-					anchor: 'start'
+					align: 'center',
+					anchor: 'center'
 				  }
 			}
 		],
@@ -176,9 +165,9 @@ function VacChart({ location, from,  to }) {
 				  weight: 'bold'
 				},
 				formatter: function (value) {
-					return value > 1 ? value + "%" : "";
+					return value > 7 ? value + "%" : "";
 				},
-				padding: 2
+				padding: 0
 			  }
 		},
 		tooltips: {
