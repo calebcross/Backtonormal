@@ -156,10 +156,6 @@ function VacChart({ location, from,  to }) {
 				},
 			],
 			datalabels: {
-				backgroundColor: function(context) {
-				  return context.dataset.backgroundColor;
-				},
-				borderRadius: 4,
 				color: '#303030',
 				font: {
 				  weight: 'bold'
