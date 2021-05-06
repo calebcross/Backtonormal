@@ -74,7 +74,7 @@ const plucky = ({ entriesBy }, key, minus) => {
 	for (let i = newArr.length - 1; i > 0; i = i - 7) {
 		newA.push(round( newArr[i][key] - newArr[i][minus], 4));
 	}
-	return newA.reverse();
+	return newA;
 };
 
 
