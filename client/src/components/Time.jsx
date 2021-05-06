@@ -24,7 +24,7 @@ function Time({ data, location }) {
 	let scope = {
 		pop: data.entry.Census,
 		vdd: data.entry.Doses_Distributed,
-		advdg: 1240139,
+		advdg: 1088215,
 	};
 
 	let numDays = evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)
@@ -59,7 +59,7 @@ function Time({ data, location }) {
 						
 					</p>
 				</div>
-				<strong>OR<br/>IN</strong>
+				<strong>Or<br/>In</strong>
 				<div className='card-body text-center card-inner'>
 					<h4 className='date card-title '>
 					{location === "United States" ? monthDay.split(',')[0]: 'N/A'}

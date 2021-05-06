@@ -55,7 +55,8 @@ function App() {
 		setLocation(location);
 	};
 
-	let date = "2021-05-04";
+	let date = "2021-05-05";
+	let from = "2021-03-08"
 
 	const { loading, error, data } = useQuery(getInfo, {
 		variables: { date: date, state: location },
@@ -83,7 +84,7 @@ function App() {
 	}
 
 	return (
-		<div className='d-flex flex-column justify-content-center my-6 wrap'>
+		<div className='d-flex my-6 wrap'>
 			<h1 className='title title-mobile text-center'>
 				COVID-19 Vaccinations in
 			</h1>
@@ -98,7 +99,7 @@ function App() {
 						<Not title='Not Vaccinated' data={data} />
 					</div>
 					<div className='data'>
-						<VacChart />
+						<VacChart location={location} from={from} to={date} />
 						<Donuts data={data} />
 					</div>
 				</div>

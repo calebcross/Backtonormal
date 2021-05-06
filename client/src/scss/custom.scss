@@ -140,6 +140,10 @@
 
     @include tablet {
         margin: 0 1rem;
+            flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
     }
 
     @include media-breakpoint-up(lg) {
