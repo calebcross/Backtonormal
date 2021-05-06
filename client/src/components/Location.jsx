@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react'
 import { useQuery, gql } from "@apollo/client";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
@@ -40,16 +40,14 @@ function Location({ pushState, location }) {
 	};
 
 	return (
-		<>
+		<> 
 			<select
 				className='rounded card text-center'
 				onChange={changeHandler} value={location}>
 				<option className='card card_option' value='United States'>
 					United States
 				</option>
-				<option className='card card_option' disabled>
-					──────────
-				</option>
+				<option className='card card_option text-center' disabled>--------------</option>
 
 				{states.reduce((reduceArr, state, i) => {
 					if (
@@ -67,6 +65,7 @@ function Location({ pushState, location }) {
 					return reduceArr;
 				}, [])}
 			</select>
+			
 		</>
 	);
 }

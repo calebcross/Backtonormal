@@ -7,10 +7,11 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
-	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-21", to: "2021-05-04") {
+	query GetChartInfo($state: String!, $from: String!, $to: String!) {
+		entriesBy(state: $state, from: $from, to: $to) {
 			date
 			Administered_Dose1_Pop_Pct
+			Administered_Dose2_Pop_Pct
 			Series_Complete_Pop_Pct
 		}
 	}
@@ -40,13 +41,7 @@ const findDates = ({ entriesBy }) => {
 		}
 	}
 
-
-
-
-
-
-
-	return newA.reverse()/* newLabels.reduce((renderArr, label, i) => {
+	return newA.reverse(); /* newLabels.reduce((renderArr, label, i) => {
 		//console.log(`${i} ${label}`)
 		if (i === newLabels.length - 1) {
 			renderArr.push(format(addDays(new Date(label), 1), "MMMM do"));
@@ -73,21 +68,12 @@ const pluck = ({ entriesBy }, key) => {
 		return a.date - b.date;
 	});
 
-
 	let newA = [];
 
 	for (let i = newArr.length - 1; i > 0; i = i - 7) {
-			newA.push(newArr[i][key])
+		newA.push(newArr[i][key]);
 	}
-
-	console.log(newA)
-
-	return newA.reverse() /* newArr.reduce((renderArr, entry, i) => {
-		if (i === newArr.length - 1 || i % 7 === 0) {
-			renderArr.push(entry[key]);
-		}
-		return renderArr;
-	}, []); */
+	return newA.reverse();
 };
 const plucky = ({ entriesBy }, key, minus) => {
 	let newArr = [];
@@ -98,21 +84,16 @@ const plucky = ({ entriesBy }, key, minus) => {
 	let newA = [];
 
 	for (let i = newArr.length - 1; i > 0; i = i - 7) {
-			newA.push(round(newArr[i][key] - newArr[i][minus], 3))
+		newA.push(round( newArr[i][key] - newArr[i][minus], 4));
 	}
-
-	console.log(newA)
-
-	return newA.reverse() /* newArr.reduce((renderArr, entry, i) => {
-		if (i === newArr.length - 1 || i % 7 === 0) {
-			renderArr.push(round(entry[key] - entry[minus], 3));
-		}
-		return renderArr;
-	}, []); */
+	return newA.reverse();
 };
 
-function VacChart() {
-	const { loading, error, data } = useQuery(getChartInfo);
+
+function VacChart({ location, from,  to }) {
+	const { loading, error, data } = useQuery(getChartInfo, {
+		variables: { state: location, from: from, to: to},
+	});
 
 	if (loading)
 		return (
@@ -136,20 +117,41 @@ function VacChart() {
 	const chartData = {
 		labels: findDates(data),
 		datasets: [
-			{
-				type: "bar",
-				label: "Fully Vaccinated",
-				backgroundColor: "rgb(187,222,251)",
-				borderColor: "rgb(187,222,251)",
-				data: pluck(data, [fully]),
-			},
+			/* {
+				type: "line",
+				label: "At least One Dose",
+				backgroundColor: "rgb(178,157,219)",
+				borderColor: "rgb(178,157,219)",
+				data: pluck(data, [partially]),
+				fill: false,
+				index: 2,
+				datalabels: {
+					align: 'end',
+					anchor: 'end'
+				  }
+			}, */
 			{
 				type: "bar",
 				label: "Only 1 Dose",
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
 				data: plucky(data, [partially], [fully]),
+				datalabels: {
+					align: 'end',
+					anchor: 'start'
+				  }
 			},
+			{
+				type: "bar",
+				label: "Fully Vaccinated",
+				backgroundColor: "rgb(187,222,251)",
+				borderColor: "rgb(187,222,251)",
+				data: pluck(data, [fully]),
+				datalabels: {
+					align: 'end',
+					anchor: 'start'
+				  }
+			}
 		],
 	};
 
@@ -160,23 +162,24 @@ function VacChart() {
 			labels: [
 				{
 					render: (args) => {
-						return; /* round( args.value , 3) + '%' */
+						return;
 					},
 				},
 			],
 			datalabels: {
-				color: "#303030",
-				display: function (context) {
-					return `${context.dataset.data[context.dataIndex]}%`;
+				backgroundColor: function(context) {
+				  return context.dataset.backgroundColor;
 				},
+				borderRadius: 4,
+				color: '#303030',
 				font: {
-					weight: "bold",
-					fontFamily: "Montserrat",
+				  weight: 'bold'
 				},
 				formatter: function (value) {
 					return value > 1 ? value + "%" : "";
 				},
-			},
+				padding: 2
+			  }
 		},
 		tooltips: {
 			mode: "index",
@@ -197,9 +200,8 @@ function VacChart() {
 					stacked: true,
 
 					ticks: {
-						max: 50,
 						stepSize: 10,
-						callback: function (value, index, values) {
+						callback: function (value) {
 							return `${value}%`;
 						},
 						fontColor: "white",
@@ -231,7 +233,7 @@ function VacChart() {
 	return (
 		<div className='card border-dark data_head'>
 			<div className='card-header-dark text-center green chart_title'>
-				Vaccinated percentage of the population
+				Vaccinated Percentage of the Population
 			</div>
 			<div className='card-body d-flex justify-content-center align-items-center'>
 				<div className='vacchart'>

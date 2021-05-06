@@ -1,13 +1,13 @@
 import "chartjs-plugin-datalabels";
 import { HorizontalBar } from "react-chartjs-2";
-import { formatDistance, addDays} from "date-fns";
+import { formatDistance, addDays } from "date-fns";
 import { useQuery, gql } from "@apollo/client";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-05-04") {
+		entriesBy(state: "United States", from: "2021-03-08", to: "2021-05-05") {
 			date
 			Series_Complete_Yes
 			Series_Complete_Moderna
@@ -73,7 +73,7 @@ const plucky = ({ entriesBy }, key, total) => {
 		);
 	}
 
-	return newA;
+	return newA.reverse();
 };
 
 function Manufact() {
