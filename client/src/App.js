@@ -84,7 +84,7 @@ function App() {
 	}
 
 	return (
-		<div className='d-flex my-6 wrap'>
+		<div className='wrap'>
 			<h1 className='title title-mobile text-center'>
 				COVID-19 Vaccinations in
 			</h1>

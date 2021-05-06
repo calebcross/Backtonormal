@@ -137,13 +137,31 @@
 }
 
 .wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1.title{
+        height: 2rem;
+    min-width: max-content;
+    font-size: 1rem;
+    color: $white;
+   
+
+
+        @include media-breakpoint-up(md) {
+            font-size: calc(1rem + 1vw);
+            height: calc(1.5rem + 1.5vw);
+            margin-right: .5rem;
+        }
+    }
+
 
     @include tablet {
         margin: 0 1rem;
             flex-wrap: wrap;
     flex-direction: row;
-    align-content: center;
-    align-items: center;
+    align-items: flex-end;
     }
 
     @include media-breakpoint-up(lg) {
@@ -544,8 +562,9 @@ select{
     margin: 0 auto 1rem;
 
     @include media-breakpoint-up(md) {
-        font-size: calc(1rem + 1vw);
-        height: calc(1.5rem + 1.5vw);
+        font-size: calc(1rem + .5vw);
+        height: calc(1.5rem + 1vw);
+        margin: 0 0 1rem 0
     }
 }
 
