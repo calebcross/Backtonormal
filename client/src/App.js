@@ -55,8 +55,8 @@ function App() {
 		setLocation(location);
 	};
 
-	let date = "2021-05-05";
-	let from = "2021-03-08"
+	let date = "2021-05-09";
+	let from = "2021-03-10"
 
 	const { loading, error, data } = useQuery(getInfo, {
 		variables: { date: date, state: location },
