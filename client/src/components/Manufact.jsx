@@ -7,7 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
 	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-08", to: "2021-05-05") {
+		entriesBy(state: "United States", from: "2021-03-10", to: "2021-05-09") {
 			date
 			Series_Complete_Yes
 			Series_Complete_Moderna
