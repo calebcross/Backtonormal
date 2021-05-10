@@ -1,6 +1,6 @@
 
 const moment = require('moment');
-require('dotenv').config({path: 'heroku.env'});
+require('dotenv').config({path: '.env'});
 
 module.exports = {
   client: "mysql",
