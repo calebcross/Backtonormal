@@ -16,7 +16,7 @@ import Location from "./components/Location";
 import "./scss/custom.scss";
 
 const getInfo = gql`
-	query GetInfo($date: String!, $state: String!) {
+	query GetInfo($date: String, $state: String!) {
 		entry(date: $date, state: $state) {
 			Administered_Dose1_Pop_Pct
 			Administered_Dose1_Recip
@@ -55,11 +55,11 @@ function App() {
 		setLocation(location);
 	};
 
-	let date = "2021-05-09";
-	let from = "2021-03-10"
+	let date = "2021-05-11";
+	let from = "2021-03-12"
 
 	const { loading, error, data } = useQuery(getInfo, {
-		variables: { date: date, state: location },
+		variables: {state: location},
 	});
 
 	if (loading)
@@ -103,7 +103,7 @@ function App() {
 						<Donuts data={data} />
 					</div>
 				</div>
-				<Manufact data={data} />
+				<Manufact location={location} from={from} to={date} />
 			</section>
 		</div>
 	);

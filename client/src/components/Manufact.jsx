@@ -6,8 +6,8 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
-	query GetChartInfo {
-		entriesBy(state: "United States", from: "2021-03-10", to: "2021-05-09") {
+	query GetChartInfo($state: String!, $from: String!, $to: String) {
+		entriesBy(state: $state, from: $from, to: $to) {
 			date
 			Series_Complete_Yes
 			Series_Complete_Moderna
@@ -76,9 +76,11 @@ const plucky = ({ entriesBy }, key, total) => {
 	return newA.reverse();
 };
 
-function Manufact() {
-	const { loading, error, data } = useQuery(getChartInfo);
-
+function Manufact({ location, from,  to })  {
+	const { loading, error, data } = useQuery(getChartInfo, {
+		variables: { state: location, from: from},
+	});
+	
 	if (loading)
 		return (
 			<Button variant='secondary' disabled>
