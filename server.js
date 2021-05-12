@@ -12,53 +12,81 @@ const CDC_URL =
 	"https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data";
 
 async function scrape(URL) {
+
+	try {
 	const response = await axios.get(URL);
 	//console.log(response.data.vaccination_data)
 
 	const { vaccination_data } = response.data;
 
-	const cleansedData = vaccination_data.map((entry) => {
-		const {
-			Date,
-			LongName,
-			Census2019,
-			Location,
-			ShortName,
-			date_type,
-			Administered_Fed_LTC,
-			Administered_Fed_LTC_Dose1,
-			Administered_Fed_LTC_Dose2,
-			Series_Complete_FedLTC,
-			...restEntry
-		} = entry;
+	let states = null;
 
-		const newEntry = {
-			date: Date,
-			name: LongName,
-			Census: Census2019,
-			...restEntry,
-		};
+	knex.table("states").select("name", "id").then( res => {
+		states = res
+		//console.log(states)
+	
+	
 
-		return newEntry;
-	});
+		const cleansedData = vaccination_data.map((entry) => {
+			
+			const {
+				Date,
+				LongName,
+				Census2019,
+				Location,
+				ShortName,
+				date_type,
+				Administered_Fed_LTC,
+				Administered_Fed_LTC_Dose1,
+				Administered_Fed_LTC_Dose2,
+				Series_Complete_FedLTC,
+				...restEntry
+			} = entry;
 
-	//console.log(cleansedData)
-	knex('entries').insert(cleansedData).then( (res) =>
-console.log(res))
+			const foundState = states.find((oneState) => oneState.name === LongName);
+
+				//console.log(foundState)
+			const newEntry = {
+				date: Date,
+				state_id: foundState.id,
+				name: LongName,
+				Census: Census2019,
+				...restEntry,
+			};
+			return newEntry;
+		});
+
+		//console.log(cleansedData);
+		//knex('entries').insert(cleansedData).then( (res) => console.log(`inserted into table`))
+
+	})
+	}
+	catch (err) {
+		console.log(err);
+	}
+	
 }
-
+//knex('entries').insert(cleansedData).then( (res) => console.log(res))
 scrape(CDC_URL);
 
-function insertDB(data) {
-	console.log(data);
+const callDB = async () => {
+		const States = await knex.table("states").select("name", "id");
+		return States;
 
-	/* 	const cleansedData = data.map( entry => {
-		entry['Date'] = entry['date']
-		entry['LongName'] = entry['name']
-		entry['Census2019'] = entry['Census']
-	})
+};
 
-  knex('entries').insert(cleansedData).then( (res) =>
+async function insertDB() {
+	let States;
+
+	try {
+		States = await knex.table("states").select("name", "id");
+		return States;
+	} catch (err) {
+		console.log(err);
+		States = [];
+	}
+
+	/* knex('entries').insert(cleansedData).then( (res) =>
 console.log(res)) */
 }
 
