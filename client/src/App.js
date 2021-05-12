@@ -55,8 +55,8 @@ function App() {
 		setLocation(location);
 	};
 
-	let date = "2021-05-09";
-	let from = "2021-03-10"
+	let date = "2021-05-11";
+	let from = "2021-03-12"
 
 	const { loading, error, data } = useQuery(getInfo, {
 		variables: { date: date, state: location },
@@ -103,7 +103,7 @@ function App() {
 						<Donuts data={data} />
 					</div>
 				</div>
-				<Manufact data={data} />
+				<Manufact location={location} from={from} to={date} />
 			</section>
 		</div>
 	);
