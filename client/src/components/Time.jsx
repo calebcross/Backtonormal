@@ -4,27 +4,11 @@ import { evaluate } from "mathjs";
 import { addDays, format } from "date-fns";
 
 function Time({ data, location }) {
-/* 	const CDC_url =
-		";
-https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_data"
-
-	useEffect(() => {
-		axios
-			.get(CDC_url)
-			.then((response) => {
-				setAvg(
-					response.vaccination_trends_data.Administered_7_Day_Rolling_Average
-				);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []); */
 
 	let scope = {
 		pop: data.entry.Census,
 		vdd: data.entry.Doses_Distributed,
-		advdg: 1282032,
+		advdg: 1161272,
 	};
 
 	let numDays = evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)
