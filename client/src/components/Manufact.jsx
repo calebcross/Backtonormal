@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
-	query GetChartInfo($state: String!, $from: String!, $to: String!) {
+	query GetChartInfo($state: String!, $from: String!, $to: String) {
 		entriesBy(state: $state, from: $from, to: $to) {
 			date
 			Series_Complete_Yes
@@ -78,7 +78,7 @@ const plucky = ({ entriesBy }, key, total) => {
 
 function Manufact({ location, from,  to })  {
 	const { loading, error, data } = useQuery(getChartInfo, {
-		variables: { state: location, from: from, to: to},
+		variables: { state: location, from: from},
 	});
 	
 	if (loading)

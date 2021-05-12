@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 const getChartInfo = gql`
-	query GetChartInfo($state: String!, $from: String!, $to: String!) {
+	query GetChartInfo($state: String!, $from: String!, $to: String) {
 		entriesBy(state: $state, from: $from, to: $to) {
 			date
 			Administered_Dose1_Pop_Pct
@@ -80,7 +80,7 @@ const plucky = ({ entriesBy }, key, minus) => {
 
 function VacChart({ location, from,  to }) {
 	const { loading, error, data } = useQuery(getChartInfo, {
-		variables: { state: location, from: from, to: to},
+		variables: { state: location, from: from},
 	});
 
 	if (loading)

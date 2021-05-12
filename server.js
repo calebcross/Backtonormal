@@ -84,7 +84,7 @@ async function scrape(URL) {
 
 
 
-const task = cron.schedule('* */6 * * *', () => {
+const task = cron.schedule('* */1 * * *', () => {
 	console.log('running cdc scrape');
 	scrape(CDC_URL);
   });
