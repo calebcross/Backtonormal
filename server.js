@@ -55,7 +55,7 @@ async function scrape(URL) {
 									Administered_Fed_LTC_Dose1,
 									Administered_Fed_LTC_Dose2,
 									Series_Complete_FedLTC,
-									...restEntry
+									...restOfEntry
 								} = entry;
 
 								const foundState = states.find(
@@ -66,12 +66,11 @@ async function scrape(URL) {
 									state_id: foundState.id,
 									name: LongName,
 									Census: Census2019,
-									...restEntry,
+									...restOfEntry,
 								};
 								return newEntry;
 							});
 
-							//console.log(cleansedData);
 							knex('entries').insert(cleansedData).then( (res) => console.log(`inserted into db`))
 						});
 				}
@@ -84,12 +83,11 @@ async function scrape(URL) {
 
 
 
-const task = cron.schedule('* */1 * * *', () => {
+const task = cron.schedule('*/5 14-20 * * *', () => {
 	console.log('running cdc scrape');
 	scrape(CDC_URL);
   });
 
-  task.start();
 
 const APP_PORT = process.env.PORT || 8080;
 

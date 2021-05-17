@@ -14,18 +14,27 @@ function Donuts({ data }) {
 		Administered_Dose1_Recip_18PlusPop_Pct,
 		Administered_Dose1_Recip_65Plus,
 		Administered_Dose1_Recip_65PlusPop_Pct,
+		Administered_Dose1_Recip_12Plus,
+		Administered_Dose1_Recip_12PlusPop_Pct,
 		Series_Complete_18Plus,
 		Series_Complete_18PlusPop_Pct,
 		Series_Complete_65Plus,
 		Series_Complete_65PlusPop_Pct,
-		Series_Complete_Pfizer_65Plus,
-		Series_Complete_Pfizer_18Plus,
+		Series_Complete_12Plus,
+		Series_Complete_12PlusPop_Pct,
 		Series_Complete_Janssen_18Plus,
 		Series_Complete_Janssen_65Plus,
+		Series_Complete_Janssen_12Plus,
 		Series_Complete_Moderna_18Plus,
 		Series_Complete_Moderna_65Plus,
+		Series_Complete_Moderna_12Plus,
+		Series_Complete_Pfizer_18Plus,
+		Series_Complete_Pfizer_65Plus,
+		Series_Complete_Pfizer_12Plus,
 		Series_Complete_Unk_Manuf_18Plus,
 		Series_Complete_Unk_Manuf_65Plus,
+		Series_Complete_Unk_Manuf_12Plus,
+		Census_12PlusPop
 	} = data.entry;
 
 	const sixtyFiveScope = {
@@ -44,6 +53,14 @@ function Donuts({ data }) {
 		partially_pct: Administered_Dose1_Recip_18PlusPop_Pct,
 	};
 
+	const twelvePlusScope = {
+		atleastOne: Administered_Dose1_Recip_12Plus,
+		fully: Series_Complete_12Plus,
+		fully_pct: Series_Complete_12PlusPop_Pct,
+		partially: Administered_Dose1_Recip_12Plus - Series_Complete_12Plus,
+		partially_pct: Administered_Dose1_Recip_12PlusPop_Pct,
+	};
+
 	const sixtyFivePop = Math.ceil(
 		Administered_Dose1_Recip_65Plus /
 			(Administered_Dose1_Recip_65PlusPop_Pct / 100)
@@ -53,6 +70,7 @@ function Donuts({ data }) {
 		Administered_Dose1_Recip_18Plus /
 			(Administered_Dose1_Recip_18PlusPop_Pct / 100)
 	);
+	const twelvePlusPop = Census_12PlusPop
 
 	const { partially, fully } = sixtyFiveScope;
 	const sixtyFiveData = [partially, fully, sixtyFivePop - partially - fully];
@@ -60,6 +78,11 @@ function Donuts({ data }) {
 		eighteenPlusScope.partially,
 		eighteenPlusScope.fully,
 		eighteenPlusPop - eighteenPlusScope.partially - eighteenPlusScope.fully,
+	];
+	const twelveData = [
+		twelvePlusScope.partially,
+		twelvePlusScope.fully,
+		twelvePlusPop - twelvePlusScope.partially - twelvePlusScope.fully,
 	];
 
 	const chartData = (data) => {
@@ -91,6 +114,7 @@ function Donuts({ data }) {
 		cutoutPercentage: 40,
 		responsive: true,
 		maintainAspectRatio: true,
+		aspectRatio: 1,
 		legend: {
 			display: false,
 			position: "bottom",
@@ -194,6 +218,11 @@ function Donuts({ data }) {
 		},
 	};
 
+	const twelveTotal =
+		Series_Complete_Pfizer_12Plus +
+		Series_Complete_Moderna_12Plus +
+		Series_Complete_Janssen_12Plus +
+		Series_Complete_Unk_Manuf_12Plus;
 	const eighteenTotal =
 		Series_Complete_Pfizer_18Plus +
 		Series_Complete_Moderna_18Plus +
@@ -206,13 +235,14 @@ function Donuts({ data }) {
 		Series_Complete_Unk_Manuf_65Plus;
 
 	const horizontalData = {
-		labels: ["≥ 18 Years Of Age", "≥ 65 Years Of Age"],
+		labels: [/* "≥ 12 Years Of Age", */"≥ 18 Years Of Age", "≥ 65 Years Of Age"],
 		datasets: [
 			{
 				label: "Janssen",
 				backgroundColor: "rgb(179,157,219)",
 				borderColor: "rgb(179,157,219)",
 				data: [
+/* 					calPct(Series_Complete_Janssen_12Plus, twelveTotal), */
 					calPct(Series_Complete_Janssen_18Plus, eighteenTotal),
 					calPct(Series_Complete_Janssen_65Plus, sixtyFiveTotal),
 				],
@@ -222,6 +252,7 @@ function Donuts({ data }) {
 				backgroundColor: "rgb(255,183,78)",
 				borderColor: "rgb(255,183,78)",
 				data: [
+					/* calPct(Series_Complete_Pfizer_12Plus, twelveTotal), */
 					calPct(Series_Complete_Pfizer_18Plus, eighteenTotal),
 					calPct(Series_Complete_Pfizer_65Plus, sixtyFiveTotal),
 				],
@@ -231,6 +262,7 @@ function Donuts({ data }) {
 				backgroundColor: "rgb(252,126,152)",
 				borderColor: "rgb(252,126,152)",
 				data: [
+					/* calPct(Series_Complete_Unk_Manuf_12Plus, twelveTotal), */
 					calPct(Series_Complete_Unk_Manuf_18Plus, eighteenTotal),
 					calPct(Series_Complete_Unk_Manuf_65Plus, sixtyFiveTotal),
 				],
@@ -240,6 +272,7 @@ function Donuts({ data }) {
 				backgroundColor: "rgb(187,222,251)",
 				borderColor: "rgb(187,222,251)",
 				data: [
+					/* calPct(Series_Complete_Moderna_12Plus, twelveTotal), */
 					calPct(Series_Complete_Moderna_18Plus, eighteenTotal),
 					calPct(Series_Complete_Moderna_65Plus, sixtyFiveTotal),
 				],
@@ -254,16 +287,21 @@ function Donuts({ data }) {
 			</div>
 
 			<div className='donuts'>
+{/* 				<div className='card-body text-center donut'>
+					<div className='donut_title white pb-3 fw-bold'>
+						Ages 12 and Older
+					</div>
+					<Doughnut data={chartData(twelveData)} options={donutOptions} />
+				</div> */}
 				<div className='card-body text-center donut'>
 					<div className='donut_title white pb-3 fw-bold'>
-						{" "}
-						Adults 18 and Older
+						Ages 18 and Older
 					</div>
 					<Doughnut data={chartData(eighteenData)} options={donutOptions} />
 				</div>
 				<div className='card-body text-center donut'>
 					<div className='donut_title white pb-3 fw-bold'>
-						Adults 65 and Older
+						Ages 65 and Older
 					</div>
 					<Doughnut data={chartData(sixtyFiveData)} options={donutOptions} />
 				</div>
