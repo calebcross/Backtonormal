@@ -58,6 +58,22 @@ exports.up = function (knex) {
 		table.decimal("Series_Complete_18PlusPop_Pct");
 		table.bigInteger("Series_Complete_65Plus");
 		table.decimal("Series_Complete_65PlusPop_Pct");
+		table.bigInteger("Administered_65Plus_Entity")
+		table.bigInteger("Census_12PlusPop");
+		table.bigInteger("Administered_12Plus");
+		table.bigInteger("Admin_Per_100k_12Plus");
+		table.bigInteger("Distributed_Per_100k_12Plus");
+		table.bigInteger("Administered_Dose1_Recip_12Plus");
+		table.decimal("Administered_Dose1_Recip_12PlusPop_Pct");
+		table.bigInteger("Administered_Dose2_Recip_12Plus");
+		table.decimal("Administered_Dose2_Recip_12PlusPop_Pct");
+		table.bigInteger("Series_Complete_12Plus");
+		table.decimal("Series_Complete_12PlusPop_Pct");
+		table.bigInteger("Series_Complete_Moderna_12Plus");
+		table.bigInteger("Series_Complete_Pfizer_12Plus");
+		table.bigInteger("Series_Complete_Janssen_12Plus");
+		table.bigInteger("Series_Complete_Unk_Manuf_12Plus");
+		table.bigInteger("Administered_12Plus_Entity")
 	});
 };
 

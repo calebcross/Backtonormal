@@ -8,7 +8,7 @@ function Time({ data, location }) {
 	let scope = {
 		pop: data.entry.Census,
 		vdd: data.entry.Doses_Distributed,
-		advdg: 1161272,
+		advdg: 1148164,
 	};
 
 	let numDays = evaluate(`((pop * .7) - (vdd * .5))/(advdg * .5 )`, scope)

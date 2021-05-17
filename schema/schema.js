@@ -14,13 +14,27 @@ const {
 const StateType = new GraphQLObjectType({
 	name: "State",
 	fields: () => ({
-		id: { type: GraphQLInt },
-		name: { type: GraphQLString },
-		stateCode: { type: GraphQLString },
-		region: { type: GraphQLString },
-		division: { type: GraphQLString },
+		id: { type: GraphQLInt,
+			description:'Unique ID for State, Territory or Federal Entity' },
+		name: {
+			type: GraphQLString,
+			description: "Full name of State, Territory or Federal Entity",
+		},
+		stateCode: {
+			type: GraphQLString,
+			description: "Abbreviation of State, Territory or Federal Entity",
+		},
+		region: {
+			type: GraphQLString,
+			description: "Region of State, Territory or Federal Entity",
+		},
+		division: {
+			type: GraphQLString,
+			description: "Division of State, Territory or Federal Entity",
+		},
 		entries: {
 			type: new GraphQLList(EntryType),
+			description: "Daily entries of Cumulative Data from CDC vaccination information",
 			resolve(parent, args) {
 				return knex.select().from("entries").where("state_id", parent.id);
 			},
@@ -44,20 +58,28 @@ const StateType = new GraphQLObjectType({
 const EntryType = new GraphQLObjectType({
 	name: "Entry",
 	fields: () => ({
-		id: { type: GraphQLInt },
-		date: { type: GraphQLString },
-		name: { type: GraphQLString },
-		state_id: { type: GraphQLInt },
+		id: { type: GraphQLInt,
+			description:'Unique ID for daily entry' },
+		date: { type: GraphQLString,
+			description:'Date of collection of data' },
+		name: { type: GraphQLString,
+			description:'Name of State, Territory or Federal Entity where data was collected' },
+		state_id: { type: GraphQLInt,
+			description:'Unique ID for State, Territory or Federal Entity where data was collected' },
 		state: {
 			type: StateType,
 			resolve(parent, args) {
 				return knex.first().from("states").where("id", parent.state_id);
 			},
 		},
-		Census: { type: GraphQLFloat },
-		Doses_Distributed: { type: GraphQLFloat },
-		Doses_Administered: { type: GraphQLFloat },
-		Dist_Per_100K: { type: GraphQLFloat },
+		Census: { type: GraphQLFloat,
+			description:'2019 Census Population' },
+		Doses_Distributed: { type: GraphQLFloat,
+			description:'Cumulative Doses Distrubuted'  },
+		Doses_Administered: { type: GraphQLFloat,
+			description:'Cumulative Doses Administered' },
+		Dist_Per_100K: { type: GraphQLFloat,
+			description:'Distributed doses per 100K of population' },
 		Admin_Per_100K: { type: GraphQLFloat },
 		Administered_Moderna: { type: GraphQLFloat },
 		Administered_Pfizer: { type: GraphQLFloat },
@@ -101,6 +123,22 @@ const EntryType = new GraphQLObjectType({
 		Series_Complete_18PlusPop_Pct: { type: GraphQLFloat },
 		Series_Complete_65Plus: { type: GraphQLFloat },
 		Series_Complete_65PlusPop_Pct: { type: GraphQLFloat },
+		Administered_65Plus_Entity: { type: GraphQLFloat },
+		Census_12PlusPop: { type: GraphQLFloat },
+		Administered_12Plus: { type: GraphQLFloat },
+		Admin_Per_100k_12Plus: { type: GraphQLFloat },
+		Distributed_Per_100k_12Plus: { type: GraphQLFloat },
+		Administered_Dose1_Recip_12Plus: { type: GraphQLFloat },
+		Administered_Dose1_Recip_12PlusPop_Pct: { type: GraphQLFloat },
+		Administered_Dose2_Recip_12Plus: { type: GraphQLFloat },
+		Administered_Dose2_Recip_12PlusPop_Pct: { type: GraphQLFloat },
+		Series_Complete_12Plus: { type: GraphQLFloat },
+		Series_Complete_12PlusPop_Pct: { type: GraphQLFloat },
+		Series_Complete_Moderna_12Plus: { type: GraphQLFloat },
+		Series_Complete_Pfizer_12Plus: { type: GraphQLFloat },
+		Series_Complete_Janssen_12Plus: { type: GraphQLFloat },
+		Series_Complete_Unk_Manuf_12Plus: { type: GraphQLFloat },
+		Administered_12Plus_Entity: { type: GraphQLFloat }
 	}),
 });
 
@@ -150,7 +188,7 @@ const RootQuery = new GraphQLObjectType({
 					.select()
 					.from("entries")
 					.where("name", state)
-					.whereBetween("date", [from, to || maxDateQuery[0]["max(`date`)"] ])
+					.whereBetween("date", [from, to || maxDateQuery[0]["max(`date`)"]])
 					.orderBy("date", "desc");
 			},
 		},

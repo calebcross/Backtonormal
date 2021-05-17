@@ -43,6 +43,15 @@ const getInfo = gql`
 			Series_Complete_Unk_Manuf_18Plus
 			Series_Complete_Unk_Manuf_65Plus
 			Series_Complete_Yes
+			Administered_Dose1_Recip_12Plus
+			Administered_Dose1_Recip_12PlusPop_Pct
+			Series_Complete_12Plus
+			Series_Complete_12PlusPop_Pct
+			Series_Complete_Janssen_12Plus
+			Series_Complete_Moderna_12Plus
+			Series_Complete_Pfizer_12Plus
+			Series_Complete_Unk_Manuf_12Plus
+			Census_12PlusPop
 			date
 		}
 	}
@@ -55,11 +64,10 @@ function App() {
 		setLocation(location);
 	};
 
-	let date = "2021-05-11";
-	let from = "2021-03-12"
+	let from = "2021-03-16";
 
 	const { loading, error, data } = useQuery(getInfo, {
-		variables: {state: location},
+		variables: { state: location },
 	});
 
 	if (loading)
@@ -99,11 +107,11 @@ function App() {
 						<Not title='Not Vaccinated' data={data} />
 					</div>
 					<div className='data'>
-						<VacChart location={location} from={from} to={date} />
+						<VacChart location={location} from={from} />
 						<Donuts data={data} />
 					</div>
 				</div>
-				<Manufact location={location} from={from} to={date} />
+				<Manufact location={location} from={from} />
 			</section>
 		</div>
 	);
