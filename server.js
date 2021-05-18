@@ -55,6 +55,7 @@ async function scrape(URL) {
 									Administered_Fed_LTC_Dose1,
 									Administered_Fed_LTC_Dose2,
 									Series_Complete_FedLTC,
+									Census2019_12PlusPop,
 									...restOfEntry
 								} = entry;
 
