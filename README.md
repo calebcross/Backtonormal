@@ -34,12 +34,16 @@ You can find descriptions about the GraphQL Schema I defined through the Docs li
 
 I would like to incorporate the daily trend data. As of now the 7 daily moving average I used to calculate the amount of days are left until we reach herd immunity is hard coded in. The CDC just started publishing trend data as of March 2021 into a new endpoint:
 https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_trends_data
+
 ## Author
 [My GitHub](https://github.com/calebcross)  
 [My LinkedIn](https://www.linkedin.com/in/calebacross/)
 
 ## Credits
-[Font Awesome 5](https://fontawesome.com/start)
+[Font Awesome 5](https://fontawesome.com/start) - Awesome Fonts
+[Timetoherd.com](https://timetoherd.com/) - One of the projects that inspired me
+[Vaccination in Belgium](https://covid-vaccinatie.be/en) - Another Inspiration by a team of volunteers in Belgium
+
 
 
 ## License
