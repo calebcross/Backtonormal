@@ -56,6 +56,7 @@ async function scrape(URL) {
 									Administered_Fed_LTC_Dose2,
 									Series_Complete_FedLTC,
 									Census2019_12PlusPop,
+									Count_70pct_vacc,
 									...restOfEntry
 								} = entry;
 
@@ -84,7 +85,7 @@ async function scrape(URL) {
 
 
 
-const task = cron.schedule('*/5 14-20 * * *', () => {
+const task = cron.schedule('* * * * *', () => {
 	console.log('running cdc scrape');
 	scrape(CDC_URL);
   });

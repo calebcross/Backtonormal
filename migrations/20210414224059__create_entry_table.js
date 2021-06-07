@@ -73,7 +73,8 @@ exports.up = function (knex) {
 		table.bigInteger("Series_Complete_Pfizer_12Plus");
 		table.bigInteger("Series_Complete_Janssen_12Plus");
 		table.bigInteger("Series_Complete_Unk_Manuf_12Plus");
-		table.bigInteger("Administered_12Plus_Entity")
+		table.bigInteger("Administered_12Plus_Entity");
+		table.bigInteger("Count_70pct_vacc");
 	});
 };
 

@@ -138,7 +138,8 @@ const EntryType = new GraphQLObjectType({
 		Series_Complete_Pfizer_12Plus: { type: GraphQLFloat },
 		Series_Complete_Janssen_12Plus: { type: GraphQLFloat },
 		Series_Complete_Unk_Manuf_12Plus: { type: GraphQLFloat },
-		Administered_12Plus_Entity: { type: GraphQLFloat }
+		Administered_12Plus_Entity: { type: GraphQLFloat },
+		Count_70pct_vacc: { type: GraphQLFloat }
 	}),
 });
 
